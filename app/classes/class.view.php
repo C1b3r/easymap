@@ -23,7 +23,7 @@ class View {
 	}
 	public function assign($field,$value)
 	{
-		$this->$field = $value;
+		$this->{$field} = $value;
 		return $this;
 	}
 	public function makeLink($first,$option)
