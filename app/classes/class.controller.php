@@ -13,4 +13,10 @@ class Controller{
 		$modelName = $name.'_Model';
 		$this->model = new $modelName();
 	}
+
+	public function redirect($url) 
+	{
+		header("Location: ".COMPLETE_WEB_PATH.$url);
+		die();
+	}
 }

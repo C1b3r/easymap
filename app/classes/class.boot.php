@@ -12,6 +12,7 @@ class Boot {
 
     public static function init()
     {
+        session_start();
         /*The same as Boot::loader
         if loader not static use new Self, when create object, loader will be load(class,controller and  model*/
         spl_autoload_register(array('Boot','loader'));
