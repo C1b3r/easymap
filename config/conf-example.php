@@ -1,5 +1,5 @@
 <?php 
-
+defined('ROOT_PATH') or exit('Direct access forbidden');
 define("DB_HOST", "");
 define("DB_USER", "");
 define("DB_NAME", "");
