@@ -2,7 +2,6 @@
 
 class View {
 	public $data = array();
-	public $field = '';
 
 	public function __construct() 
 	{
@@ -23,6 +22,7 @@ class View {
 	}
 	public function assign($field,$value)
 	{
+		//Creating property object dinamically
 		$this->{$field} = $value;
 		return $this;
 	}
@@ -30,17 +30,21 @@ class View {
 	{
 		return WEB_PATH.implode('/',array($first,$this->clean($option))).'/';
 	}
-	public function display($name, $noInclude = false)
+	public function display($name, $noInclude = false, $admin = false)
 	{
-		echo $this->render($name, $noInclude = false);
+		echo $this->render($name, $noInclude, $admin);
 		return $this;
 	}
-	public function render($name, $noInclude = false)
+	public function render($name, $noInclude = false, $admin = false)
 	{
 		ob_start();
 		if ($noInclude)
 		{
 			$this->loadView($name);
+		}
+		else if($admin)
+		{
+			$this->loadView('admin/header-admin')->loadView($name)->loadView('admin/footer-admin');
 		}
 		else 
 		{

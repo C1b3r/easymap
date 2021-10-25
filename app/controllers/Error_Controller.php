@@ -13,7 +13,8 @@ class Error_Controller extends Controller {
 		{
 			$message = '';
 		}
-		$this->view->assign('title','')
+		$this->view->assign('title','404 not found')
+				   ->assign('robots','noindex, nofollow')
 				   ->assign('keywords','')
 				   ->assign('description','')
 				   ->assign('message','')

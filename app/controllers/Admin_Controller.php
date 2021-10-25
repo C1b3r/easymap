@@ -20,9 +20,9 @@ class Admin_Controller extends Controller
     public function checkIfLogin()
     {
         if(!isset($_SESSION['admin'])){
-			return $this->view->display('admin/login');
+			return $this->view->display('admin/login', '' ,true);
 		}else{
-			return $this->view->display('admin/mainAdmin');
+			return $this->view->display('admin/mainAdmin',null,true);
 		}
     }
 

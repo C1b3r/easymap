@@ -16,7 +16,7 @@ define('CONTROLLER_PATH',ROOT_PATH.'app/controllers/');
 define('MODEL_PATH',ROOT_PATH.'app/model/');
 define('CLASSES_PATH',ROOT_PATH.'app/classes/');
 define('PUBLIC_PATH',ROOT_PATH.'app/public/');
-define('PUBLIC_WEB_PATH',COMPLETE_WEB_PATH.'/resources/');
+define('PUBLIC_WEB_PATH',COMPLETE_WEB_PATH.'resources/');
 define('ADMIN_EMAIL','');
 define('DEBUG_IP','');
 define('DEBUG_ENVIRONMENT',TRUE);

@@ -35,7 +35,7 @@
                 <button class="btn btn-outline-light btn-lg px-5" name="submit" type="submit">Login</button>
               </form>
               <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                <a href="#!" class="text-white"><i class="bi bi-github"></i></a>
+                <a href="https://github.com/C1b3r" class="text-white"><i class="bi bi-github"></i></a>
               </div>
 
             </div>

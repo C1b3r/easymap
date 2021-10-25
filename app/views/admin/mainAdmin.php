@@ -1,1 +1,6 @@
-adsfasd
+<div class="container">
+  <h2>Basic Panel</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">A Basic Panel</div>
+  </div>
+</div>
