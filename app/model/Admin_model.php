@@ -1,6 +1,8 @@
 <?php
 class Admin_Model extends model
  {
+     public $username;
+
     public function logUser($email, $pass)
     {
         $passSecured = md5($pass);
@@ -21,6 +23,16 @@ class Admin_Model extends model
        
         if($count)
         {
+            $this->username = $data->email;
+            setcookie(
+                'username',
+                $this->username,
+                 time() + 3600 * 24 * 365,
+                 '/',//Para todo el directorio
+                 WEB_PATH,
+                 false, // TLS-only
+                 false  // http-only
+            );
             $_SESSION['admin'] = $data->id_user; // Storing user session value
             return true;
         }

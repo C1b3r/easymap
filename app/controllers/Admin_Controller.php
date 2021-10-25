@@ -39,6 +39,7 @@ class Admin_Controller extends Controller
 			}
 			if($this->model->logUser($_POST['email'],$_POST['pass']))
 			{
+				$this->view->assign('email', $this->model->username);
 				// $this->checkIfLogin();
 				$this->redirect('admin');
 			}else{
