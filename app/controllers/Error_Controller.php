@@ -1,7 +1,9 @@
 <?php
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
-class Error_Controller extends Controller {
+class Error_Controller extends Controller 
+{
+	public $havemodel = false;
 
 	function __construct() 
 	{

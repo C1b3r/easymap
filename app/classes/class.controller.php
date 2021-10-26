@@ -1,7 +1,10 @@
 <?php
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
-class Controller{
+class Controller
+{
+	//If your controller dont have database operation, override in the child with false value
+	public $havemodel = true;
 
     public function __construct() 
 	{

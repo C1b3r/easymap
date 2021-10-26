@@ -92,4 +92,9 @@ class Boot {
 		$controller->index($message);
 		return false;
 	}
+
+    public static function getMail()
+    {
+
+    }
 }

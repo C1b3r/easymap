@@ -17,8 +17,8 @@ class MyException extends Exception
 				$referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'direct';
 				$request_uri = $_SERVER['REQUEST_URI'];
 				$message = $_SERVER['REMOTE_ADDR'] . "referrer=".$referrer . "\n request_uri=" . $request_uri."\n" . $msg;
-				$subject = 'Fatal error on: ' . APPLICATION_WEB_PATH;
-				Bootstrap::getMail()->setMessage($message)->setSubject($subject)->send();
+				$subject = 'Fatal error on: ' . WEB_PATH;
+				Boot::getMail()->setMessage($message)->setSubject($subject)->send();
 			break;			
 		}
     }

@@ -1,7 +1,7 @@
 <?php
 class Admin_Model extends model
  {
-     public $username;
+    public $username;
 
     public function logUser($email, $pass)
     {
@@ -28,8 +28,8 @@ class Admin_Model extends model
                 'username',
                 $this->username,
                  time() + 3600 * 24 * 365,
-                 '/',//Para todo el directorio
-                 WEB_PATH,
+                 '/',//Para todo el directorio CURRENT_DIRECTORY -- para este solo
+                 CURRENT_DOMAIN,
                  false, // TLS-only
                  false  // http-only
             );

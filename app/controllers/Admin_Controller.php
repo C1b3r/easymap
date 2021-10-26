@@ -14,7 +14,8 @@ class Admin_Controller extends Controller
 		
 		$this->view->assign('keywords','')
 				   ->assign('description','')
-				   ->assign('other_title','');
+				   ->assign('other_title','')
+				   ->assign('current_page','Visión general');
 		$this->checkIfLogin();		   
 	}
     public function checkIfLogin()

@@ -30,12 +30,12 @@
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Hello, <?php echo $this->email; ?>
+                  Hola, <?php echo $_COOKIE['username']; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  <li><a class="dropdown-item" href="logout">Cerrar sesión</a></li>
                 </ul>
               </div>
         </div>
@@ -74,6 +74,13 @@
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo $this->current_page; ?></li>
+            </ol>
+          </nav>
 <?php 
     }
 

@@ -36,7 +36,11 @@ class InitController {
 		if (!file_exists($file)) throw new MyException('Controller not found',1);
 		
 		$controller = new $class_name;
-		$controller->loadModel($controller_name);
+
+		if($controller->havemodel){
+			$controller->loadModel($controller_name);
+		}
+		
 		// calling methods
 		if (!empty($this->location[1]) && !empty($this->location[2]))
 		{
