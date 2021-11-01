@@ -28,11 +28,12 @@ if (localStorage.getItem("tema") === null) {
 }
 
 
-
-boton.addEventListener('click', () => {
-    let colorTema;
-    document.body.classList.toggle('bg-light');
-    document.body.classList.toggle('bg-dark');
-    colorTema = document.body.classList.contains('bg-light') ? 'light' : 'dark';
-    localStorage.setItem('tema', colorTema);
-})
+if (boton) {
+    boton.addEventListener('click', () => {
+        let colorTema;
+        document.body.classList.toggle('bg-light');
+        document.body.classList.toggle('bg-dark');
+        colorTema = document.body.classList.contains('bg-light') ? 'light' : 'dark';
+        localStorage.setItem('tema', colorTema);
+    });
+}
