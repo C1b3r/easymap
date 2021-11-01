@@ -1,3 +1,11 @@
+:root {
+    --color-bg: #ddd;
+    --color-texto: #EE6352;
+}
+
+
+/*Menú sidebar*/
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -9,15 +17,42 @@
     z-index: 99;
 }
 
+.sidebar .nav-link {
+    color: #333;
+}
+
+.sidebar .nav-link.active {
+    color: #0d6efd;
+}
+
+.navbar {
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+}
+
+
+/*Dark/light theme*/
+
+.btn-dark-theme {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .btn-light-theme {
+        display: none;
+    }
+    .btn-dark-theme {
+        display: block;
+    }
+}
+
+
+/*Medias*/
+
 @media (max-width: 767.98px) {
     .sidebar {
         top: 11.5rem;
         padding: 0;
     }
-}
-
-.navbar {
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
 }
 
 @media (min-width: 767.98px) {
@@ -26,12 +61,4 @@
         position: sticky;
         z-index: 999;
     }
-}
-
-.sidebar .nav-link {
-    color: #333;
-}
-
-.sidebar .nav-link.active {
-    color: #0d6efd;
 }

@@ -16,7 +16,7 @@ class Model
 	}
 	public function prepare($sql) 
 	{
-		 $this->conexion->prepare($sql);
+		return $this->conexion->prepare($sql);//inutil hasta que herede de conection
 	}
 
 	public function __destruct()

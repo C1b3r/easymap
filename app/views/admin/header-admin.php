@@ -28,16 +28,22 @@
             <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
         </div>
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-            <div class="dropdown">
+            <div class="me-1 mt-1">
+              <button type="button" id="btn-dark-light-theme" class="btn btn-light" title="Tema oscuro-Tema claro">
+                <i class="btn-light-theme bi bi-brightness-high"></i>
+                <i class="btn-dark-theme bi bi-brightness-high-fill"></i>
+               </button>
+            </div>
+            <div class="dropdown ms-1">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Hola, <?php echo $_COOKIE['username']; ?>
+                  Hola, <?php echo $_SESSION['username']; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
                   <li><a class="dropdown-item" href="logout">Cerrar sesión</a></li>
                 </ul>
-              </div>
+             </div>
         </div>
     </nav>
     <div class="container-fluid">

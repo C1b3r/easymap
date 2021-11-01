@@ -18,21 +18,22 @@ class Admin_Model extends model
     //    }else{
     //     return false;
     //    }
-       
+       //Si tenemos resultados
        $count = $stmt->rowCount();
        
         if($count)
         {
             $this->username = $data->email;
-            setcookie(
-                'username',
-                $this->username,
-                 time() + 3600 * 24 * 365,
-                 '/',//Para todo el directorio CURRENT_DIRECTORY -- para este solo
-                 CURRENT_DOMAIN,
-                 false, // TLS-only
-                 false  // http-only
-            );
+            // setcookie(
+            //     'username',
+            //     $this->username,
+            //      time() + 3600 * 24 * 365,
+            //      '/',//Para todo el directorio CURRENT_DIRECTORY -- para este solo
+            //      CURRENT_DOMAIN,
+            //      false, // TLS-only
+            //      false  // http-only
+            // );
+            $_SESSION['username'] = $this->username;
             $_SESSION['admin'] = $data->id_user; // Storing user session value
             return true;
         }
