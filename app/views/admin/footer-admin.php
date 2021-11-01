@@ -2,7 +2,7 @@
     {
     ?>
             <footer class="pt-5 d-flex justify-content-between">
-             <span>Creado con cariño por <a href="https://github.com/C1b3r/">C1b3r</a></span>
+             <span class="text-white">Creado con cariño por <a href="https://github.com/C1b3r/">C1b3r</a></span>
                 <ul class="nav m-0">
                     <li class="nav-item">
                         <a class="nav-link text-secondary" aria-current="page" href="#">Politica de privacidad</a>

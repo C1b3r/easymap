@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 </head>
-<body>
+<body inverso="false">
     <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']))
     {
     ?>
-<nav class="navbar navbar-light bg-light p-3">
+<nav class="navbar navbar-light bg-light p-3 border-bottom border-white">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
             <a class="navbar-brand" href="#">
                 Admin panel
@@ -48,17 +48,17 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse border-end border-white">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">
+                          <a class="nav-link active  text-white" aria-current="page" href="#">
                             <i class="bi bi-house-door"></i>
                             <span class="ms-2">Inicio</span>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">
+                          <a class="nav-link text-white" href="#">
                             <i class="bi bi-map"></i>
                             <span class="ms-2">Mapas</span>
                           </a>
@@ -83,8 +83,8 @@
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php echo $this->current_page; ?></li>
+                <li class="breadcrumb-item "><a class=" text-white" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
+                <li class="breadcrumb-item active  text-white" aria-current="page"><?php echo $this->current_page; ?></li>
             </ol>
           </nav>
 <?php 
