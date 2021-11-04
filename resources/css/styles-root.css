@@ -113,9 +113,16 @@
     --color-background-body: var(--color-hinted-grey-3);
     --color-text-body: var(--color-white);
     --color-texto-link: var(--color-cyan-12);
+    --btn__dark: none;
+    --btn__light: block;
 }
 .mp-root--theme-light {
     --color-background-body: var(--color-hinted-grey-15);
     --color-text-body: var(--color-black);
     --color-texto-link: var(--color-cyan-8);
+    --btnlightdark: var("\f1d2");
+    --btn__dark: block;
+    --btn__light: none;
+
+    
 }

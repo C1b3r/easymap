@@ -29,7 +29,10 @@ body{
     background-color: var(--color-background-body);
 }
 .btn-dark-theme {
-    display: none;
+    display: var(--btn__dark);
+}
+.btn-light-theme {
+    display: var(--btn__light);
 }
 
 .body__text{
@@ -37,15 +40,6 @@ body{
 }
 .text__link{
     color:var(--color-texto-link);
-}
-
-@media (prefers-color-scheme: dark) {
-    .btn-light-theme {
-        display: none;
-    }
-    .btn-dark-theme {
-        display: block;
-    }
 }
 
 

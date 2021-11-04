@@ -25,10 +25,6 @@ if (localStorage.getItem("tema") === null) {
         } else if (localConfig === 'light') {
             htmlroot.classList.toggle('mp-root--theme-light');
          }
-
-        if (boton) {
-            cambioBtnCambioColor(localConfig);
-        }
     }
 
 
@@ -38,21 +34,7 @@ if (boton) {
         colorTema = htmlroot.classList.contains('mp-root--theme-dark') ? 'light' : 'dark';
         localStorage.setItem('tema', colorTema);
         cambioTema(colorTema);
-
-        cambioBtnCambioColor(colorTema);
-
     });
-}
-
-function cambioBtnCambioColor(colorTema) {
-    //Como último detalle cambiamos el icono del boton
-    if (colorTema === 'light') {
-        document.getElementsByClassName('btn-dark-theme')[0].style.display = "block";
-        document.getElementsByClassName('btn-light-theme')[0].style.display = "none";
-    } else {
-        document.getElementsByClassName('btn-dark-theme')[0].style.display = "none";
-        document.getElementsByClassName('btn-light-theme')[0].style.display = "block";
-    }
 }
 
 function cambioTema(colorTema){
