@@ -1,5 +1,5 @@
-<h1 class="h2">Dashboard</h1>
-<p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
+<h1 class="h2 body__text">Dashboard</h1>
+<p class="body__text">This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
 <div class="row my-4">
     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
         <div class="card">

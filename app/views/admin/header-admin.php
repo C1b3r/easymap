@@ -7,17 +7,18 @@
     <meta name="robots" content="<?php echo $this->robots; ?>">
     <title><?php echo $this->title; ?></title>
     <link href="<?php echo PUBLIC_WEB_PATH.'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet">
+    <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-root.css';?>" rel="stylesheet">
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-ad.css';?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 </head>
-<body inverso="false">
+<body class="">
     <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']))
     {
     ?>
 <nav class="navbar navbar-light bg-light p-3 border-bottom border-white">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" class="logo__link" href="#">
                 Admin panel
             </a>
             <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,13 +53,13 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                          <a class="nav-link active  text-white" aria-current="page" href="#">
+                          <a class="nav-link active text__link" aria-current="page" href="#">
                             <i class="bi bi-house-door"></i>
                             <span class="ms-2">Inicio</span>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link text-white" href="#">
+                          <a class="nav-link text__link" href="#">
                             <i class="bi bi-map"></i>
                             <span class="ms-2">Mapas</span>
                           </a>
@@ -83,8 +84,8 @@
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item "><a class=" text-white" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <li class="breadcrumb-item active  text-white" aria-current="page"><?php echo $this->current_page; ?></li>
+                <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
+                <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo $this->current_page; ?></li>
             </ol>
           </nav>
 <?php 

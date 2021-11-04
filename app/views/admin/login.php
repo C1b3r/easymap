@@ -11,13 +11,13 @@
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div inverso="true" class="card bg-dark text-white" style="border-radius: 1rem;">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
 
             <div class="mb-md-5 mt-md-4 pb-5">
 
-              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-              <p inverso="true" class="text-white mb-5">Please enter your login and password!</p>
+              <h2 class="fw-bold mb-2 text-uppercase body__text">Login</h2>
+              <p class="body__text mb-5">Please enter your login and password!</p>
             <form method="POST" action="<?php echo COMPLETE_WEB_PATH."admin/login";?>" >
             
                 <div class="form-outline form-white mb-4">
@@ -30,18 +30,18 @@
                     <label class="form-label" for="typePasswordX">Password</label>
                 </div>
 
-                <p class="small mb-5 pb-lg-2"><a inverso="true" class="text-white" href="#!">Forgot password?</a></p>
+                <p class="small mb-5 pb-lg-2"><a class="text-white" href="#!">Forgot password?</a></p>
 
-                <button inverso="true" class="btn btn-outline-light btn-lg px-5" name="submit" type="submit">Login</button>
+                <button class="btn btn-outline-light btn-lg px-5" name="submit" type="submit">Login</button>
               </form>
               <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                <a href="https://github.com/C1b3r" inverso="true" class="text-white"><i class="bi bi-github"></i></a>
+                <a href="https://github.com/C1b3r" class="text-white"><i class="bi bi-github"></i></a>
               </div>
 
             </div>
 
             <div>
-              <p class="mb-0">Don't have an account? <a href="#!" inverso="true" class="text-white fw-bold">Sign Up</a></p>
+              <p class="mb-0">Don't have an account? <a href="#!" class="text-white fw-bold">Sign Up</a></p>
             </div>
 
           </div>
