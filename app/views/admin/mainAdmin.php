@@ -3,9 +3,9 @@
 <div class="row my-4">
     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
         <div class="card">
-            <h5 class="card-header">Customers</h5>
+            <h5 class="card-header">Mapas</h5>
             <div class="card-body">
-              <h5 class="card-title">345k</h5>
+              <h5 class="card-title">Mapa pepito</h5>
               <p class="card-text">Feb 1 - Apr 1, United States</p>
               <p class="card-text text-success">18.2% increase since last month</p>
             </div>

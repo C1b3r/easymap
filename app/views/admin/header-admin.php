@@ -10,13 +10,15 @@
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-root.css';?>" rel="stylesheet">
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-ad.css';?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="<?php echo PUBLIC_WEB_PATH;?>/images/icons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="<?php echo PUBLIC_WEB_PATH;?>/images/icons/favicon-32x32.png" sizes="32x32">
 
 </head>
 <body class="">
     <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']))
     {
     ?>
-<nav class="navbar navbar-light bg-light p-3 border-bottom border-white">
+<nav class="navbar navbar-light p-3 border-bottom border-white">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
             <a class="navbar-brand" class="logo__link" href="#">
                 Admin panel
@@ -49,7 +51,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse border-end border-white">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse border-end border-white">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">

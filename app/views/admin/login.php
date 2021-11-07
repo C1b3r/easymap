@@ -11,13 +11,13 @@
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+        <div class="card body-secondary text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
 
             <div class="mb-md-5 mt-md-4 pb-5">
 
-              <h2 class="fw-bold mb-2 text-uppercase body__text">Login</h2>
-              <p class="body__text mb-5">Please enter your login and password!</p>
+              <h2 class="fw-bold mb-2 text-uppercase text-white">Login</h2>
+              <p class="text-white mb-5">Please enter your login and password!</p>
             <form method="POST" action="<?php echo COMPLETE_WEB_PATH."admin/login";?>" >
             
                 <div class="form-outline form-white mb-4">
