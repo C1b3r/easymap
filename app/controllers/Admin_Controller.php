@@ -23,6 +23,8 @@ class Admin_Controller extends Controller
         if(!isset($_SESSION['admin'])){
 			return $this->view->display('admin/login', '' ,true);
 		}else{
+			$maps = $this->model->getMap(2);
+			$this->view->assign('maps', $maps);
 			return $this->view->display('admin/mainAdmin',null,true);
 		}
     }

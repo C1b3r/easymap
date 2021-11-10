@@ -5,9 +5,12 @@
         <div class="card">
             <h5 class="card-header">Mapas</h5>
             <div class="card-body">
-              <h5 class="card-title">Mapa pepito</h5>
-              <p class="card-text">Feb 1 - Apr 1, United States</p>
-              <p class="card-text text-success">18.2% increase since last month</p>
+              <?php  
+              foreach ($this->maps as $value) {
+                echo ' <h5 class="card-title">'.$value['title'].'</h5>';
+                echo ' <p class="card-text">'.$value['description'].'</p>';
+                echo '<p class="card-text text-success">'.$value['date_add'].'</p>';
+              } ?>
             </div>
           </div>
     </div>
