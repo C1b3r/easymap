@@ -60,11 +60,16 @@
                             <span class="ms-2">Inicio</span>
                           </a>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link text__link" href="#">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link text__link dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" href="#">
                             <i class="bi bi-map"></i>
                             <span class="ms-2">Mapas</span>
                           </a>
+                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Crear mapa</a></li>
+                          <li><a class="dropdown-item" href="#">Ver todos</a></li>
+                          <li><a class="dropdown-item" href="#">Filtros</a></li>
+                         </ul>
                         </li>
 
                        

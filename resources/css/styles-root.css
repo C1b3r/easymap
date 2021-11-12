@@ -169,10 +169,10 @@
     --color-text-body: var(--color-white);
     --btn__dark: none;
     --btn__light: block;
-    --color-text-link: var(--color-black-2);
+    --color-text-link: var(--color-white-2);
     --color-border-base: var(--color-opac-w-2);
     --color-text-link-hover: var(--color-green-10);
-    --color-text-link-active: var(--color-green-7);
+    --color-text-link-active: var(--color-green-12);
     --color-text-link-focus: var(--color-green-10);
     --color-text-link-visited: var(--color-green-11);
 }
@@ -183,11 +183,11 @@
     --btnlightdark: var("\f1d2");
     --btn__dark: block;
     --btn__light: none;
-    --color-text-link: var(--color-white-2);
+    --color-text-link: var(--color-black-2);
     --color-text-link: var(--color-green-7);
     --color-border-base: var(--color-opac-b-2);
     --color-text-link-hover: var(--color-green-8);
-    --color-text-link-active: var(--color-green-7);
+    --color-text-link-active: var(--color-green-10);
     --color-text-link-focus: var(--color-green-8);
     --color-text-link-visited: var(--color-green-7);
 }
