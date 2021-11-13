@@ -6,11 +6,14 @@
             <h5 class="card-header">Mapas</h5>
             <div class="card-body">
               <?php  
-              foreach ($this->maps as $value) {
-                echo ' <h5 class="card-title">'.$value['title'].'</h5>';
-                echo '<p class="card-text text-success">'.$value['date_add'].'</p>';
-              } ?>
-                   <a href="#" class="btn btn-block btn-light float-end">Ver todos</a>
+              if(!empty($this->maps)){
+                foreach ($this->maps as $value) {
+                  echo ' <h5 class="card-title">'.$value['title'].'</h5>';
+                  echo '<p class="card-text text-success">'.$value['date_add'].'</p>';
+                } 
+              }?>
+            
+                   <a href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>mapas" class="btn btn-block btn-light float-end">Ver todos</a>
             </div>
        
           </div>

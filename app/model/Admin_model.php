@@ -60,6 +60,8 @@ class Admin_Model extends model
         if($count)
         {
             return $data;
+        }else{
+            return false;
         }
 
     }
