@@ -18,19 +18,19 @@
 
               <h2 class="fw-bold mb-2 text-uppercase text-white">Login</h2>
               <p class="text-white mb-5">Please enter your login and password!</p>
-            <form method="POST" action="<?php echo COMPLETE_WEB_PATH."admin/login";?>" >
+             <?php echo $this->startform; ?>
             
-                <div class="form-outline form-white mb-4">
+                <div class="form-outline mb-4">
                     <input type="text" id="typeEmailX" name="email" class="form-control form-control-lg" />
                     <label class="form-label" for="typeEmailX">Email</label>
                 </div>
 
-                <div class="form-outline form-white mb-4">
+                <div class="form-outline mb-4">
                     <input type="password" id="typePasswordX" name="pass" class="form-control form-control-lg" />
                     <label class="form-label" for="typePasswordX">Password</label>
                 </div>
 
-                <p class="small mb-5 pb-lg-2"><a class="text-white" href="#!">Forgot password?</a></p>
+                <p class="small mb-5 pb-lg-2"><a class="text-white" href="#!">He olvidado mi contraseña</a></p>
 
                 <button class="btn btn-outline-light btn-lg px-5" name="submit" type="submit">Login</button>
               </form>
@@ -39,11 +39,6 @@
               </div>
 
             </div>
-
-            <div>
-              <p class="mb-0">Don't have an account? <a href="#!" class="text-white fw-bold">Sign Up</a></p>
-            </div>
-
           </div>
         </div>
       </div>
