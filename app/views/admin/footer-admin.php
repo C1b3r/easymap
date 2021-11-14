@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']))
+<?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
     {
     ?>
             <footer class="pt-5 d-flex justify-content-between">

@@ -15,7 +15,7 @@
 
 </head>
 <body class="">
-    <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']))
+    <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
     {
     ?>
 <nav class="navbar navbar-light p-3 border-bottom border-white">

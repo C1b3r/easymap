@@ -15,32 +15,17 @@ class Logout_Controller extends Controller
 		//Clean cookies --Future, only clean cookies admin(search in array)
 		foreach($_COOKIE as  $key => $val)
 		{
-		   $this->cleanCookie($key);
+			Session::cleanCookie($key);
 		}
 
 		//Clean session
-		$this->cleanSession();
+		Session::cleanSession();
 
 		//Go to front page
 		$this->redirect('');
-		/*
-		  session_start();
 
-    $sesionHelper = array_keys($_SESSION);
-    foreach ($sesionHelper as $key){
-        unset($_SESSION[$key]);
-    } */
 	   
 	}
 
-	public static function cleanCookie($cookieName)
-	{
-		//Clean cookie value and set empty
-		unset($_COOKIE[$cookieName]);
-		setcookie($cookieName, '', time() - 3600,'/');
-	}
-	public static function cleanSession()
-	{
-		session_destroy();
-	}
+
 }

@@ -5,12 +5,14 @@ class Admin_Controller extends Controller
 {
 	private $isLogin = false; //check if user login
 	private $defaultView = 'admin/login';
+	public $session;
 
 	public function __construct() 
 	{
 		parent::__construct(); //to create view
 		$this->view->assign('robots','noindex, nofollow')->assign('title','Panel de administración'); //assing allways the same robots(you can overwrite in assign function)
-		$this->isLogin = $this->checkIfLogin();
+		$this->isLogin = Session::checkIfLogin();
+		$this->session = new Session;
 
 	}
 
@@ -32,38 +34,17 @@ class Admin_Controller extends Controller
 		}
 		$this->loadAdminView('admin/mainAdmin');   
 	}
-    public function checkIfLogin()
-    {//test cookie in future
-        if(!isset($_SESSION['admin'])){
-			return false;
-		}else{
 
-			return true;
-		}
-    }
 	
 	protected function loadAdminView($currentView = 'admin/login')
 	{
 		//Si no está logeado
 		if(!$this->isLogin){
 			$currentView = $this->defaultView;
-		}
+		} 
 		return $this->view->display($currentView,null,true);
 	}
 
-	// private function dashboard($boolean = false)
-	// {
-	// 	if($boolean){
-	// 		$maps = $this->model->getMap(2);
-	// 		if($maps){
-	// 			$this->view->assign('maps', $maps);
-	// 		}
-			
-	// 		return $this->view->display('admin/mainAdmin',null,true);
-	// 	}else{
-	// 		return $this->view->display('admin/login', '' ,true);
-	// 	}
-	// }
 
 	public function login()
 	{
@@ -73,25 +54,25 @@ class Admin_Controller extends Controller
 		}else{
 			if(empty($_POST['email']) || empty($_POST['pass']))
 			{
-				$this->error();
+				$this->error('admin/login','Debe rellenar ambos campos');
 			}
-			if($this->model->logUser($_POST['email'],$_POST['pass']))
+			if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
 			{
 				$this->view->assign('email', $this->model->username);
 				//Cargará el index
 				$this->redirect('admin');
 			}else{
-				$this->error();
+				$this->error('admin/login','Usuario y contraseña incorrectos');
 			}
 		}
 		
 	}
 
 
-	private function error()
+	private function error($view,$mensaje)
 	{
-		return $this->view->assign('message','Error')
-		->display('admin/login',null,true);
+		return $this->view->assign('message',$mensaje);
+		$this->loadAdminView($view);
 	}
 
 	public function mapas()
