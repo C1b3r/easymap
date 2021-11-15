@@ -44,7 +44,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="logout">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item" href="admin/logout">Cerrar sesión</a></li>
                 </ul>
              </div>
         </div>
@@ -92,12 +92,6 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <?php if(isset($this->antecesor_page)){
-                  foreach ($this->antecesor_page as $url => $value) {
-                    echo '<li class="breadcrumb-item "><a class="text__link" href="'.COMPLETE_WEB_PATH_ADMIN.$url.'">'.$value.'</a></li>';
-                  }
-                } ?>
-               
                 <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo $this->current_page; ?></li>
             </ol>
           </nav>

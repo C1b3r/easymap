@@ -15,7 +15,9 @@ define('COMPLETE_WEB_PATH',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].CURRENT_DI
 define('COMPLETE_WEB_PATH_ADMIN',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].CURRENT_DIRECTORY.'/admin/');
 define('VIEW_PATH',ROOT_PATH.'app/views/');
 define('CONTROLLER_PATH',ROOT_PATH.'app/controllers/');
+define('CONTROLLER_ADMIN_PATH',ROOT_PATH.'app/controllers/admincontrollers/');
 define('MODEL_PATH',ROOT_PATH.'app/model/');
+define('MODEL_ADMIN_PATH',ROOT_PATH.'app/model/adminmodels/');
 define('CLASSES_PATH',ROOT_PATH.'app/classes/');
 define('PUBLIC_PATH',ROOT_PATH.'app/public/');
 define('PUBLIC_WEB_PATH',COMPLETE_WEB_PATH.'resources/');
