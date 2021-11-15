@@ -24,6 +24,7 @@ class Controller
 
 	private function form()
 	{
+		//All controllers dont need a form, its better to declare here instead on construct(i think)
 		return $this->form = new Form;
 	}
 		

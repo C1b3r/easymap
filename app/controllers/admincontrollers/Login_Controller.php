@@ -5,6 +5,13 @@ class Login_Controller extends Controller
 {
 	public $havemodel = false;
 	protected $defaultView = 'admin/login';
+	public $formLogin = array('formStart' =>['name'=>'loginform',
+											'method'=>'POST',
+										'action'=>COMPLETE_WEB_PATH."admin/login",
+										'enctype'=>0,
+										'onsubmit'=>''],
+								'formFields' =>['text'
+								]);
 
 	public function __construct() 
 	{
