@@ -25,3 +25,4 @@ define('CURRENT_DOMAIN',$_SERVER["SERVER_NAME"]);
 define('ADMIN_EMAIL','');
 define('DEBUG_IP','');
 define('DEBUG_ENVIRONMENT',TRUE);
+define('LOG_PATH',ROOT_PATH.'logs/');

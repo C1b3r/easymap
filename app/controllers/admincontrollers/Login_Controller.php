@@ -5,7 +5,10 @@ class Login_Controller extends Controller
 {
 	public $havemodel = false;
 	protected $defaultView = 'admin/login';
-
+	public $formFields = array('email'=>'email',
+								'password`'=>'pass');
+								//ir llamando a la función e ir agregando nombre, o declararlo, devolver el objeto y luego seguir agregando->funcion>funcion
+	public $f = array('encitype'=>'bla bla');//O hago un array de arrays con todas las propiedades y lo paso a la función del controlador.
 	public function __construct() 
 	{
 		parent::__construct(); //to create view
@@ -42,20 +45,5 @@ class Login_Controller extends Controller
 		}
 		
 		
-	}
-
-
-	public function mapas()
-	{
-
-		$this->view->assign('current_page','Listado de mapas');
-		$this->loadAdminView('admin/mapsAdmin');
-	}
-
-	public function crearmapa()
-	{
-		$this->view->assign('current_page','Listado de mapas')
-					->assign('antecesor_page',array('mapas'=>'mapas')); //para el breadcrum, declaramos un array de url=>nombre
-		$this->loadAdminView('admin/mapsAdmin');
 	}
 }

@@ -111,6 +111,7 @@ class Boot {
 
     public static function getMail()
     {
-
+        $mail = new Mail();
+		return $mail; 
     }
 }
