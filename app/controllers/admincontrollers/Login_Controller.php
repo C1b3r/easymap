@@ -9,6 +9,14 @@ class Login_Controller extends Controller
 								'password`'=>'pass');
 								//ir llamando a la función e ir agregando nombre, o declararlo, devolver el objeto y luego seguir agregando->funcion>funcion
 	public $f = array('encitype'=>'bla bla');//O hago un array de arrays con todas las propiedades y lo paso a la función del controlador.
+	public $formLogin = array('formStart' =>['name'=>'loginform',
+											'method'=>'POST',
+										'action'=>COMPLETE_WEB_PATH."admin/login",
+										'enctype'=>0,
+										'onsubmit'=>''],
+								'formFields' =>['text'
+								]);
+
 	public function __construct() 
 	{
 		parent::__construct(); //to create view
