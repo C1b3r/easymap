@@ -20,15 +20,6 @@ class Model
 		return $this->conexion->prepare($sql);//inutil hasta que herede de conection
 	}
 
-	public function getForm($nameForm)
-    {
-        /* get_class($this) i want to get the name of class dinamically and execute later with this
-        call_user_func_array(array($this->object,'method'), array($arg1, $arg2));  
-        */
-        call_user_func(array(get_class($this),"form".$nameForm));
-       return $this->form[$nameForm];
-    }
-	
 	public function __destruct()
 	{
 		$this->db->closeConnection();

@@ -36,7 +36,6 @@ class Controller
 	public function createForm($nameForm)
 	{
 		$this->formFunction = "form".$nameForm;
-		// if(!$miForm = $this->form()->getForm($nameForm,$this->model)){echo "No se ha encontrado formulario";}	
 		if(!method_exists($this->model,$this->formFunction)){
 			return false;
         }
@@ -51,11 +50,10 @@ class Controller
 	{
 		//Si no está logeado
 		if(!$this->isLogin){
-			//cargo el formulario
-			// echo Login_Controller::$aa;
+		
 			$currentView = "login";
-			if($this->createForm("Login")){
-				$this->error($currentView,"No se ha encontrado formulario");
+			if($this->createForm("Login")){ //cargo el formulario
+				$this->error($currentView,"No se ha encontrado formulario");	
 			}
 		} 
 		return $this->view->display($currentView,null,true);
