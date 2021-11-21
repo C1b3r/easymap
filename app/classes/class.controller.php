@@ -39,10 +39,11 @@ class Controller
 		if(!method_exists($this->model,$this->formFunction)){
 			return false;
         }
+		//Tendre que hacer una consulta a la tabla de configuración para rescatar el secret key para validar el formulario
 		//https://www.php.net/manual/en/language.types.string.php#language.types.string.parsing.complex
-		if($miForm = $this->model->{$this->formFunction}()){echo "No se ha encontrado formulario";}
+		$miForm = $this->model->{$this->formFunction}();
 		// print_r($this->model->getForm($nameForm));
-		$this->view->assign($this->formFunction,$this->form()->openForm("LoginForm","post",COMPLETE_WEB_PATH."admin/login",0));
+		$this->view->assign($this->formFunction,$this->form()->makeForm($miForm));
 
 	}
 

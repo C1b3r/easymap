@@ -18,13 +18,13 @@
              <?php echo $this->formLogin; ?>
             
                 <div class="form-outline mb-4">
-                    <input type="text" id="typeEmailX" name="email" autofocus class="form-control form-control-lg" />
-                    <label class="form-label" for="typeEmailX">Email</label>
+                    <input type="text" id="typeEmail" name="email" autofocus class="form-control form-control-lg" />
+                    <label class="form-label" for="typeEmail">Email</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <input type="password" id="typePasswordX" name="pass" class="form-control form-control-lg" />
-                    <label class="form-label" for="typePasswordX">Password</label>
+                    <input type="password" id="typePassword" name="pass" class="form-control form-control-lg" />
+                    <label class="form-label" for="typePassword">Password</label>
                 </div>
 
                 <p class="small mb-5 pb-lg-2"><a class="text-white" href="#!">He olvidado mi contraseña</a></p>

@@ -3,17 +3,41 @@ class Admin_Model extends model
  {
     public $username;
 
-	public $formFields = array('email'=>'email',
-								'password`'=>'pass');
-								//ir llamando a la función e ir agregando nombre, o declararlo, devolver el objeto y luego seguir agregando->funcion>funcion
-	public $f = array('encitype'=>'bla bla');//O hago un array de arrays con todas las propiedades y lo paso a la función del controlador.
-	public $loginForm = array('formStart' =>['name'=>'loginform',
-											'method'=>'POST',
-										'action'=>COMPLETE_WEB_PATH."login",
-										'enctype'=>0,
-										'onsubmit'=>''],
-								'formFields' =>['text'
-								]);
+    //name->type
+	public $loginFields = array([
+                                "id" => "typeEmail",
+                                "name" => "Email",
+                                "type" => "email",
+                                "required" => true,
+                                "attributes" => "autofocus",
+                                "class" => "form-control form-control-lg",
+                                "label" => "Email",
+                                "div" => "form-outline mb-4"
+                            ],
+                            [
+                                "id" => "typePassword",
+                                "name" => "Password",
+                                "type" => "password",
+                                "required" => true,
+                                "class" => "form-control form-control-lg",
+                                "label" => "Password",
+                                "div" => "form-outline mb-4"
+                            ],
+                            [
+                                "id" => "submitLogin",
+                                "name" => "submit",
+                                "type" => "submit",
+                                "class" => "btn btn-outline-light btn-lg px-5",
+                                "label" => "Login"
+                            ]
+                           );
+
+	public $loginForm = array('name'=>'loginform',
+								'method'=>'POST',
+								'action'=>COMPLETE_WEB_PATH."login",
+								'enctype'=>0,
+								'onsubmit'=>''
+                                );
 
     public function logUser($email, $pass,$session)
     {
@@ -65,9 +89,7 @@ class Admin_Model extends model
 
 
     public function formLogin(){
-        //I need to pass the instance of object model because i cant use this to get instance of model
-        //return $model->form = $model->loginForm;
-        echo "aaa";
+       return array($this->loginForm,$this->loginFields);
 
     }
 

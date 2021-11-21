@@ -21,15 +21,24 @@ class Form
 	{
 		
     }
-	function openForm($name = 'form', $method = 'POST', $action = '#', $enctype = 0, $onsubmit = ''){
-        $this->action = $action;
-        $this->method = $method;
-        $this->name = $name;
-        $this->enctype = $this->enctype[$enctype];
-        $this->onsubmit = $onsubmit;
-        
-        $this->formStart = "<form name='".$this->name."' action='".$this->action."' method='".$this->method."' enctype='".$this->enctype."' onsubmit='".$this->onsubmit."'>";
-        return $this->formStart;
+	function makeForm($form){
+        //create form start
+        $this->formStart = $this->makeStart($form[0]);
+    //   foreach ($form as  $value) {
+    //         foreach ($value as $key) {
+    //             echo $key;
+    //         }
+    //   }
+        // $this->formStart = "<form name='".$this->name."' action='".$this->action."' method='".$this->method."' enctype='".$this->enctype."' onsubmit='".$this->onsubmit."'>";
+        // return $this->formStart;
+    }
+
+    public function makeStart($formStart)
+    {
+        // print_r($formStart);
+        foreach ($formStart as $key => $value) {
+            echo $value;
+        }
     }
  
 }
