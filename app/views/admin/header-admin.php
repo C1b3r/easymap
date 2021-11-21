@@ -15,9 +15,7 @@
 
 </head>
 <body class="">
-    <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
-    {
-    ?>
+    <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
 <nav class="navbar navbar-light p-3 border-bottom border-white">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
             <a class="navbar-brand" class="logo__link" href="#">
@@ -44,7 +42,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="admin/logout">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item" href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>logout">Cerrar sesión</a></li>
                 </ul>
              </div>
         </div>
@@ -95,8 +93,7 @@
                 <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo $this->current_page; ?></li>
             </ol>
           </nav>
-<?php 
-    }
+<?php endif;
 
 
                 

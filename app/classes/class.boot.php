@@ -109,9 +109,4 @@ class Boot {
 		return false;
 	}
 
-    public static function getMail()
-    {
-        $mail = new Mail();
-		return $mail; 
-    }
 }

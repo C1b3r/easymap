@@ -16,7 +16,7 @@ class Mail
 		$email_headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 		$email_headers .= 'From: '. $from . "\r\n";
 		$email_headers .= 'Reply-To:'. $from ." \r\n";
-		$email_headers .= 'X-Mailer: PHP/'.phpversion();	
+		// $email_headers .= 'X-Mailer: PHP/'.phpversion();	
 		$this->headers = $email_headers;
 		return $this;
 	}

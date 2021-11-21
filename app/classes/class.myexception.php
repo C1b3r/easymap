@@ -23,7 +23,7 @@ class MyException extends Exception
 				$request_uri = $_SERVER['REQUEST_URI'];
 				$message = $_SERVER['REMOTE_ADDR'] . "referrer=".$referrer . "\n request_uri=" . $request_uri."\n" . $msg;
 				$subject = 'Fatal error on: ' . WEB_PATH;
-				Boot::getMail()->setMessage($message)->setSubject($subject)->send();
+				Helper::getMail()->setMessage($message)->setSubject($subject)->send();
 			break;			
 		}
     }

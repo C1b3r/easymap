@@ -3,6 +3,18 @@ class Admin_Model extends model
  {
     public $username;
 
+	public $formFields = array('email'=>'email',
+								'password`'=>'pass');
+								//ir llamando a la función e ir agregando nombre, o declararlo, devolver el objeto y luego seguir agregando->funcion>funcion
+	public $f = array('encitype'=>'bla bla');//O hago un array de arrays con todas las propiedades y lo paso a la función del controlador.
+	public $loginForm = array('formStart' =>['name'=>'loginform',
+											'method'=>'POST',
+										'action'=>COMPLETE_WEB_PATH."login",
+										'enctype'=>0,
+										'onsubmit'=>''],
+								'formFields' =>['text'
+								]);
+
     public function logUser($email, $pass,$session)
     {
         $passSecured = md5($pass);
@@ -50,4 +62,14 @@ class Admin_Model extends model
         }
 
     }
+
+
+    public function formLogin(){
+        //I need to pass the instance of object model because i cant use this to get instance of model
+        //return $model->form = $model->loginForm;
+        echo "aaa";
+
+    }
+
+
  }

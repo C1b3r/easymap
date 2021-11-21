@@ -4,13 +4,12 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 class Admin_Controller extends Controller 
 {
 	
-	protected $defaultView = 'admin/mainAdmin';
+	protected $defaultView = 'mainAdmin';
 
 	public function __construct() 
 	{
-		parent::__construct(); //to create view
+		parent::__construct(true); //to create view
 		$this->view->assign('robots','noindex, nofollow')->assign('title','Panel de administración'); //assing allways the same robots(you can overwrite in assign function)
-		$this->isLogin = Session::checkIfLogin();
 	}
 
     public function index() 
@@ -29,6 +28,6 @@ class Admin_Controller extends Controller
 			}
 
 		}
-		$this->loadAdminView('admin/mainAdmin');   
+		$this->loadAdminView($this->defaultView);   
 	}
 }

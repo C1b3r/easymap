@@ -1,13 +1,10 @@
 <section class="vh-100 gradient-custom">
     
-    <?php if(isset($this->message) || !empty($this->message))
-    {
-        ?>
+    <?php if(isset($this->message) && !empty($this->message)):?>
     <div class="alert alert-danger" role="alert">
         <?php echo $this->message; ?>
     </div>
-        <?php
-    } ?>
+        <?php endif;?>
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -18,10 +15,10 @@
 
               <h2 class="fw-bold mb-2 text-uppercase text-white">Login</h2>
               <p class="text-white mb-5">Please enter your login and password!</p>
-             <?php echo $this->startform; ?>
+             <?php echo $this->formLogin; ?>
             
                 <div class="form-outline mb-4">
-                    <input type="text" id="typeEmailX" name="email" class="form-control form-control-lg" />
+                    <input type="text" id="typeEmailX" name="email" autofocus class="form-control form-control-lg" />
                     <label class="form-label" for="typeEmailX">Email</label>
                 </div>
 

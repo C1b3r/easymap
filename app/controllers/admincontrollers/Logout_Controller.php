@@ -22,7 +22,7 @@ class Logout_Controller extends Controller
 		Session::cleanSession();
 
 		//Go to front page
-		$this->redirect('');
+		$this->redirect('',false);
 
 	   
 	}
