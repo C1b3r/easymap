@@ -4,26 +4,39 @@ class Admin_Model extends model
     public $username;
 
     //name->type
-	public $loginFields = array([
+	public $loginFields = array(
+                    "Email"=> [
                                 "id" => "typeEmail",
                                 "name" => "Email",
                                 "type" => "email",
-                                "required" => true,
+                                "validations" => array("RULE_REQUIRED", "RULE_EMAIL"),
+                                "placeholder" => "Email",
                                 "attributes" => "autofocus",
                                 "class" => "form-control form-control-lg",
-                                "label" => "Email",
-                                "div" => "form-outline mb-4"
+                                "label" => array("text" => "Email",
+                                                 "position" => "end") , //end, start or wrap input
+                                "container" => array(
+                                                 "type" => "div",   
+                                                 "class"=> "form-outline mb-4",
+                                                 "attritubes" => ""
+                                                  )
                             ],
-                            [
+                    "Password" => [
                                 "id" => "typePassword",
                                 "name" => "Password",
                                 "type" => "password",
-                                "required" => true,
+                                "validations" => array("RULE_REQUIRED"),
+                                "placeholder" => "Contraseña",
                                 "class" => "form-control form-control-lg",
-                                "label" => "Password",
-                                "div" => "form-outline mb-4"
+                                "label" => array("text" => "Password",
+                                                 "position" => "end"),
+                                "container" => array(
+                                                "type" => "div",   
+                                                "class"=> "form-outline mb-4",
+                                                "attritubes" => ""
+                                                )
                             ],
-                            [
+                    "submit"=> [
                                 "id" => "submitLogin",
                                 "name" => "submit",
                                 "type" => "submit",
@@ -34,7 +47,7 @@ class Admin_Model extends model
 
 	public $loginForm = array('name'=>'loginform',
 								'method'=>'POST',
-								'action'=>COMPLETE_WEB_PATH."login",
+								'action'=>COMPLETE_WEB_PATH_ADMIN."login",
 								'enctype'=>0,
 								'onsubmit'=>''
                                 );

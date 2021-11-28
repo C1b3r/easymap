@@ -5,7 +5,7 @@ define("DB_HOST", "");
 define("DB_USER", "");
 define("DB_PASS", "");
 define("DB_NAME", "");
-define("DB_CHARSET", "utf8");
+define("DB_CHARSET", "utf8mb4");
 define("DB_PREFIX", "mymap_");
 //path's
 define('WEB_PROTOCOL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ?  'https' : 'http');
