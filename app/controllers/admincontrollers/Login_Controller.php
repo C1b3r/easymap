@@ -32,35 +32,15 @@ class Login_Controller extends Controller
 					//Cargará el index
 					$this->redirect('admin');
 				}else{
-					Helper::setFlash("danger","login",'Usuario o contraseña incorrectos');
-					$this->loadAdminView('login');
-					// $this->error('/','Usuario o contraseña incorrectos');
+					// Helper::setFlash("danger","login",'Usuario o contraseña incorrectos');
+					// $this->loadAdminView('login');
+					$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
 				}
 			}else{
-				Helper::setFlash("danger","formulario",$validation);
-				$this->loadAdminView('login');
-				// print_r($validation);
+				$this->error('login',self::FLASH_ERROR,'flash',$validation);
+				// Helper::setFlash("danger","formulario",$validation);
+				// $this->loadAdminView('login');
 			 }
-				
-
-			// if($validation = $validador->validateFields($this->loginValidations,$_POST)) //submit variable
-			// {
-			
-			// }else{
-			// 	print_r($validation);
-				// if(empty($_POST['email']) || empty($_POST['pass']))
-				// {
-				// 	$this->error('/','Debe rellenar ambos campos');
-				// }
-				// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
-				// {
-				// 	$this->view->assign('email', $this->model->username);
-				// 	//Cargará el index
-				// 	$this->redirect('admin');
-				// }else{
-				// 	$this->error('/','Usuario y contraseña incorrectos');
-				// }
-			// }
 		}else{
 			if(!$this->isLogin){
 				$this->loadAdminView('login');

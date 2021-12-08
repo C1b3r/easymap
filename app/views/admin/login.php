@@ -1,10 +1,4 @@
 <section class="vh-100 gradient-custom">
-    
-    <?php if(isset($this->message) && !empty($this->message)):?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $this->message; ?>
-    </div>
-        <?php endif;?>
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">

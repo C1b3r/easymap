@@ -5,10 +5,6 @@ class Validation
 {
 
 	private $secretKey = 'fjd3vkuw#KURefg'; //get from database TODO
-	const FLASH_ERROR = 'danger';
-	const FLASH_WARNING = 'warning';
-	const FLASH_INFO = 'info';
-	const FLASH_SUCCESS = 'success';
 
 	public function __construct() 
 	{

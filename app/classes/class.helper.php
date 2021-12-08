@@ -34,9 +34,6 @@ class Helper
 					array_push($_SESSION['flash'][$name], sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
 					$type,
 					$message));
-				// 	$_SESSION['flash'][$name] = sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
-				// $type,
-				// $message);
 				}
 			}else{
 				array_push($_SESSION['flash'][$name], sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',

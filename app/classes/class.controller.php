@@ -9,6 +9,10 @@ class Controller
 	protected $defaultView;
 	protected $formFunction;
 	protected $session;
+	const FLASH_ERROR = 'danger';
+	const FLASH_WARNING = 'warning';
+	const FLASH_INFO = 'info';
+	const FLASH_SUCCESS = 'success';
 
     public function __construct($admin = false) 
 	{
@@ -54,7 +58,7 @@ class Controller
 		
 			$currentView = "login";
 			if($this->createForm("formLogin")){ //cargo el formulario
-				$this->error($currentView,"No se ha encontrado formulario");	
+				$this->error($currentView,self::FLASH_ERROR,'message',"No se ha encontrado formulario");	
 			}
 		} 
 		return $this->view->display($currentView,null,true);
@@ -62,9 +66,14 @@ class Controller
 
 	
 
-	protected function error($view,$mensaje)
+	protected function error($view,$format, $type, $mensaje)
 	{
-		 $this->view->assign('message',$mensaje);
+		if($type == "flash"){
+			Helper::setFlash("danger","formulario",$mensaje);
+		}else{
+			$this->view->assign('message',array('type'=> $format, 'mensaje'=>$mensaje));
+		}
+		
 		return $this->loadAdminView($view);
 	}
 
