@@ -31,7 +31,7 @@ class Mapas_Controller extends Controller
 
 		}
 		$this->view->assign('current_page','Listado de mapas');
-		$this->loadAdminView('admin/mapsAdmin');  
+		$this->loadAdminView('mapsAdmin');  
 	}
 
 
@@ -39,6 +39,6 @@ class Mapas_Controller extends Controller
 	{
 		$this->view->assign('current_page','Listado de mapas')
 					->assign('antecesor_page',array('mapas'=>'mapas')); //para el breadcrum, declaramos un array de url=>nombre
-		$this->loadAdminView('admin/mapsAdmin');
+		$this->loadAdminView('mapsAdmin');
 	}
 }

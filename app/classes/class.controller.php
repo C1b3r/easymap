@@ -44,14 +44,6 @@ class Controller
 
 	protected function loadAdminView($currentView = 'error')
 	{
-		//Si no está logeado
-		if(!$this->isLogin){
-		
-			$currentView = "login";
-			if($this->createForm("formLogin")){ //cargo el formulario
-				$this->error($currentView,self::FLASH_ERROR,'message',"No se ha encontrado formulario");	
-			}
-		} 
 		return $this->view->display($currentView,null,true);
 	}
 

@@ -30,10 +30,20 @@ class InitController {
 		}
 
 		if(ucwords($this->location[$indexAdmin]) === ucwords(ADMIN_FOLDER)){
+			if(!Session::checkIfLogin()){
+				$controller = new Login_Controller();
+				$controller->index();
+				return $this;
+		
+			}
 			//Comprobamos si en /admin/ esta vacio para cargar la vista principal de administrador
 			if(empty($this->location[$indexAdmin+1])){
+
 				$controller = new Admin_Controller();
+				
+				// if(empty($controller->model)){
 				$controller->loadModel(ucwords($this->location[$indexAdmin])); //controller_name
+				// };
 				$controller->index();
 				return $this;
 			}

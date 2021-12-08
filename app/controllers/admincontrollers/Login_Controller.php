@@ -35,10 +35,12 @@ class Login_Controller extends Controller
 					$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
 				}
 			}else{
+				$this->createForm("formLogin");
 				$this->error('login',self::FLASH_ERROR,'flash',$validation);
 			 }
 		}else{
 			if(!$this->isLogin){
+				$this->createForm("formLogin");
 				$this->loadAdminView('login');
 			}else{
 				$this->redirect('admin');
