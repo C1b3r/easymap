@@ -23,7 +23,7 @@ class Login_Controller extends Controller
 	{
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-			$validador = new Validation;
+			$validador = new Validation('users');
 			$validation = $validador->validateFields($this->loginValidations,$_POST);
 			if(!count($validation)){
 				if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))

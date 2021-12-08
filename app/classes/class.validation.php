@@ -5,10 +5,10 @@ class Validation
 {
 
 	private $secretKey = 'fjd3vkuw#KURefg'; //get from database TODO
-
-	public function __construct() 
+	protected $table = '';
+	public function __construct($table = '') 
 	{
-		
+		$this->table = $table;
     }
 
 	public function validateFields($rules,$post)
@@ -84,25 +84,20 @@ class Validation
 		  return strlen($input[$fieldName]) > $value;
 	  }
   
-	  public function isRecordUnique($input,$table, $fieldName) 
+	  public function isRecordUnique($input, $fieldName, $fieldDatabase) 
 	  {	
+		  //For unique fields, we need defined as unique:nameoffieldindatabase in the string
 		  // Connect to database
-		  $db = new Model();
-  
-		  // SQL Statement
-		  $sql = "SELECT * FROM ".DB_PREFIX.$table." WHERE ".$fieldName."='".$input[$fieldName]."'";
-  
-		  // Process the query
-		  $results = $db->conexion->query($sql);
-  
-		  // Fetch Associative array
-		  $row = $results->fetch_assoc();
-  
-		  // Close db connection
-		  $db->conexion->close();
-  
-		  // If the result is not array so the record is unique
-		  return !is_array($row);
+		  $stmt = new Model();
+		 $cantidad = $stmt->checkOneRow($this->table,$fieldDatabase,$input[$fieldName]);	
+
+		 if(!$cantidad || $cantidad == 0){
+			 //if not cuantity, false or if $cantidad =0 not exist
+			 return true;
+		 }else{
+			 return false;
+		 }
+		
 	  }
   
 	  public function isEmailValid($input, $fieldName) 
