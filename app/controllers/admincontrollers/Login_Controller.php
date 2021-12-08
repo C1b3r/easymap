@@ -32,14 +32,10 @@ class Login_Controller extends Controller
 					//Cargará el index
 					$this->redirect('admin');
 				}else{
-					// Helper::setFlash("danger","login",'Usuario o contraseña incorrectos');
-					// $this->loadAdminView('login');
 					$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
 				}
 			}else{
 				$this->error('login',self::FLASH_ERROR,'flash',$validation);
-				// Helper::setFlash("danger","formulario",$validation);
-				// $this->loadAdminView('login');
 			 }
 		}else{
 			if(!$this->isLogin){
