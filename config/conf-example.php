@@ -7,13 +7,15 @@ define("DB_PASS", "");
 define("DB_NAME", "");
 define("DB_CHARSET", "utf8mb4");
 define("DB_PREFIX", "mymap_");
+define("ADMIN_FOLDER", "admin");
 //path's
 define('WEB_PROTOCOL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ?  'https' : 'http');
 define('WEB_PATH',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].'/');
 define('CURRENT_DIRECTORY',dirname($_SERVER['PHP_SELF'])); //if proyect is in subfolder
 define('COMPLETE_WEB_PATH',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].CURRENT_DIRECTORY.'/');
-define('COMPLETE_WEB_PATH_ADMIN',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].CURRENT_DIRECTORY.'/admin/');
+define('COMPLETE_WEB_PATH_ADMIN',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].CURRENT_DIRECTORY.'/'.ADMIN_FOLDER.'/');
 define('VIEW_PATH',ROOT_PATH.'app/views/');
+define('VIEW_FORM_PATH',ROOT_PATH.'app/views/forms/');
 define('CONTROLLER_PATH',ROOT_PATH.'app/controllers/');
 define('CONTROLLER_ADMIN_PATH',ROOT_PATH.'app/controllers/admincontrollers/');
 define('MODEL_PATH',ROOT_PATH.'app/model/');

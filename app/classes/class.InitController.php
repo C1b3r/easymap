@@ -29,7 +29,7 @@ class InitController {
 			//return current object
 		}
 
-		if(ucwords($this->location[$indexAdmin]) === "Admin"){
+		if(ucwords($this->location[$indexAdmin]) === ucwords(ADMIN_FOLDER)){
 			//Comprobamos si en /admin/ esta vacio para cargar la vista principal de administrador
 			if(empty($this->location[$indexAdmin+1])){
 				$controller = new Admin_Controller();

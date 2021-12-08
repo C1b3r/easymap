@@ -18,4 +18,57 @@ class Helper
 		  return $mail; 
 	  }
 
+	  public static function setFlash($type,$name,$flash_message)
+	  {
+		//Si hay alguna sesión ya creada con ese nombre, la borra
+		if (isset($_SESSION['flash'][$name])) {
+			unset($_SESSION['flash'][$name]);
+		}
+		//Instancio un array para luego hacer push
+		$_SESSION['flash'][$name] = [];
+		if(is_array($flash_message)){
+		foreach ($flash_message as $key => $value) {
+			if(is_array($value)){
+				foreach ($value as $message) {
+					//Para que lo haga como un array de posición y no se sustituya en cada iteración
+					array_push($_SESSION['flash'][$name], sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
+					$type,
+					$message));
+				// 	$_SESSION['flash'][$name] = sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
+				// $type,
+				// $message);
+				}
+			}else{
+				array_push($_SESSION['flash'][$name], sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
+				$type,
+				$value));
+			}
+		
+		}	
+	}else{
+		array_push($_SESSION['flash'][$name], sprintf('<div class="alert alert-%s alert-dismissible fade show" role="alert">%s   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
+		$type,
+		$flash_message));
+	}
+			
+	  }
+
+	  public static function getFlash()
+	  {
+		  if(isset($_SESSION['flash']) && !empty($_SESSION['flash'])){
+			foreach($_SESSION['flash'] as $name => $message)
+			{
+				if(is_array($message)){
+					foreach ($message as $value) {
+						echo $value;
+					}
+				}else{
+					echo $message;
+				}
+				
+				unset($_SESSION['flash'][$name]);
+			}
+		  }
+	  }
+
 }

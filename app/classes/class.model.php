@@ -20,6 +20,16 @@ class Model
 		return $this->conexion->prepare($sql);//inutil hasta que herede de conection
 	}
 
+	public function select()
+	{
+
+	}
+
+	public function selectOneRowBy($table,$by,$param)
+	{
+		$sql = "SELECT * FROM ".DB_PREFIX.$table." WHERE ".$by."='".$param."'";
+	}
+
 	public function __destruct()
 	{
 		$this->db->closeConnection();

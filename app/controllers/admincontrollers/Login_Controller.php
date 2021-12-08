@@ -5,6 +5,12 @@ class Login_Controller extends Controller
 {
 	public $havemodel = false;
     protected $defaultView = 'login';
+
+	public $loginValidations = [
+		'email' => 'required|email|min:2|max:100',
+		'pass' => 'required|min:2|max:100',
+		'submit' => 'required'
+	];
 	
 	public function __construct() 
 	{
@@ -18,24 +24,43 @@ class Login_Controller extends Controller
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			$validador = new Validation;
-
-			if(!isset($_POST['submit'])) //submit variable
-			{
-				$this->loadAdminView('/');
-			}else{
-				if(empty($_POST['email']) || empty($_POST['pass']))
-				{
-					$this->error('/','Debe rellenar ambos campos');
-				}
+			$validation = $validador->validateFields($this->loginValidations,$_POST);
+			if(!count($validation)){
 				if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
 				{
 					$this->view->assign('email', $this->model->username);
 					//Cargará el index
 					$this->redirect('admin');
 				}else{
-					$this->error('/','Usuario y contraseña incorrectos');
+					Helper::setFlash("danger","login",'Usuario o contraseña incorrectos');
+					$this->loadAdminView('login');
+					// $this->error('/','Usuario o contraseña incorrectos');
 				}
-			}
+			}else{
+				Helper::setFlash("danger","formulario",$validation);
+				$this->loadAdminView('login');
+				// print_r($validation);
+			 }
+				
+
+			// if($validation = $validador->validateFields($this->loginValidations,$_POST)) //submit variable
+			// {
+			
+			// }else{
+			// 	print_r($validation);
+				// if(empty($_POST['email']) || empty($_POST['pass']))
+				// {
+				// 	$this->error('/','Debe rellenar ambos campos');
+				// }
+				// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
+				// {
+				// 	$this->view->assign('email', $this->model->username);
+				// 	//Cargará el index
+				// 	$this->redirect('admin');
+				// }else{
+				// 	$this->error('/','Usuario y contraseña incorrectos');
+				// }
+			// }
 		}else{
 			if(!$this->isLogin){
 				$this->loadAdminView('login');
@@ -44,16 +69,6 @@ class Login_Controller extends Controller
 			}
 			
 		}
-		
-		function test(){
-			$array = array("form" => [],  
-			"fields" => []);
-$form = $array['form'];
 
-array_push($form,"pepe","perez");
-
-
-print_r($form);
-		}
 	}
 }

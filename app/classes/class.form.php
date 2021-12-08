@@ -10,11 +10,7 @@ class Form
     const RULE_MATCH = 'match';
     const RULE_UNIQUE = 'unique';
     
-	public $action,
-			$method,
-			$name,
-			$enctype = ['application/x-www-form-urlencoded','multipart/form-data','text/plain'],
-			$onsubmit,
+	public $enctype = ['application/x-www-form-urlencoded','multipart/form-data','text/plain'],
 			$formStart,
             $formFields,
             $completeForm;
@@ -28,12 +24,7 @@ class Form
         $this->formStart = $this->makeStart($form[0]);
         $this->formFields = $this->addField($form[1]);
         $this->completeForm = $this->formStart.$this->formFields."</form>";
-    //   foreach ($form as  $value) {
-    //         foreach ($value as $key) {
-    //             echo $key;
-    //         }
-    //   }
-        // $this->formStart = "<form name='".$this->name."' action='".$this->action."' method='".$this->method."' enctype='".$this->enctype."' onsubmit='".$this->onsubmit."'>";
+
         return $this->completeForm;
     }
 
@@ -90,27 +81,6 @@ class Form
                 }
 
                 $completefields.= $field;
-                // foreach ($properties as $propertykey => $propertyValue) {
-                //         if($propertykey== "label" && is_array($propertyValue)){ 
-                //             $label = $this->addLabel($propertyValue);
-                //             continue;
-                //         }
-                //         if($propertykey== "container" && is_array($propertyValue)){ 
-                //             $wrap = $this->addWrap($propertyValue);
-                //             continue;
-                //         }
-                //         if($propertykey== "validations" && is_array($propertyValue)){ 
-                //             // $wrap = $this->addWrap($propertyValue);
-                //             continue;
-                //         }
-                        
-
-
-                //         if(!empty($label)){
-                //             $field = str_replace("inputlabelposition", $field, $label);
-                //         }
-                //         echo $propertyValue;
-                // }
              }
         }
         return $completefields;
@@ -153,4 +123,19 @@ class Form
         return "<$type class='$class' $attributes>"."inputdivposition"."</$type>";
     }
  
+    public function renderForm($name)
+    {
+        $csrf = 'asdf';
+        ob_start();
+		
+		 if (file_exists(VIEW_FORM_PATH . $name . '.php'))
+		{
+			include_once(VIEW_FORM_PATH . $name . '.php');
+		}
+		else{ throw new MyException('View file not found: '.$name,1); }
+
+		$form = ob_get_contents();
+		ob_end_clean();
+		return str_replace('{{random}}', $csrf , $form); 
+    }
 }

@@ -15,6 +15,9 @@
 
 </head>
 <body class="">
+<div class="flash-message-container">
+  <?php Helper::getFlash(); ?>
+</div>
     <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
 <nav class="navbar navbar-light p-3 border-bottom border-white">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">

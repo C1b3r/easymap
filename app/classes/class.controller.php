@@ -35,15 +35,15 @@ class Controller
 
 	public function createForm($nameForm)
 	{
-		$this->formFunction = "form".$nameForm;
-		if(!method_exists($this->model,$this->formFunction)){
-			return false;
-        }
+		// $this->formFunction = "form".$nameForm;
+		// if(!method_exists($this->model,$this->formFunction)){
+		// 	return false;
+        // }
 		//Tendre que hacer una consulta a la tabla de configuración para rescatar el secret key para validar el formulario
 		//https://www.php.net/manual/en/language.types.string.php#language.types.string.parsing.complex
-		$miForm = $this->model->{$this->formFunction}();
+		// $miForm = $this->model->{$this->formFunction}(); //escapamos el nombre de la función para llamarla de manera dinámica
 		// print_r($this->model->getForm($nameForm));
-		$this->view->assign($this->formFunction,$this->form()->makeForm($miForm));
+		$this->view->assign($nameForm,$this->form()->renderForm($nameForm));
 
 	}
 
@@ -53,7 +53,7 @@ class Controller
 		if(!$this->isLogin){
 		
 			$currentView = "login";
-			if($this->createForm("Login")){ //cargo el formulario
+			if($this->createForm("formLogin")){ //cargo el formulario
 				$this->error($currentView,"No se ha encontrado formulario");	
 			}
 		} 
