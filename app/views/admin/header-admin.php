@@ -15,9 +15,15 @@
 
 </head>
 <body class="">
-    <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
-    {
-    ?>
+<div class="flash-message-container">
+  <?php Helper::getFlash(); ?>
+</div>
+<?php if(isset($this->message) && !empty($this->message)):?>
+    <div class="alert alert-<?php echo $this->message['type']; ?> alert-dismissible fade show" role="alert">
+        <?php echo $this->message['mensaje']; ?>
+    </div>
+<?php endif;?>
+    <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
 <nav class="navbar navbar-light p-3 border-bottom border-white">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
             <a class="navbar-brand" class="logo__link" href="#">
@@ -44,7 +50,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="logout">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item" href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>logout">Cerrar sesión</a></li>
                 </ul>
              </div>
         </div>
@@ -92,17 +98,10 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <?php if(isset($this->antecesor_page)){
-                  foreach ($this->antecesor_page as $url => $value) {
-                    echo '<li class="breadcrumb-item "><a class="text__link" href="'.COMPLETE_WEB_PATH_ADMIN.$url.'">'.$value.'</a></li>';
-                  }
-                } ?>
-               
                 <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo $this->current_page; ?></li>
             </ol>
           </nav>
-<?php 
-    }
+<?php endif;
 
 
                 

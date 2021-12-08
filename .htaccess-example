@@ -2,6 +2,7 @@
 Options -MultiViews
 DirectoryIndex index.php
 RewriteEngine On
+#if subfolder, /subfolderafeterdomain/subfolder/ localhost/map/mapflet/
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -13,7 +14,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
-
+#if subfolder, ^/subfolderdomain/subfolder/logs localhost/map/mapflet/logs/
+RedirectMatch 403 ^/logs/.*$
+#ErrorDocument 403 /notfound.html
 #https
 #RewriteCond %{HTTPS} off
 #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

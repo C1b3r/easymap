@@ -22,10 +22,10 @@ if (localStorage.getItem("tema") === null) {
 } else {
     if (localConfig === 'dark') {
         htmlroot.classList.toggle('mp-root--theme-dark');
-        } else if (localConfig === 'light') {
-            htmlroot.classList.toggle('mp-root--theme-light');
-         }
+    } else if (localConfig === 'light') {
+        htmlroot.classList.toggle('mp-root--theme-light');
     }
+}
 
 
 if (boton) {
@@ -37,8 +37,34 @@ if (boton) {
     });
 }
 
-function cambioTema(colorTema){
+function cambioTema(colorTema) {
     htmlroot.classList.toggle('mp-root--theme-light');
     htmlroot.classList.toggle('mp-root--theme-dark');
 
+}
+
+/** Flash message */
+if (document.getElementsByClassName('flash-message-container').length > 0) {
+    //Evitar instanciar timers innecesarios
+    if (countChildElement(".flash-message-container") > 0) {
+        setTimeout(function() {
+                let alert = document.querySelector(".flash-message-container");
+                var myVar = setInterval(function() {
+                    //If child of container is zero, cant remove nothing else, clear timer
+                    if (countChildElement(".flash-message-container") != 0) {
+                        alert.removeChild(alert.childNodes[0]);
+                    } else {
+                        clearInterval(myVar);
+                    }
+
+                }, 2000);
+
+            },
+            3000);
+    }
+
+}
+
+function countChildElement(nameElement) {
+    return document.querySelector(nameElement).childElementCount
 }

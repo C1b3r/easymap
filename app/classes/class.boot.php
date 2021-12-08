@@ -40,13 +40,29 @@ class Boot {
                     if (file_exists(CONTROLLER_PATH.$className.'.php'))
                     {
                         require_once CONTROLLER_PATH.$className.'.php';
+
+                    }elseif(file_exists(CONTROLLER_ADMIN_PATH.$className.'.php')){
+
+                        require_once CONTROLLER_ADMIN_PATH.$className.'.php';	
+
                     }else{
                         echo "no existe";
                     }
 					
 				break;
 				case "model":
-					require_once MODEL_PATH.$className.'.php';
+                    if (file_exists(MODEL_PATH.$className.'.php'))
+                    {
+                        require_once MODEL_PATH.$className.'.php';
+
+                    }elseif(file_exists(MODEL_ADMIN_PATH.$className.'.php')){
+                        
+                        require_once MODEL_ADMIN_PATH.$className.'.php';	
+
+                    }else{
+                        echo "no existe el modelo ";
+                    }
+					
 				break;
 			}
 		}
@@ -93,8 +109,4 @@ class Boot {
 		return false;
 	}
 
-    public static function getMail()
-    {
-
-    }
 }

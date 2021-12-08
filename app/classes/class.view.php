@@ -44,7 +44,7 @@ class View {
 		}
 		else if($admin)
 		{
-			$this->loadView('admin/header-admin')->loadView($name)->loadView('admin/footer-admin');
+			$this->loadView('admin/header-admin')->loadView('admin/'.$name)->loadView('admin/footer-admin');
 		}
 		else 
 		{

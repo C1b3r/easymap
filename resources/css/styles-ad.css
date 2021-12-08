@@ -56,6 +56,31 @@ body {
 }
 
 
+/*Flash message*/
+
+.flash-message-container {
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    z-index: 10;
+    padding: 0.75rem;
+    transition: .2s;
+    -webkit-transform: translateY(16px);
+    transform: translateY(16px);
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+    opacity: 1;
+    visibility: visible;
+}
+
+.flash-message-container--is-visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+
 /*Medias*/
 
 @media (max-width: 767.98px) {
