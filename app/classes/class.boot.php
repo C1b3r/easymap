@@ -105,7 +105,7 @@ class Boot {
     private function error($message)
 	{
 		$controller = new Error_Controller();
-		$controller->index($message);
+		$controller->index($message,500);
 		return false;
 	}
 

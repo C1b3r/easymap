@@ -12,9 +12,9 @@ class InitController {
 		$this->location = explode('/',trim($url, '/'));
 	}
 	public function error()
-	{
+	{	
 		$controller = new Error_Controller();
-		$controller->index();
+		$controller->index("Controlador no encontrado",404);
 		return false;
 	}
 	public function load()
@@ -61,7 +61,7 @@ class InitController {
 		
 		
 		//find controller
-		if (!file_exists($file)) throw new MyException('Controller not found',1);
+		if (!file_exists($file)) throw new MyException('Controller load not found',__FUNCTION__,0);
 		
 		$controller = new $class_name;
 
@@ -79,7 +79,7 @@ class InitController {
 			{
 				$controller->{$controller_method}($controller_options);
 			} 
-			else throw new MyException('Controller method not found',1);
+			else throw new MyException('Controller method not found',__FUNCTION__,0);
 		} 
 		else 
 		{

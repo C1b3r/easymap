@@ -18,7 +18,7 @@ class Connection{
             $this->conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             //  echo "Connected successfully";
           } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            new MyException("Connection failed: ". $e->getMessage(),basename($e->getFile()),1);
           }
         return $this->conexion;   
            

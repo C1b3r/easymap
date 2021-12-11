@@ -6,16 +6,29 @@ class MyException extends Exception
 	const THROW_MEDIUM = 1;
 	const THROW_HARD = 2;
 	
-    public function __construct($msg = '',$function = '', $code = 0)
+    public function __construct($msg = '',$namefile = '', $code = 0)
     {
 		parent::__construct($msg, (int) $code);
+		$controller = new Error_Controller();
+
 		switch($code)
 		{
+			case self::THROW_SIMPLE:
+				$controller->index($msg); //como es simple, solamente tomo nota
+				return false;
+
+			break;
 			case self::THROW_MEDIUM:
 				//log error
-				$archivo = fopen(LOG_PATH.$function.'.txt', "a+");
+				if (!file_exists(LOG_PATH.'medium/')) {
+					mkdir(LOG_PATH.'medium/', 0755, true);
+				}
+				$archivo = fopen(LOG_PATH.'medium/'.$namefile.'.txt', "a+");
 				fwrite($archivo, "[".date("d-m-Y H:i:s")."] ".$msg.PHP_EOL);
 				fclose($archivo);
+
+				$controller->index($msg,500);
+				return false;
 
 			break;
 			case self::THROW_HARD:

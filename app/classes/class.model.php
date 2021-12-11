@@ -33,13 +33,13 @@ class Model
 	public function checkOneRow($table,$by,$param)
 	{
 		try {
- 			$stmt =$this->db->conexion->prepare("SELECT * FROM ".DB_PREFIX.$table." WHERE ".$by."= :param");
+ 			$stmt =$this->db->conexion->prepare("SELECT * FROM ".DB_PREFIX.$table." WHEREee ".$by."= :param");
 			$stmt->bindParam("param", $param,PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetchColumn();
 		
 		} catch (PDOException $th) {
-			echo "Mensaje de Error: " . $th->getMessage();
+			new MyException("Connection failed: ". $th->getMessage()." on function ".__FUNCTION__,basename($th->getFile()),1);
 		}
 	
 	}

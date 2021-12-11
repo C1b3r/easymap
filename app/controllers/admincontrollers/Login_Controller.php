@@ -32,6 +32,7 @@ class Login_Controller extends Controller
 					//Cargará el index
 					$this->redirect('admin');
 				}else{
+					$this->createForm("formLogin");
 					$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
 				}
 			}else{
