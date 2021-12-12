@@ -23,6 +23,11 @@ class Validation
 					$ruleValue = $this->_getRuleSuffix($rule);
 					$rule = $this->_removeRuleSuffix($rule);
 
+					//not validate these cases as they will be used for queries
+					if($rule == "column" || $rule == "encrypt" || $rule == "submit"){
+						continue;
+					}
+
 					if($rule == "required" && $this->isEmptyFieldRequired($post, $fieldName)){
 						$errors[$fieldName]['required'] = "El campo ". $this->_removeUnderscore(ucfirst($fieldName)) . " es obligatorio";
 					}
@@ -117,14 +122,14 @@ class Validation
 		  return str_replace("_", " ", $string);
 	  }
   
-	  public function _removeRuleSuffix($string) 
+	  public static function _removeRuleSuffix($string) 
 	  {
 		  $arr = explode(":", $string);
   
-		  return $arr[0];
+		  return trim($arr[0]); //trim if i put accidentally whitespace in rule
 	  }
   
-	  public function _getRuleSuffix($string) 
+	  public static function _getRuleSuffix($string) 
 	  {
 		  $arr = explode(":", $string);
   

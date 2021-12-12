@@ -6,10 +6,11 @@ class Login_Controller extends Controller
 	public $havemodel = false;
     protected $defaultView = 'login';
 
+	//Put on key the name of the column in database, specific if necesary encrypt and if is submit to select function in class model
 	public $loginValidations = [
-		'email' => 'required|email|min:2|max:100',
-		'pass' => 'required|min:2|max:100',
-		'submit' => 'required'
+		'email' => 'required|email|min:2|max:100|column:email',
+		'pass' => 'required|min:2|max:100|encrypt|column:pass',
+		'submit' => 'required|submit'
 	];
 	
 	public function __construct() 
@@ -26,7 +27,8 @@ class Login_Controller extends Controller
 			$validador = new Validation('users');
 			$validation = $validador->validateFields($this->loginValidations,$_POST);
 			if(!count($validation)){
-				if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
+				if($this->model->logUser($_POST,$this->loginValidations,$this->session))
+				// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
 				{
 					$this->view->assign('email', $this->model->username);
 					//Cargará el index

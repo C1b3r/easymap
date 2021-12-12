@@ -2,7 +2,7 @@
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Connection{
-    public $conexion;
+    protected $conexion;
     protected $registros;
     
     public function __construct()

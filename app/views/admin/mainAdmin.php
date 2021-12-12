@@ -59,6 +59,7 @@
                           <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de creación</th>   
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -68,6 +69,7 @@
                             foreach ($this->maps as $value) {
                               echo '<tr>
                               <th scope="row">'.$value['title'].'</th>
+                              <th scope="row">'.$value['description'].'</th>
                               <td><p class="card-text text-success">'.$value['date_add'].'</p></td>
                               </tr>
                               ';
