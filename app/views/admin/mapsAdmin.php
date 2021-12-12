@@ -8,37 +8,34 @@
             </h5> 
            
             <div class="card-body">
+              <?php  if(!empty($this->maps)): ?>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                           <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de creación</th>   
                             <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
-                        <?php  
-                          if(!empty($this->maps)){
-                            foreach ($this->maps as $value) {
-                              echo '<tr>
-                              <th scope="row">'.$value['title'].'</th>
-                              <td><p class="card-text text-success">'.$value['date_add'].'</p></td>
-                              </tr>
-                              ';
-                            } 
-                          }else{
-                            echo '
-                            <tr>
-                              <td>No hay mapas actualmente </td>
-                              <td>¡Crea uno!</td>
-                            </tr>
-                            ';
-                          }
-                         ?>
+                        <?php foreach ($this->maps as $value):?>
+                             <tr>
+                              <th scope="row"><?php echo $value['title'];?></th>
+                              <th scope="row"><?php echo $value['description'];?></th>
+                              <td><p class="card-text text-success"><?php echo $value['date_add'];?></p></td>
+                             </tr>
+                              
+                        <?php endforeach; ?>
                         </tbody>
                       </table>
                 </div>
+                <?php else: ?>
+                  <div class="text-center">
+                   <p>No hay mapas actualmente ¡Crea uno!</p> 
+                  </div>
+                <?php endif;?>
             </div>
         </div>
     </div>

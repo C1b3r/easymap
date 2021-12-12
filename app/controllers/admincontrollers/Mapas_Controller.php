@@ -3,7 +3,7 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Mapas_Controller extends Controller 
 {
-	protected $defaultView = 'admin/mapsAdmin';
+	protected $defaultView = 'mapsAdmin';
 
 
 	public function __construct() 
