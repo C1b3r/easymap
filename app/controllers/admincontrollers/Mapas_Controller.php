@@ -4,6 +4,7 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 class Mapas_Controller extends Controller 
 {
 	protected $defaultView = 'mapsAdmin';
+	protected $currentPage = 'Listado de mapas';
 
 
 	public function __construct() 
@@ -20,7 +21,7 @@ class Mapas_Controller extends Controller
 		$this->view->assign('keywords','')
 				   ->assign('description','')
 				   ->assign('other_title','')
-				   ->assign('current_page','Visión general');
+				   ->assign('current_page',$this->currentPage);
 		if($this->isLogin)
 		{
 			$maps = $this->model->getMap(2);
@@ -30,14 +31,14 @@ class Mapas_Controller extends Controller
 			}
 
 		}
-		$this->view->assign('current_page','Listado de mapas');
+		$this->view->assign('current_page',$this->currentPage);
 		$this->loadAdminView('mapsAdmin');  
 	}
 
 
 	public function crearmapa()
 	{
-		$this->view->assign('current_page','Listado de mapas')
+		$this->view->assign('current_page',$this->currentPage)
 					->assign('antecesor_page',array('mapas'=>'mapas')); //para el breadcrum, declaramos un array de url=>nombre
 		$this->loadAdminView('mapsAdmin');
 	}

@@ -41,7 +41,7 @@
             <div class="card-body text-center">
               <h5 class="card-title"></h5>
               <p class="card-text"><a href="">Crear usuario</a></p>
-              <p class="card-text"><a href="">Listar usuarios</a></p>
+              <p class="card-text"><a href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>users">Listar usuarios</a></p>
              <!-- <p class="card-text"><a href="">Roles</a></p>-->
             </div>
         </div>

@@ -1,4 +1,11 @@
 <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
+    <?php if(isset($this->pagination)):?>
+        <div class="mt-3 d-flex justify-content-center">
+      <?php echo $this->createPaginationLink($this->results,$this->current_page); ?>      
+        </div>
+    
+    <?php endif;?>
+
             <footer class="pt-5 d-flex justify-content-between">
              <span class="body__text">Creado con cariño por <a href="https://github.com/C1b3r/">C1b3r</a></span>
                 <ul class="nav m-0">

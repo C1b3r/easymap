@@ -2,6 +2,7 @@
 
 class View {
 	public $data = array();
+	public $pagination = false;
 
 	public function __construct() 
 	{
@@ -54,4 +55,47 @@ class View {
 		ob_end_clean();
 		return $view;
 	}
+
+		/**
+	 * @param links For limit number of pages, if is offset limit, it put ...
+	 */
+	public function createPaginationLink($data,$currentPage = '', $links = 7)
+	{
+			if ( $data->limit == 'all' ) {
+				return '';
+			}
+		 
+			$last       = ceil( $data->total / $data->limit );
+		 
+			$start      = ( ( $data->page - $links ) > 0 ) ? $data->page - $links : 1;
+			$end        = ( ( $data->page + $links ) < $last ) ? $data->page + $links : $last;
+		 
+			$html       = '<ul class="pagination">';
+		 
+			$class      = ( $data->page == 1 ) ? "disabled" : "";
+			$html       .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . ( $data->page - 1 ) . '">&laquo;</a></li>';
+		 
+			if ( $start > 1 ) {
+				$html   .= '<li class="page-item" ><a href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/1">1</a></li>';
+				$html   .= '<li class="disabled"><span>...</span></li>';
+			}
+		 
+			for ( $i = $start ; $i <= $end; $i++ ) {
+				$class  = ( $data->page == $i ) ? "active" : "";
+				$html   .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . $i . '">' . $i . '</a></li>';
+			}
+		 
+			if ( $end < $last ) {
+				$html   .= '<li class="disabled"><span>...</span></li>';
+				$html   .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . $last . '">' . $last . '</a></li>';
+			}
+		 
+			$class      = ( $data->page == $last ) ? "disabled" : "";
+			$html       .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . ( $data->page + 1 ) . '">&raquo;</a></li>';
+		 
+			$html       .= '</ul>';
+		 
+			return $html;
+	}
+
 }

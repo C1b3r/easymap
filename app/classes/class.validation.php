@@ -3,8 +3,8 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Validation 
 {
-
-	private $secretKey = 'fjd3vkuw#KURefg'; //get from database TODO
+	// todo we catch from database or file
+	private $secretKey = 'fjd3vkuw#KURefg';
 	protected $table = '';
 	public function __construct($table = '') 
 	{

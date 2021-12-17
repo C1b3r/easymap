@@ -98,7 +98,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo $this->current_page; ?></li>
+                <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo ucwords($this->title); ?></li>
             </ol>
           </nav>
 <?php endif;

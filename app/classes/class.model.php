@@ -5,7 +5,7 @@ class Model extends Connection
 {
 	protected $db;
 	public $form = [];
-	public $result,$count,$limit;
+	public $result,$count,$limit = 1 ,$totalrow,$total_pages ;
 
 	public function __construct() 
 	{
@@ -38,6 +38,8 @@ class Model extends Connection
 
 			}
             $stmt->execute();
+			// $this->totalrow = $stmt->fetchColumn(); this prevents me from fetching later as array and object, i will use rowCount or make flag
+			// $this->totalrow = $stmt->rowCount();
 			// echo $stmt->debugDumpParams();
             return $stmt;
 
@@ -46,7 +48,6 @@ class Model extends Connection
         }
 	}
 	public function select($table, $data, $extrawhere = '', $fields = "*")
-	// public function select($table, $where="", $bind = array(), $fields = "*")
 	{
 		if(is_array($data) && $fields != "*"){
 			$fields = implode(', ',array_keys($data));
@@ -64,7 +65,47 @@ class Model extends Connection
 		return $this;
 
 	}
-	/* To create where clause to bind later */
+	/**
+	 * *We use this funcion only for make pagination select. 
+	 * *On the first time, make select to get the total rows
+	 * *Secondly, retrieves the information with limit clause
+	 * @param table We need the name of the table
+	 * @param limit To give the limit of the query
+	 * @param page to set the current page 
+	 * @param where to give extra specific information 
+	 * @param fields to select all field or only specific column, is a string separated by comma
+	 */
+	public function selectPagination($table,$page = 1, $where = '',$fields = '*')
+	{
+		$sqlTotal = "SELECT COUNT(*) FROM ".DB_PREFIX.$table;
+		$whereclause = ($this->is_assoc($where)) ? $this->createWhere($where) : '';
+		$sqlTotal.= $whereclause;
+		$this->result = $this->runQuery($sqlTotal);
+		$this->totalrow = $this->result->fetchColumn();
+		// $this->total_pages = ceil($this->totalrow/$limit);
+		$this->total_pages = $this->totalrow;
+
+		$sql =  "SELECT $fields FROM ".DB_PREFIX.$table;
+		$sql.= $whereclause;
+		$sql.= " LIMIT " . ( ( $page - 1 ) * $this->limit ) . ", $this->limit";
+		$this->result = $this->runQuery($sql);
+
+		//To get the data in array
+		$results = $this->fetchArray(true);
+		//Creation of no name class and assing properties to pass more easy
+		$result         = new stdClass();
+		$result->page   = $page;
+		$result->limit  = $this->limit;
+		$result->total  = $this->total_pages;
+		$result->data   = $results;
+		return $result;
+
+	}
+	/**
+	 * *we use this function to bind later
+	 *   @param data We need to specify in an array column value array("column database name" => "value") 
+	 *   
+	 */ 
 	public function createWhere($data)
 	{
 		$values = implode(' AND ',$data);
@@ -98,7 +139,10 @@ class Model extends Connection
 	
 	}
 
-	/* We need to know if it is an associative array to know if it comes from a post or is a simple query*/
+	/**
+	 * *Need to know if it is an associative array to know if it comes from a post or is a simple query. Using array values to extract values from array and check if its equal to array, if its simple array, its equal and no associative.
+	 * @param array give associative array (or not) to check it 
+	 */ 
 	public function is_assoc($array)
 	{
 		if(is_array($array) && isset($array)){
