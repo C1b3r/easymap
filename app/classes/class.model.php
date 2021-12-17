@@ -5,7 +5,11 @@ class Model extends Connection
 {
 	protected $db;
 	public $form = [];
-	public $result,$count,$limit = 1 ,$totalrow,$total_pages ;
+	public $result,
+			$count,
+			$limit = 1 ,
+			$totalrow,
+			$total_pages;
 
 	public function __construct() 
 	{
@@ -58,7 +62,7 @@ class Model extends Connection
 		$sql.= ($this->is_assoc($data)) ? $this->createWhere($data) : '';
 		//If i defined data array and wants specific extra where
 		$sql.= (!empty($extrawhere) || !isset($extrawhere))? " AND ".$extrawhere : '';
-		$sql.= (!empty($this->limit))? " LIMIT ".$this->limit : '';
+		$sql.= (!empty($this->limit) && isset($this->limit))? " LIMIT ".$this->limit : '';
 
         $this->result = $this->runQuery($sql, $data);
 		$this->count = $this->result->rowCount();

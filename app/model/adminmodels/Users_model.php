@@ -1,7 +1,8 @@
 <?php
 class Users_Model extends model
  {
-   
+    public $defaultFunction = "getUsuarios";
+
     public function getUsuarios($page = 1,$limit = '')
     {
         //TODO: hacer un select complejo con inner joins

@@ -13,6 +13,7 @@ class Controller
 	const FLASH_WARNING = 'warning';
 	const FLASH_INFO = 'info';
 	const FLASH_SUCCESS = 'success';
+	public $pagination = 1;
 
     public function __construct($admin = false) 
 	{
@@ -48,16 +49,35 @@ class Controller
 	}
 
 	
-
+	/* Format is for div message class
+	View in flash is for name of the element */
 	protected function error($view,$format, $type, $mensaje)
 	{
 		if($type == "flash"){
-			Helper::setFlash("danger","formulario",$mensaje);
+			Helper::setFlash($format,$view,$mensaje);
 		}else{
 			$this->view->assign('message',array('type'=> $format, 'mensaje'=>$mensaje));
 		}
 		
 		return $this->loadAdminView($view);
+	}
+
+	public function page($page)
+	{
+		if(!is_numeric($page)){
+			new MyException("Not found",'',0);
+		}
+		//escape model property to call function and pass parameters
+		$results = $this->model->{$this->model->defaultFunction}($page);
+
+		if($results){
+			
+			$this->view->pagination = true; //To indicates the pagination navbar
+			$this->view->assign('results', $results);//To pass data to the view
+		}
+
+		$this->loadAdminView($this->defaultView);
+		// print_r($result);
 	}
 
 	public function redirect($url ,$bckslash = true) 

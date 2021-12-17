@@ -8,7 +8,7 @@
             </h5> 
            
             <div class="card-body">
-              <?php  if(!empty($this->maps)): ?>
+              <?php  if(!empty($this->results->data)): ?>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -20,7 +20,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->maps as $value):?>
+                        <?php foreach ($this->results->data as $value):?>
                              <tr>
                               <th scope="row"><?php echo $value['title'];?></th>
                               <th scope="row"><?php echo $value['description'];?></th>

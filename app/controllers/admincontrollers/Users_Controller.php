@@ -26,7 +26,7 @@ class Users_Controller extends Controller
 				   ->assign('other_title','');
 		if($this->isLogin)
 		{
-			$users = $this->model->getUsuarios(1);
+			$users = $this->model->getUsuarios();//page 1
 
 			if($users){
 				$this->view->assign('results', $users);
@@ -37,18 +37,18 @@ class Users_Controller extends Controller
 	}
 
 	// todo make global function page
-	public function page($page)
-	{
-		$this->view->pagination = true;
-		$users = $this->model->getUsuarios($page);
+	// public function page($page)
+	// {
+	// 	$this->view->pagination = true;
+	// 	$users = $this->model->getUsuarios($page);
 
-		if($users){
-			$this->view->assign('results', $users);
-		}
+	// 	if($users){
+	// 		$this->view->assign('results', $users);
+	// 	}
 
-		$this->loadAdminView('usersAdmin'); 
+	// 	$this->loadAdminView('usersAdmin'); 
 
-	}
+	// }
 
 
 	public function crearmapa()

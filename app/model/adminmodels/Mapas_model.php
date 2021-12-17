@@ -1,12 +1,15 @@
 <?php
 class Mapas_Model extends model
  {
-   
-    public function getMap($limit)
+   public $defaultFunction = "getMap";
+
+    public function getMap($page = 1,$limit = '')
     {
-        $this->limit = $limit;
-        $result = $this->select("map", null)->fetchAllArray();  
-         //En este caso, al ser un limit, hacemos un fetchall,si quieres testear uno concreto, sustituye null por array('id_map' => 3)
+        if(!empty($limit)){
+            $this->limit = $limit;
+       }
+        // $this->limit = ( $limit == 0 || !isset($limit)) ? 'null' : $limit;
+        $result = $this->selectPagination("map",$page);  
         return $result;
 
     }

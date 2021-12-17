@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
-    <?php if(isset($this->pagination)):?>
+    <?php if(isset($this->pagination) && !empty($this->results) || $this->pagination):?>
         <div class="mt-3 d-flex justify-content-center">
       <?php echo $this->createPaginationLink($this->results,$this->current_page); ?>      
         </div>
