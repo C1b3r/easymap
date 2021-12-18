@@ -1,3 +1,4 @@
+<?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
     <div class="container vh-100">
         <div class="flex-row  d-flex align-items-center justify-content-center h-100">
             <div class="col-md-12 text-center">

@@ -1,3 +1,4 @@
+<?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
     <?php if(isset($this->pagination) && !empty($this->results) || $this->pagination):?>
         <div class="mt-3 d-flex justify-content-center">

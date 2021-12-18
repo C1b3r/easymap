@@ -1,3 +1,4 @@
+<?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

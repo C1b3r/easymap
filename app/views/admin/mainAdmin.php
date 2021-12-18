@@ -1,3 +1,4 @@
+<?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <h1 class="h2 body__text">Dashboard</h1>
 <p class="body__text">Panel de administración general</p>
 <div class="row my-4">

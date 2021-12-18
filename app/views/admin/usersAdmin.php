@@ -1,3 +1,4 @@
+<?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <h1 class="h2 body__text">Todos los usuarios</h1>
 
 <div class="row">
