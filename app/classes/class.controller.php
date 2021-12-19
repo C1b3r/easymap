@@ -62,7 +62,7 @@ class Controller
 		return $this->loadAdminView($view);
 	}
 
-	public function page($page)
+	public function page($page = 1)
 	{
 		if(!is_numeric($page)){
 			new MyException("Not found",'',0);
@@ -78,6 +78,23 @@ class Controller
 
 		$this->loadAdminView($this->defaultView);
 		// print_r($result);
+	}
+
+	public function edit($request = '')
+	{
+		//To get the form dynamically,get the parent controller
+		$realClassName = get_class($this);
+		//Separate in array
+		$className = explode("_",$realClassName);
+		$nameForm = "edit".$className[0];
+		$this->view->assign('nameForm', $nameForm);
+		//For breadcrum  in header
+		$this->view->assign('precedent_page',"Editar ".$className[0]);
+		$this->view->assign('previous_page_link',$className[0]);
+		// print_r(strtolower($className[0]));
+		$this->createForm($nameForm);
+		return $this->loadAdminView("editAdmin");
+
 	}
 
 	public function redirect($url ,$bckslash = true) 

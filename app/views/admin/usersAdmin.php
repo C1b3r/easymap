@@ -24,6 +24,7 @@
                              <tr>
                               <th scope="row"><?php echo $value['email'];?></th>
                               <th scope="row"><?php echo $value['date_add'];?></th>
+                              <td><a class="btn btn-secondary" href="<?php echo COMPLETE_WEB_PATH_ADMIN.strtolower($this->current_page).'/edit/'.$value['id_user'];?>">Editar</a></td>
                              </tr>
                               
                         <?php endforeach; ?>

@@ -99,7 +99,12 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo ucwords($this->title); ?></li>
+                <?php if(isset($this->precedent_page)):?> 
+                <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN.strtolower($this->previous_page_link); ?>"><?php echo ucfirst($this->title); ?></a> </li>
+                <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo ucfirst($this->precedent_page); ?></li>
+                <?php else:?>
+                  <li class="breadcrumb-item active body__text" aria-current="page"><?php echo ucfirst($this->title); ?></li>
+                <?php endif;?>
             </ol>
           </nav>
 <?php endif;

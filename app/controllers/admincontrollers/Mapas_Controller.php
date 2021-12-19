@@ -5,7 +5,7 @@ class Mapas_Controller extends Controller
 {
 	protected $defaultView = 'mapsAdmin';
 	protected $currentTitle = 'Listado de mapas';
-	protected $currentPage = 'mapas';
+	protected $currentPage = 'mapas'; //for pagination and breadcrumb links
 
 
 	public function __construct() 

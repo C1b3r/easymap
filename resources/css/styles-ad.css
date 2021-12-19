@@ -81,6 +81,14 @@ body {
 }
 
 
+/* Formularios*/
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: var(--color-outline);
+}
+
+
 /*Medias*/
 
 @media (max-width: 767.98px) {
