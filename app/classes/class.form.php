@@ -1,7 +1,7 @@
 <?php
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
-class Form 
+class Form extends View
 {
     const RULE_REQUIRED = 'required';
     const RULE_EMAIL = 'email';

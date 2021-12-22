@@ -98,4 +98,13 @@ class View {
 			return $html;
 	}
 
+	public function renderMap($height = "720px", $width = "100%")
+	{
+		$resources = '<link href="'.PUBLIC_WEB_PATH."leaflet/leaflet.css".'" rel="stylesheet">
+		<script src="'.PUBLIC_WEB_PATH."leaflet/leaflet.js".'"></script>';
+		$div = '<div id="map" style="width: '.$width.'; height: '.$height.';"></div>';
+		echo $resources.$div;
+		
+	}
+
 }
