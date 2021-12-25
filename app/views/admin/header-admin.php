@@ -87,8 +87,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-sm btn-warning ms-3 mt-2" href="https://github.com/C1b3r/mapflet">
-                            <i class="bi bi-github"></i> Mapflet github
+                            <a class="btn btn-sm btn-warning ms-3 mt-2" href="https://github.com/C1b3r/easymap">
+                            <i class="bi bi-github"></i> Easymap github
                             </a>
                         </li>
                       </ul>

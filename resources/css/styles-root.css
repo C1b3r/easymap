@@ -157,11 +157,11 @@
     --color-info: #1f69ff;
     --color-accent: #9147ff;
     --color-outline: #BA68C8;
-    --color-mapflet-primary: #A4E45A;
-    --color-mapflet-secondary: #7321DB;
-    --color-mapflet-tertiary: #F23D30;
-    --color-mapflet-quaternary: #DBA021;
-    --color-mapflet-quinary: #25C7F9;
+    --color-easymap-primary: #A4E45A;
+    --color-easymap-secondary: #7321DB;
+    --color-easymap-tertiary: #F23D30;
+    --color-easymap-quaternary: #DBA021;
+    --color-easymap-quinary: #25C7F9;
 }
 
 .mp-root--theme-dark,
