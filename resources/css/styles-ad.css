@@ -89,6 +89,13 @@ body {
 }
 
 
+/* Correcion botón de busqueda de leaflet geocode*/
+
+.leaflet-control-geosearch form input {
+    height: 30px!important;
+}
+
+
 /*Medias*/
 
 @media (max-width: 767.98px) {

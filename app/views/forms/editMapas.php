@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="text-right">Editar mapa</h4>
 </div>
-<div class="col-md-4">
+<div class="col-md-12">
     <form name="mapasform" method="POST" action="<?php echo COMPLETE_WEB_PATH_ADMIN."login"?>" enctype="application/x-www-form-urlencoded">  
     <input type="hidden" name="temp_random" value="{{random}}">
     <div class="row mt-2">
@@ -15,22 +15,30 @@
             <textarea class="form-control" rows="3" placeholder="Descripción"></textarea>
         </div>
     </div>
-
+    <div class="row mt-3 mb-4">
+        <div class="col-md-12">
+            <label class="labels">Latitud</label>
+            <input type="text" name="latitud" placeholder="Latitud">
+            <label class="labels">Longitud</label>
+            <input type="text" name="longitud" placeholder="Longitud">
+        </div>
+    </div>
+<iframe style="width:100%; height:300px;" src="https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/utils/geocoder/embed"></iframe>
     <button class="btn btn-outline-primary btn-lg px-5" name="submit" type="submit" value="submit">Editar</button>
     </form>  
 </div>
-<div class="col-md-8">
-<!-- <div id="map" style="width: 100%; height: 720px;"></div>
-<link href="<?php echo PUBLIC_WEB_PATH.'leaflet/leaflet.css';?>" rel="stylesheet">
-<script src="<?php echo PUBLIC_WEB_PATH.'leaflet/leaflet.js';?>"></script> -->
+<div class="col-md-12">
 <?php $this->renderMap();?>
 <script>
 //Configurar un tile, si no hay, usar el predeterminado como es openstreetmap
 //Cuando se configure un tile, guardar el access_token en configuración
 //Cada mapa tendrá coordenadas de inicio específicas
-//Si no se ha configurado unas coordenadas al principio del mapa, usará las de madrid centro
+//Si no se ha configurado unas coordenadas al principio del mapa, usará las de madrid centro,ahora usara españa o geolocalizado, creo que sería mas facil españa
 //Los marcadores que se agregen iran apareciendo en el lado derecho o abajo para que agregues información
-	var map = L.map('map').setView([40.4167, -3.70325], 13);
+	// var map = L.map('map').setView([40.4167, -3.70325], 13); madrid con nivel de zoom inicial de 13
+	var map = L.map('map').setView([40.416775,-3.703790], 6); //spain con nivel de zoom inicial de 6
+    //spain lat long
+    //https://developers.google.com/maps/documentation/geocoding/overview
 //http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 // https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw
 	// var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -93,6 +101,14 @@ map.removeLayer(marker);
 /*Hacer controles del tipo,
 poner marcador
 borrar marcador cuando pinches */
+
+const search = new GeoSearch.GeoSearchControl({
+  notFoundMessage: 'No ha podido ser encontrado',
+  style: 'button',
+  provider: new GeoSearch.OpenStreetMapProvider(),
+});
+map.addControl(search);
+/** buscar por dirección y te situará donde debe, también servirá a la hora de configurar para establecer unas coordenadas iniciales  */
 </script>
 
 

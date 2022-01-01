@@ -98,12 +98,47 @@ class View {
 			return $html;
 	}
 
+	public function putJSorStyle($fileName,$type,$local =true)
+	{
+		if($local){
+			//to supress warnings about leaflet path
+			$fp = @filemtime(PUBLIC_WEB_PATH.$fileName); // finger print by file last modified
+			$path = PUBLIC_WEB_PATH.$fileName;
+		}else{
+			$fp = '';
+			$path = $fileName;
+		}
+		$fileName .= '?' . $fp;
+
+		switch ($type) {
+			case 'css':
+				echo '<link rel="stylesheet" href="' . $path  . '"/>';
+				break;
+			case 'js':
+				echo '<script src="'. $path  .'"></script>';
+				break;
+			default:
+			 return false;
+				break;
+		}
+	
+	
+	}
+
 	public function renderMap($height = "720px", $width = "100%")
 	{
-		$resources = '<link href="'.PUBLIC_WEB_PATH."leaflet/leaflet.css".'" rel="stylesheet">
-		<script src="'.PUBLIC_WEB_PATH."leaflet/leaflet.js".'"></script>';
-		$div = '<div id="map" style="width: '.$width.'; height: '.$height.';"></div>';
-		echo $resources.$div;
+		foreach (MAP_RESOURCES as $type => $arrays) {
+			 foreach ($arrays as $files) {
+					if(strpos($files, 'http') !== false){
+						$local = false; //contains http/https is external, dont use filemtime
+					} else{
+						$local = true;
+					}
+					$this->putJSorStyle($files,$type,$local);
+			 }
+		}
+		$divmap = '<div id="map" style="width: '.$width.'; height: '.$height.';"></div>';
+		echo $divmap;
 		
 	}
 

@@ -8,6 +8,7 @@ define("DB_NAME", "");
 define("DB_CHARSET", "utf8mb4");
 define("DB_PREFIX", "mymap_");
 define("ADMIN_FOLDER", "admin"); //For security reasons, it stronglly recomended change admin folder and the value of this variable
+
 //path's
 define('WEB_PROTOCOL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ?  'https' : 'http');
 define('WEB_PATH',WEB_PROTOCOL.'://'.$_SERVER["SERVER_NAME"].'/');
@@ -28,3 +29,16 @@ define('ADMIN_EMAIL','');
 define('DEBUG_IP','');
 define('DEBUG_ENVIRONMENT',TRUE); //Change this to false if you upload to production/real server
 define('LOG_PATH',ROOT_PATH.'logs/');
+
+//map configuration
+define('MAP_RESOURCES', array(
+    'css'=> array(
+    'leaflet/leaflet.css',
+    'https://unpkg.com/leaflet-geosearch@3.6.0/dist/geosearch.css',
+    ),
+    'js' => array(
+    'leaflet/leaflet.js',
+    'https://unpkg.com/leaflet-geosearch@3.6.0/dist/geosearch.umd.js'
+    )
+    )
+);
