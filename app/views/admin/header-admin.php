@@ -49,9 +49,9 @@
                   Hola, <?php echo $_SESSION['username']; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><a class="dropdown-item" href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>users/edit/<?php echo $_SESSION['id_user'];?>">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>logout">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item" noprefetch href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>logout">Cerrar sesión</a></li>
                 </ul>
              </div>
         </div>

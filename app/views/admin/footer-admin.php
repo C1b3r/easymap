@@ -28,5 +28,16 @@
 <script defer src="<?php echo PUBLIC_WEB_PATH.'bootstrap/js/popper.min.js';?>"></script>
 <script defer src="<?php echo PUBLIC_WEB_PATH.'bootstrap/js/bootstrap.min.js';?>"></script>
 <script defer src="<?php echo PUBLIC_WEB_PATH.'js/custom.js';?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.2.0/quicklink.umd.js"></script>
+<script>
+window.addEventListener('load', () => {
+  quicklink.listen(
+    {
+      origins:false,
+      ignores:[(uri, elem) => elem.hasAttribute('noprefetch')] 
+    }
+  );
+});
+</script>
 </body>
 </html>
