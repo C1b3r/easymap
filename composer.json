@@ -1,0 +1,15 @@
+{
+    "name": "illuminate-example/eloquent",
+    "description": "ImplementationofDatabaseQuerieswithilluminateandEloquent",
+    "type": "project",
+    "require": {
+        "illuminate/database": "^8.83"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "app/controllers/",
+            "Models\\": "app/models/"
+                
+                }
+    }
+}

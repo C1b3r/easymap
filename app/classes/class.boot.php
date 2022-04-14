@@ -1,7 +1,8 @@
 <?php
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
-require_once ROOT_PATH.'/config/conf.php';;
+require_once ROOT_PATH.'/config/conf.php';
+require_once ROOT_PATH.'/config/database.php';
 
 class Boot {
 

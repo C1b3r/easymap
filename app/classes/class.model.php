@@ -1,7 +1,7 @@
 <?php
 defined('ROOT_PATH') or exit('Direct access forbidden');
-
-class Model extends Connection
+use Illuminate\Database\Eloquent\Model as Eloquent;
+class Model extends Eloquent
 {
 	protected $db;
 	public $form = [];
@@ -9,11 +9,13 @@ class Model extends Connection
 			$count,
 			$limit = 1 ,
 			$totalrow,
-			$total_pages;
+			$total_pages,
+			$conectar;
 
 	public function __construct() 
 	{
-		parent::__construct();
+		// parent::__construct();
+		$this->conectar = new Connection;
     }
 
 	protected function secure($value)
@@ -51,22 +53,27 @@ class Model extends Connection
 			new MyException("Query error: ". $e->getMessage()." on function ".__FUNCTION__,basename($e->getFile()),1);
         }
 	}
-	public function select($table, $data, $extrawhere = '', $fields = "*")
-	{
-		if(is_array($data) && $fields != "*"){
-			$fields = implode(', ',array_keys($data));
-		}
-		//extract name of column database (defined in controller validation param)
-		$sql = "SELECT " . $fields . " FROM ".DB_PREFIX.$table;
-		/* If i defined in data an array of column name and where, if i only wants all result, dont do it anything */
-		$sql.= ($this->is_assoc($data)) ? $this->createWhere($data) : '';
-		//If i defined data array and wants specific extra where
-		$sql.= (!empty($extrawhere) || !isset($extrawhere))? " AND ".$extrawhere : '';
-		$sql.= (!empty($this->limit) && isset($this->limit))? " LIMIT ".$this->limit : '';
+	// public function select($table, $data, $extrawhere = '', $fields = "*")
+	// {
+	// 	if(is_array($data) && $fields != "*"){
+	// 		$fields = implode(', ',array_keys($data));
+	// 	}
+	// 	//extract name of column database (defined in controller validation param)
+	// 	$sql = "SELECT " . $fields . " FROM ".DB_PREFIX.$table;
+	// 	/* If i defined in data an array of column name and where, if i only wants all result, dont do it anything */
+	// 	$sql.= ($this->is_assoc($data)) ? $this->createWhere($data) : '';
+	// 	//If i defined data array and wants specific extra where
+	// 	$sql.= (!empty($extrawhere) || !isset($extrawhere))? " AND ".$extrawhere : '';
+	// 	$sql.= (!empty($this->limit) && isset($this->limit))? " LIMIT ".$this->limit : '';
 
-        $this->result = $this->runQuery($sql, $data);
-		$this->count = $this->result->rowCount();
-		return $this;
+    //     $this->result = $this->runQuery($sql, $data);
+	// 	$this->count = $this->result->rowCount();
+	// 	return $this;
+
+	// }
+
+	public function selectRB($table)
+	{
 
 	}
 	/**
@@ -217,7 +224,8 @@ class Model extends Connection
 	}
 	public function __destruct()
 	{
-		$this->closeConnection();
+		// $this->closeConnection();
+		$this->conectar->conexion->disconnect('default');
 		// echo "conexion cerrada";
 	}
 
