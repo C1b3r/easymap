@@ -5,7 +5,7 @@ class Admin_Model extends Model
  {
     public $username;
     protected $table = 'users',
-              $primaryKey = 'flight_id',
+              $primaryKey = 'id_user',
               $fillable = ['email','name','active'];
 
     public function logUser($data, $fields,$session)
@@ -39,7 +39,7 @@ class Admin_Model extends Model
     {
         $this->limit = 3;
         // $result = $this->select("map", null)->fetchAllArray();   //En este caso, al ser un limit, hacemos un fetchall
-        $result = $this->conectar->conexion->table('map')->take($this->limit)->get()->toArray();
+        $result = $this->conectar->conexion->table('map')->take($this->limit)->get();
         return $result;
     }
 
