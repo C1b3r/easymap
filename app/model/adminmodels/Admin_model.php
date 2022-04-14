@@ -5,7 +5,8 @@ class Admin_Model extends Model
  {
     public $username;
     protected $table = 'users',
-              $primaryKey = 'flight_id';
+              $primaryKey = 'flight_id',
+              $fillable = ['email','name','active'];
 
     public function logUser($data, $fields,$session)
     // public function logUser($email, $pass,$session)
