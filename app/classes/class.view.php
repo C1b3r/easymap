@@ -56,7 +56,7 @@ class View {
 		return $view;
 	}
 
-		/**
+	/**
 	 * @param links For limit number of pages, if is offset limit, it put ...
 	 */
 	public function createPaginationLink($data,$currentPage = '', $links = 7)
@@ -92,6 +92,50 @@ class View {
 		 
 			$class      = ( $data->page == $last ) ? "disabled" : "";
 			$html       .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . ( $data->page + 1 ) . '">&raquo;</a></li>';
+		 
+			$html       .= '</ul>';
+		 
+			return $html;
+	}
+
+	/**
+	 * @param dataArray Data of illumnate paginator in array mode
+	 * @param currentPage Name of the current page
+	 * @param links For limit number of pages, if is offset limit, it put ...
+	 */
+	public function createPaginationLinkORM($dataArray,$currentPage = '', $links = 7)
+	{
+			if ( $dataArray['limit'] == 'all' ) {
+				return '';
+			}
+		 
+			$last       = ceil( $dataArray['total'] / $dataArray['limit'] );
+		 
+			$start      = ( ( $dataArray['page'] - $links ) > 0 ) ? $dataArray['page'] - $links : 1;
+			$end        = ( ( $dataArray['page'] + $links ) < $last ) ? $dataArray['page'] + $links : $last;
+		 
+			$html       = '<ul class="pagination">';
+		 
+			$class      = ( $dataArray['page'] == 1 ) ? "disabled" : "";
+			$html       .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . ( $dataArray['page'] - 1 ) . '">&laquo;</a></li>';
+		 
+			if ( $start > 1 ) {
+				$html   .= '<li class="page-item" ><a href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/1">1</a></li>';
+				$html   .= '<li class="disabled"><span>...</span></li>';
+			}
+		 
+			for ( $i = $start ; $i <= $end; $i++ ) {
+				$class  = ( $dataArray['page'] == $i ) ? "active" : "";
+				$html   .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . $i . '">' . $i . '</a></li>';
+			}
+		 
+			if ( $end < $last ) {
+				$html   .= '<li class="disabled"><span>...</span></li>';
+				$html   .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . $last . '">' . $last . '</a></li>';
+			}
+		 
+			$class      = ( $dataArray['page'] == $last ) ? "disabled" : "";
+			$html       .= '<li class="page-item"><a class="page-link" href="'.COMPLETE_WEB_PATH_ADMIN.$currentPage.'/page/' . ( $dataArray['page'] + 1 ) . '">&raquo;</a></li>';
 		 
 			$html       .= '</ul>';
 		 
