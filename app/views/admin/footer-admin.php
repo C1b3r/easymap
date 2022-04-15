@@ -1,6 +1,6 @@
 <?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
-    <?php if(isset($this->pagination) && $this->results->isNotEmpty() || $this->pagination):?>
+    <?php if(isset($this->pagination,$this->results) && $this->results->isNotEmpty() || $this->pagination):?>
         <div class="mt-3 d-flex justify-content-center">
       <?php //echo $this->createPaginationLink($this->results,$this->current_page); 
       echo $this->createPaginationLinkORM([
