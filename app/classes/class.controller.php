@@ -6,6 +6,7 @@ class Controller
 	protected $isLogin = false; //check if user login
 	//If your controller dont have database operation, override in the child with false value
 	public $havemodel = true;
+	public $secciones = null;
 	protected $defaultView;
 	protected $formFunction;
 	protected $session;
@@ -40,7 +41,13 @@ class Controller
 
 	public function createForm($nameForm)
 	{
-		$this->view->assign($nameForm,$this->form()->renderForm($nameForm));
+		//If it has been declared in an edit createform
+		if(!isset($this->form)){
+			$this->view->assign($nameForm,$this->form()->renderForm($nameForm));
+		}else{
+			$this->view->assign($nameForm,$this->form->renderForm($nameForm));
+		}
+		
 	}
 
 	protected function loadAdminView($currentView = 'error')
@@ -91,6 +98,8 @@ class Controller
 		//For breadcrum  in header
 		$this->view->assign('precedent_page',"Editar ".$className[0]);
 		$this->view->assign('previous_page_link',$className[0]);
+		/* Declaro la vista, esto irá a editAdmin y como lo otro va a una clase hija que es un formulario, si necesito pasarle contenido al formulario tengo que declararselo en el form */
+		$this->form()->assign('secciones',$this->secciones);
 		// print_r(strtolower($className[0]));
 		$this->createForm($nameForm);
 		return $this->loadAdminView("editAdmin");
