@@ -1,4 +1,8 @@
 <?php
+namespace app\classes\controllers;
+
+use app\classes\Controller;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Index_Controller extends Controller 

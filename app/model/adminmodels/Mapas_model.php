@@ -1,4 +1,6 @@
 <?php
+namespace app\model;
+use app\classes\Model;
 class Mapas_Model extends model
  {
    public $defaultFunction = "getMap";

@@ -1,5 +1,5 @@
 <?php
-
+namespace app\classes;
 class View {
 	public $data = array();
 	public $pagination = false;

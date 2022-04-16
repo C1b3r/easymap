@@ -1,6 +1,10 @@
 <?php
+namespace app\classes;
+
+use app\classes\controllers\Error_Controller;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
-class MyException extends Exception
+class MyException extends \Exception
 {
 	const THROW_SIMPLE = 0;
 	const THROW_MEDIUM = 1;

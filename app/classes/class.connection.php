@@ -1,4 +1,5 @@
 <?php 
+namespace app\classes;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 use Illuminate\Database\Capsule\Manager as Capsule;
 class Connection{
@@ -20,7 +21,7 @@ class Connection{
             // $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // $this->conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             //  echo "Connected successfully";
-          } catch(PDOException $e) {
+          } catch(\PDOException $e) {
             new MyException("Connection failed: ". $e->getMessage(),basename($e->getFile()),1);
           }
         return $this->conexion;   

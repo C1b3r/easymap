@@ -1,4 +1,5 @@
 <?php
+namespace app\classes;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 use Illuminate\Database\Eloquent\Model as Eloquent;
 class Model extends Eloquent
@@ -37,7 +38,7 @@ class Model extends Eloquent
 				/* In this case, bindparam in foreach with value need to pass by reference, by default allways 
 				use variable by value, $value it's by value, because bindParam needs &$value) https://www.php.net/manual/fr/pdostatement.bindparam.php#98145 */
 				foreach ($dataToBind as $key => &$value) {
-					$type_param = (is_numeric($value))? PDO::PARAM_INT: PDO::PARAM_STR;
+					$type_param = (is_numeric($value))? \PDO::PARAM_INT: \PDO::PARAM_STR;
 					//not need ":". in the $key
 					$stmt->bindParam($key, $value,$type_param); 
 				}
@@ -49,7 +50,7 @@ class Model extends Eloquent
 			// echo $stmt->debugDumpParams();
             return $stmt;
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
 			new MyException("Query error: ". $e->getMessage()." on function ".__FUNCTION__,basename($e->getFile()),1);
         }
 	}
@@ -104,7 +105,7 @@ class Model extends Eloquent
 		//To get the data in array
 		$results = $this->fetchArray(true);
 		//Creation of no name class and assing properties to pass more easy
-		$result         = new stdClass();
+		$result         = new \stdClass();
 		$result->page   = $page;
 		$result->limit  = $this->limit;
 		$result->total  = $this->total_pages;
@@ -140,11 +141,11 @@ class Model extends Eloquent
 	{
 		try {
  			$stmt =$this->conexion->prepare("SELECT * FROM ".DB_PREFIX.$table." WHERE ".$by."= :param");
-			$stmt->bindParam("param", $param,PDO::PARAM_STR);
+			$stmt->bindParam("param", $param,\PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetchColumn();
 		
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			new MyException("Connection failed: ". $e->getMessage()." on function ".__FUNCTION__,basename($e->getFile()),1);
 		}
 	
@@ -196,31 +197,31 @@ class Model extends Eloquent
 	{
 		if($loop){
 			 $data = array();
-			while ($row = $this->result->fetch(PDO::FETCH_ASSOC) ) {
+			while ($row = $this->result->fetch(\PDO::FETCH_ASSOC) ) {
 				$data[] = $row;
 			}
 			return $data;
 		}
-		return $this->result->fetch(PDO::FETCH_ASSOC);
+		return $this->result->fetch(\PDO::FETCH_ASSOC);
 	}
 	public function fetchObj($loop = false)
 	{
 		if($loop){
 			$data = array();
-		   while ($row = $this->result->fetch(PDO::FETCH_OBJ) ) {
+		   while ($row = $this->result->fetch(\PDO::FETCH_OBJ) ) {
 			   $data[] = $row;
 		   }
 		   return $data;
 	   }
-		return $this->result->fetch(PDO::FETCH_OBJ);
+		return $this->result->fetch(\PDO::FETCH_OBJ);
 	}
 	public function fetchAllArray()
 	{
-		return $this->result->fetchAll(PDO::FETCH_ASSOC);
+		return $this->result->fetchAll(\PDO::FETCH_ASSOC);
 	}
 	public function fetchAllObj($loop = false)
 	{
-		return $this->result->fetchAll(PDO::FETCH_OBJ);
+		return $this->result->fetchAll(\PDO::FETCH_OBJ);
 	}
 	public function __destruct()
 	{

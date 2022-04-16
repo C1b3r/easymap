@@ -1,4 +1,8 @@
 <?php
+namespace app\classes\controllers;
+
+use app\classes\Validation;
+use app\classes\Controller;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Login_Controller extends Controller 

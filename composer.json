@@ -1,4 +1,14 @@
 {
+    "name": "ciber/easy-map",
+    "authors": [{
+        "name": "Artulance",
+        "email": "artudevweb@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
     "require": {
         "illuminate/database": "^8.83",
         "illuminate/pagination": "^8.83"

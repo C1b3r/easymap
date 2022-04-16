@@ -1,5 +1,6 @@
 <?php
-
+namespace app\model;
+use app\classes\Model;
 
 class Admin_Model extends Model
  {

@@ -1,4 +1,5 @@
 <?php
+namespace app\classes;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Helper 

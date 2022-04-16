@@ -1,4 +1,8 @@
 <?php
+namespace app\classes\controllers;
+use app\classes\Controller;
+use app\classes\Session;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Users_Controller extends Controller 

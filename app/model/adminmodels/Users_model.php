@@ -1,5 +1,9 @@
 <?php
-class Users_Model extends model
+namespace app\model;
+
+use app\classes\Model;
+
+class Users_Model extends Model
  {
     public $defaultFunction = "getUsuarios";
 

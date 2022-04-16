@@ -1,8 +1,12 @@
 <?php
+namespace app\classes;
+
+use app\classes\controllers\Error_Controller;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 require_once ROOT_PATH.'/config/conf.php';
 require_once ROOT_PATH.'/config/database.php';
+// require_once ROOT_PATH.'/app/routes/web.php';
 
 class Boot {
 
@@ -15,9 +19,10 @@ class Boot {
     { 
         /*The same as Boot::loader
         if loader not static use new Self, when create object, loader will be load(class,controller and  model*/
-        spl_autoload_register(array('Boot','loader'));
-        new Session;
-        new Boot();
+        // spl_autoload_register(array('app\classes\Boot','loader'));
+        // new Session;
+        // new Boot();
+
     }
 
     public static function loader($className)

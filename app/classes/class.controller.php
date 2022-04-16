@@ -1,4 +1,12 @@
 <?php
+namespace app\classes;
+
+use app\classes\Form;
+use app\classes\Helper;
+use app\classes\MyException;
+use app\classes\Session;
+use app\classes\View;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Controller
