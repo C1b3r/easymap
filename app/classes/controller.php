@@ -2,10 +2,11 @@
 namespace app\classes;
 
 use app\classes\Form;
-use app\classes\Helper;
+// use app\classes\Helper;
 use app\classes\MyException;
 use app\classes\Session;
 use app\classes\View;
+use app\model\adminmodels\Admin_Model;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -69,7 +70,7 @@ class Controller
 	protected function error($view,$format, $type, $mensaje)
 	{
 		if($type == "flash"){
-			Helper::setFlash($format,$view,$mensaje);
+			\Helper::setFlash($format,$view,$mensaje);
 		}else{
 			$this->view->assign('message',array('type'=> $format, 'mensaje'=>$mensaje));
 		}

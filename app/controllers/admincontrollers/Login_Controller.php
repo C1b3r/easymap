@@ -1,8 +1,9 @@
 <?php
-namespace app\classes\controllers;
+namespace app\controllers\admincontrollers;
 
 use app\classes\Validation;
 use app\classes\Controller;
+use app\model\adminmodels\Admin_Model;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Login_Controller extends Controller 
@@ -20,7 +21,8 @@ class Login_Controller extends Controller
 	public function __construct() 
 	{
 		parent::__construct(true); //to create view
-		$this->loadModel('admin');
+		// $this->loadModel('admin');
+		$this->model = new Admin_Model();
 		$this->view->assign('robots','noindex, nofollow')->assign('title','Panel de administración'); //assing allways the same robots(you can overwrite in assign function)
 	}
 

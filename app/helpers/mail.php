@@ -1,5 +1,5 @@
 <?php
-namespace app\classes;
+// namespace app\classes;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Mail

@@ -1,5 +1,5 @@
 <?php
-namespace app\model;
+namespace app\model\adminmodels;
 
 use app\classes\Model;
 

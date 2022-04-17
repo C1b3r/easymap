@@ -1,10 +1,10 @@
 <?php 
 namespace app\classes;
 
-use app\classes\controllers\Admin_Controller;
-use app\classes\controllers\Error_Controller;
-use app\classes\controllers\Index_Controller;
-use app\classes\controllers\Login_Controller;
+use app\controllers\admincontrollers\Admin_Controller;
+use app\controllers\Error_Controller;
+use app\controllers\Index_Controller;
+use app\controllers\admincontrollers\Login_Controller;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 

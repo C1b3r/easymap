@@ -1,5 +1,5 @@
 <?php
-namespace app\classes\controllers;
+namespace app\controllers;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 use app\classes\Controller;
 class Error_Controller extends Controller 

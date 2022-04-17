@@ -5,6 +5,9 @@
         "email": "artudevweb@gmail.com"
     }],
     "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
         "psr-4": {
             "app\\": "app/"
         }

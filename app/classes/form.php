@@ -1,5 +1,5 @@
 <?php
-namespace classes;
+namespace app\classes;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Form extends View

@@ -1,5 +1,5 @@
 <?php
-namespace app\classes\controllers;
+namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');

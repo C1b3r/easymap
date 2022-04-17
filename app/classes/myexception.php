@@ -1,7 +1,7 @@
 <?php
 namespace app\classes;
 
-use app\classes\controllers\Error_Controller;
+use app\controllers\Error_Controller;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 class MyException extends \Exception
