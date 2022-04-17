@@ -49,7 +49,8 @@ class InitController {
 				$controller = new Admin_Controller();
 				
 				// if(empty($controller->model)){
-				$controller->loadModel(ucwords($this->location[$indexAdmin])); //controller_name
+				// $controller->loadModel(ucwords($this->location[$indexAdmin])); //controller_name
+				$controller->loadModel("app\\model\\adminmodels\\".ucwords($this->location[$indexAdmin]));
 				// };
 				$controller->index();
 				return $this;

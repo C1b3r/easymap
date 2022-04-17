@@ -96,6 +96,7 @@ class Boot {
     public function load()
     {
         // $url = isset($_GET['location']) ? $_GET['location'] : null;
+        new Session();
         $url = $this->parseUrl();
 		
 		$controller = new InitController($url);
