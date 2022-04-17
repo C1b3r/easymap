@@ -1,7 +1,7 @@
 <?php
 namespace app\classes;
 
-use app\classes\controllers\Error_Controller;
+use app\controllers\Error_Controller;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 require_once ROOT_PATH.'/config/conf.php';
@@ -12,6 +12,7 @@ class Boot {
 
     function __construct()
     {
+        $this->loadHelpers();
         $this->load();
     }
 
@@ -114,5 +115,13 @@ class Boot {
 		$controller->index($message,500);
 		return false;
 	}
+
+    public function loadHelpers()
+    {
+        foreach (glob(ROOT_PATH.'app/helpers/*.php') as $filename) {
+            require_once($filename);
+        }
+
+    }
 
 }
