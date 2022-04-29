@@ -16,17 +16,18 @@ class Boot {
         $this->loadHelpers();
         $this->load();
     }
-
+     //Function init Deprecated 
     public static function init()
     { 
         /*The same as Boot::loader
         if loader not static use new Self, when create object, loader will be load(class,controller and  model*/
+         // spl_autoload_register(array('Boot','loader')); //before namespaces
         // spl_autoload_register(array('app\classes\Boot','loader'));
         // new Session;
         // new Boot();
 
     }
-
+    //Function loader Deprecated 
     public static function loader($className)
     {
         //Separate index _ controller to array

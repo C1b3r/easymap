@@ -27,6 +27,7 @@ class InitController {
 	public function load()
 	{
 		$indexAdmin = 0;
+		$prefijoModel = "";
 	
 		if (empty($this->location[$indexAdmin]))
 		{	
@@ -43,6 +44,7 @@ class InitController {
 				return $this;
 		
 			}
+			$prefijoModel = "\\app\\model\\adminmodels\\";
 			//Comprobamos si en /admin/ esta vacio para cargar la vista principal de administrador
 			if(empty($this->location[$indexAdmin+1])){
 
@@ -58,7 +60,7 @@ class InitController {
 			//Cargamos ahora los controladores del admin para que sea /admin/controlador
 			$indexAdmin = 1;
 			$controller_name = ucwords($this->location[$indexAdmin]);
-			$class_name = $controller_name.'_Controller';
+			$class_name = "\\app\\controllers\\admincontrollers\\".$controller_name.'_Controller';
 			$file = CONTROLLER_ADMIN_PATH . $class_name . '.php';
 			
 		}else{
@@ -69,12 +71,12 @@ class InitController {
 		
 		
 		//find controller
-		if (!file_exists($file)) throw new MyException('Controller load not found',__FUNCTION__,0);
+		// if (!file_exists($file)) throw new MyException('Controller load not found',__FUNCTION__,0);
 		
 		$controller = new $class_name;
 
 		if($controller->havemodel){
-			$controller->loadModel($controller_name);
+			$controller->loadModel($prefijoModel.$controller_name);
 		}
 		
 		// calling methods
