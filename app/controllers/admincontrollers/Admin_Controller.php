@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\admincontrollers;
 use app\classes\Controller;
+use app\model\adminmodels\Admin_Model;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -13,6 +14,7 @@ class Admin_Controller extends Controller
 	{
 		parent::__construct(true); //to create view
 		$this->view->assign('robots','noindex, nofollow')->assign('title','Panel de administración'); //assing allways the same robots(you can overwrite in assign function)
+		$this->model = new Admin_Model();
 	}
 
     public function index() 

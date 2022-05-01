@@ -69,4 +69,9 @@ class Helper
 		  }
 	  }
 
+	  public static function Route($name,$params,$absolute = true)
+	  {
+		
+	  }
+
 }

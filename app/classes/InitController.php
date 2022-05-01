@@ -71,7 +71,7 @@ class InitController {
 		
 		
 		//find controller
-		// if (!file_exists($file)) throw new MyException('Controller load not found',__FUNCTION__,0);
+		if (!file_exists($file)) throw new MyException('Controller load not found',__FUNCTION__,0);
 		
 		$controller = new $class_name;
 

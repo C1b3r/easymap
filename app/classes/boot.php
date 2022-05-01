@@ -2,6 +2,9 @@
 namespace app\classes;
 
 use app\controllers\Error_Controller;
+use app\classes\Controller;
+use app\routing\Router;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 require_once ROOT_PATH.'/config/conf.php';
@@ -9,10 +12,17 @@ require_once ROOT_PATH.'/config/conf.php';
 require_once ROOT_PATH.'/config/database.php';
 // require_once ROOT_PATH.'/app/routes/web.php';
 
-class Boot {
+class Boot 
+{
+    public static Boot $app;
+    public ?Controller $controller = null;
+    public Router $router;
 
     function __construct()
     {
+        self::$app = $this;
+        $this->router = new Router();
+        $this->loadUrls();
         $this->loadHelpers();
         $this->load();
     }
@@ -26,6 +36,16 @@ class Boot {
         // new Session;
         // new Boot();
 
+    }
+    public function loadUrls()
+    {
+        if (file_exists(ROOT_PATH.'/routes/web.php'))
+        {
+            require_once ROOT_PATH.'/routes/web.php';
+        }else{
+            throw new MyException('Not routes files found',__FUNCTION__,0);
+        }
+      
     }
     //Function loader Deprecated 
     public static function loader($className)
@@ -99,12 +119,13 @@ class Boot {
     {
         // $url = isset($_GET['location']) ? $_GET['location'] : null;
         new Session();
-        $url = $this->parseUrl();
+        // $url = $this->parseUrl();
 		
-		$controller = new InitController($url);
+		// $controller = new InitController($url);
 
 		try{
-		     $controller->load();
+		    //  $controller->load();
+		     $this->router->resolve();
 		}
 		catch(MyException $e)
 		{
