@@ -27,11 +27,13 @@ class Router
 
     public function get(string $url, $callback, $alias = "")
     {
-        $this->routeMap['get'][$this->request->cleanURL($url)] = $callback;
+        
         $this->lastVerb = 'get';
         if(isset($this->group) && !empty($this->group)){
             // $this->routeMapGroup['get'][$this->group."/".$this->request->cleanURL($url)] = $callback;
             $this->routeMap['get'][$this->group."/".$this->request->cleanURL($url)] = $callback;
+        }else{
+            $this->routeMap['get'][$this->request->cleanURL($url)] = $callback;
         }
         if(!empty($alias)){
             $this->routeAlias[$alias] = array_key_last($this->routeMap['get']);
@@ -46,10 +48,12 @@ class Router
      */
     public function post(string $url, $callback, $alias = "")
     {
-        $this->routeMap['post'][$this->request->cleanURL($url)] = $callback;
+        
         $this->lastVerb = 'post';
         if(isset($this->group) && !empty($this->group)){
             $this->routeMap['get'][$this->group."/".$this->request->cleanURL($url)] = $callback;
+        }else{
+            $this->routeMap['post'][$this->request->cleanURL($url)] = $callback;
         }
         if(!empty($alias)){
             $this->routeAlias[$alias] = array_key_last($this->routeMap['post']);
@@ -61,7 +65,7 @@ class Router
     {
         if(isset($prefix) || !empty($prefix)){
             $this->group = $prefix;
-            call_user_func($groups,$prefix);
+            call_user_func($groups);
         }else{
             throw new MyException('Route group need prefix ',__FUNCTION__,0);
         }
@@ -70,7 +74,7 @@ class Router
 
     public function middleware()
     {
-        
+
     }
 
     /**
