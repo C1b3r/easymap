@@ -10,9 +10,12 @@ class Router
     private Request $request;
     private Response $response;
     private array $routeMap = [];
+    private array $routeMapGroup = [];
     public array $routeAlias = [];
     private ViewClass $viewClass;
     private String $lastVerb = "";
+    private String $lastPath = "";
+    private $group;
 
     // public function __construct(Request $request, Response $response)
     public function __construct()
@@ -26,6 +29,10 @@ class Router
     {
         $this->routeMap['get'][$this->request->cleanURL($url)] = $callback;
         $this->lastVerb = 'get';
+        if(isset($this->group) && !empty($this->group)){
+            // $this->routeMapGroup['get'][$this->group."/".$this->request->cleanURL($url)] = $callback;
+            $this->routeMap['get'][$this->group."/".$this->request->cleanURL($url)] = $callback;
+        }
         if(!empty($alias)){
             $this->routeAlias[$alias] = array_key_last($this->routeMap['get']);
         }
@@ -41,10 +48,29 @@ class Router
     {
         $this->routeMap['post'][$this->request->cleanURL($url)] = $callback;
         $this->lastVerb = 'post';
+        if(isset($this->group) && !empty($this->group)){
+            $this->routeMap['get'][$this->group."/".$this->request->cleanURL($url)] = $callback;
+        }
         if(!empty($alias)){
             $this->routeAlias[$alias] = array_key_last($this->routeMap['post']);
         }
         return $this;
+    }
+
+    public function group($prefix,$groups)
+    {
+        if(isset($prefix) || !empty($prefix)){
+            $this->group = $prefix;
+            call_user_func($groups,$prefix);
+        }else{
+            throw new MyException('Route group need prefix ',__FUNCTION__,0);
+        }
+        $this->group = null;
+    }
+
+    public function middleware()
+    {
+        
     }
 
     /**
