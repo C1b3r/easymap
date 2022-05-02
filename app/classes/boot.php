@@ -23,12 +23,13 @@ class Boot
     public static Boot $app;
     public ?Controller $controller = null;
     // public Router $router;
+    public $router;
 
     function __construct()
     {
         // self::$app = $this;
         // $this->router = new Router();
-        $this->loadUrls();
+        // $this->loadUrls();
         $this->loadHelpers();
         $this->load();
     }
@@ -45,13 +46,14 @@ class Boot
     }
     public function loadUrls()
     {
+        $router = $this->router;
         if (file_exists(ROOT_PATH.'/routes/web.php'))
         {
             require_once ROOT_PATH.'/routes/web.php';
         }else{
             throw new MyException('Not routes files found',__FUNCTION__,0);
         }
-      
+        require_once ROOT_PATH.'/app/routing/internalRouting.php';
     }
     //Function loader Deprecated 
     public static function loader($className)
@@ -130,6 +132,49 @@ class Boot
 		// $controller = new InitController($url);
 
 		try{
+            // Create a request from server variables, and bind it to the container; optional
+            // Create a service container
+$container = new Container;
+$request = Request::capture();
+$container->instance('Illuminate\Http\Request', $request);
+
+// Using Illuminate/Events/Dispatcher here (not required); any implementation of
+// Illuminate/Contracts/Event/Dispatcher is acceptable
+$events = new Dispatcher($container);
+
+// Create the router instance
+$this->router = new Router($events, $container);
+
+// Global middlewares
+// $globalMiddleware = [
+//     \App\Middleware\StartSession::class,
+// ];
+
+// Array middlewares
+$routeMiddleware = [
+    'admin' => \app\routing\middlewares\Authenticate::class,
+];
+
+// Load middlewares to router
+foreach ($routeMiddleware as $key => $middleware) {
+    $this->router->aliasMiddleware($key, $middleware);
+}
+// Load the routes
+$this->loadUrls();
+
+// Create the redirect instance
+$redirect = new Redirector(new UrlGenerator($this->router->getRoutes(), $request));
+
+// use redirect
+// return $redirect->home();
+// return $redirect->back();
+// return $redirect->to('/');
+
+// Dispatch the request through the router
+$response = $this->router->dispatch($request);
+
+// Send the response back to the browser
+$response->send();
 		    //  $controller->load();
 		    //  $this->router->resolve();
 		}

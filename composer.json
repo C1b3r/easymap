@@ -11,6 +11,8 @@
     },
     "require": {
         "illuminate/database": "^8.83",
-        "illuminate/pagination": "^8.83"
+        "illuminate/pagination": "^8.83",
+        "illuminate/routing": "^8.83",
+        "illuminate/events": "^8.83"
     }
 }
