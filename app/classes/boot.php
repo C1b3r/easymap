@@ -3,7 +3,13 @@ namespace app\classes;
 
 use app\controllers\Error_Controller;
 use app\classes\Controller;
-use app\routing\Router;
+
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Routing\Router;
+use Illuminate\Routing\UrlGenerator;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -16,12 +22,12 @@ class Boot
 {
     public static Boot $app;
     public ?Controller $controller = null;
-    public Router $router;
+    // public Router $router;
 
     function __construct()
     {
-        self::$app = $this;
-        $this->router = new Router();
+        // self::$app = $this;
+        // $this->router = new Router();
         $this->loadUrls();
         $this->loadHelpers();
         $this->load();
@@ -125,7 +131,7 @@ class Boot
 
 		try{
 		    //  $controller->load();
-		     $this->router->resolve();
+		    //  $this->router->resolve();
 		}
 		catch(MyException $e)
 		{
