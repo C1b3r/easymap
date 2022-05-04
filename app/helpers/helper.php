@@ -1,9 +1,14 @@
 <?php
-// namespace app\classes;
+//  namespace app\classes;
+
+use Illuminate\Routing\Redirector;
+use Illuminate\Routing\UrlGenerator;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Helper 
 {
+	public static $redirect;
 
 	public static function removeAccents($str) {
 
@@ -69,9 +74,10 @@ class Helper
 		  }
 	  }
 
-	  public static function Route($name,$params,$absolute = true)
+	  public static function redirect($routes,$request)
 	  {
-		
+		// Create the redirect instance
+		self::$redirect = new Redirector(new UrlGenerator($routes, $request));
 	  }
 
 }
