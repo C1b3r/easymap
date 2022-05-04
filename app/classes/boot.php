@@ -20,8 +20,9 @@ require_once ROOT_PATH.'/config/database.php';
 
 class Boot 
 {
-    public static Boot $app;
-    public ?Controller $controller = null;
+    //https://www.php.net/manual/es/language.oop5.properties.php no compatible con 7.3
+    // public static Boot $app;
+    // public ?Controller $controller = null;
     // public Router $router;
     public $router;
 
@@ -163,7 +164,8 @@ foreach ($routeMiddleware as $key => $middleware) {
 $this->loadUrls();
 
 // Create the redirect instance
-$redirect = new Redirector(new UrlGenerator($this->router->getRoutes(), $request));
+\Helper::redirect($this->router->getRoutes(), $request);
+// $redirect = new Redirector(new UrlGenerator());
 
 // use redirect
 // return $redirect->home();

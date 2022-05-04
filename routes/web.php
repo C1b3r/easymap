@@ -6,4 +6,4 @@ use Illuminate\Http\RedirectResponse;
 // $router->get('/', function () {
 //     return 'hello world!';
 // })->name('home');
-$router->get('/' , [Index_Controller::class,'index'])->name('inicio');
+$router->name('inicio')->get('/' , [Index_Controller::class,'index']);

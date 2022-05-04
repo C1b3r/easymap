@@ -2,7 +2,7 @@
 Options -MultiViews
 DirectoryIndex index.php
 RewriteEngine On
-#if subfolder, /subfolderafeterdomain/subfolder/ localhost/map/easymap/
+#if subfolder, /subfolderafeterdomain/subfolder/ ->example domain localhost/map/easymap/->in this case /map/easymap
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
