@@ -2,3 +2,4 @@
 adsfasd
 <?php 
 echo Helper::$urlGeneration->route('login'); 
+//https://laravel.com/docs/9.x/urls
