@@ -28,34 +28,32 @@ class Login_Controller extends Controller
 
 	public function index()
 	{
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-			$validador = new Validation('users');
-			$validation = $validador->validateFields($this->loginValidations,$_POST);
-			if(!count($validation)){
-				if($this->model->logUser($_POST,$this->loginValidations,$this->session))
-				// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
-				{
-					$this->view->assign('email', $this->model->username);
-					//Cargará el index
-					$this->redirect('admin');
-				}else{
-					$this->createForm("formLogin");
-					$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
-				}
-			}else{
-				$this->createForm("formLogin");
-				$this->error('login',self::FLASH_ERROR,'flash',$validation);
-			 }
+		if(!$this->isLogin){
+			$this->createForm("formLogin");
+			$this->loadAdminView('login');
 		}else{
-			if(!$this->isLogin){
-				$this->createForm("formLogin");
-				$this->loadAdminView('login');
-			}else{
-				$this->redirect('admin');
-			}
-			
+			$this->redirect('admin');
 		}
+	}
 
+	public function login()
+	{
+		$validador = new Validation('users');
+		$validation = $validador->validateFields($this->loginValidations,$_POST);
+		if(!count($validation)){
+			if($this->model->logUser($_POST,$this->loginValidations,$this->session))
+			// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
+			{
+				$this->view->assign('email', $this->model->username);
+				//Cargará el index
+				$this->redirect('admin');
+			}else{
+				$this->createForm("formLogin");
+				$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
+			}
+		}else{
+			$this->createForm("formLogin");
+			$this->error('login',self::FLASH_ERROR,'flash',$validation);
+		 }
 	}
 }
