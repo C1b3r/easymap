@@ -9,6 +9,7 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 class Helper 
 {
 	public static $redirect;
+	public static $urlGeneration;
 
 	public static function removeAccents($str) {
 
@@ -76,8 +77,9 @@ class Helper
 
 	  public static function redirect($routes,$request)
 	  {
+		self::$urlGeneration = new UrlGenerator($routes, $request);
 		// Create the redirect instance
-		self::$redirect = new Redirector(new UrlGenerator($routes, $request));
+		self::$redirect = new Redirector(self::$urlGeneration);
 	  }
 
 }

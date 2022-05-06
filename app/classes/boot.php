@@ -133,50 +133,50 @@ class Boot
 		// $controller = new InitController($url);
 
 		try{
-            // Create a request from server variables, and bind it to the container; optional
-            // Create a service container
-$container = new Container;
-$request = Request::capture();
-$container->instance('Illuminate\Http\Request', $request);
+        // Create a request from server variables, and bind it to the container; optional
+        // Create a service container
+        $container = new Container;
+        $request = Request::capture();
+        $container->instance('Illuminate\Http\Request', $request);
 
-// Using Illuminate/Events/Dispatcher here (not required); any implementation of
-// Illuminate/Contracts/Event/Dispatcher is acceptable
-$events = new Dispatcher($container);
+        // Using Illuminate/Events/Dispatcher here (not required); any implementation of
+        // Illuminate/Contracts/Event/Dispatcher is acceptable
+        $events = new Dispatcher($container);
 
-// Create the router instance
-$this->router = new Router($events, $container);
+        // Create the router instance
+        $this->router = new Router($events, $container);
 
-// Global middlewares
-// $globalMiddleware = [
-//     \App\Middleware\StartSession::class,
-// ];
+        // Global middlewares
+        // $globalMiddleware = [
+        //     \App\Middleware\StartSession::class,
+        // ];
 
-// Array middlewares
-$routeMiddleware = [
-    'admin' => \app\routing\middlewares\Authenticate::class,
-];
+        // Array middlewares
+        $routeMiddleware = [
+            'admin' => \app\routing\middlewares\Authenticate::class,
+        ];
 
-// Load middlewares to router
-foreach ($routeMiddleware as $key => $middleware) {
-    $this->router->aliasMiddleware($key, $middleware);
-}
-// Load the routes
-$this->loadUrls();
+        // Load middlewares to router
+        foreach ($routeMiddleware as $key => $middleware) {
+            $this->router->aliasMiddleware($key, $middleware);
+        }
+        // Load the routes
+        $this->loadUrls();
 
-// Create the redirect instance
-\Helper::redirect($this->router->getRoutes(), $request);
-// $redirect = new Redirector(new UrlGenerator());
+        // Create the redirect instance
+        \Helper::redirect($this->router->getRoutes(), $request);
+        // $redirect = new Redirector(new UrlGenerator());
 
-// use redirect
-// return $redirect->home();
-// return $redirect->back();
-// return $redirect->to('/');
+        // use redirect
+        // return $redirect->home();
+        // return $redirect->back();
+        // return $redirect->to('/');
 
-// Dispatch the request through the router
-$response = $this->router->dispatch($request);
+        // Dispatch the request through the router
+        $response = $this->router->dispatch($request);
 
-// Send the response back to the browser
-$response->send();
+        // Send the response back to the browser
+        $response->send();
 		    //  $controller->load();
 		    //  $this->router->resolve();
 		}
