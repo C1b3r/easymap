@@ -29,5 +29,5 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     // Route::get('/home', 'HomeController@index');
     //ruta a template
     $router->name('logout')->get('/logout',[Logout_Controller::class,'index']);
-    $router->name('home')->get('/',[Admin_Controller::class, 'index']);
+    $router->name('admin.home')->get('/',[Admin_Controller::class, 'index']);
 });

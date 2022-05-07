@@ -8,18 +8,18 @@ class Admin_Model extends Model
     protected $table = 'users',
               $primaryKey = 'id_user',
               $fillable = ['email','name','active'];
+    
+    protected $rules = [
+		'email' => 'required|email',
+		'pass' => 'required',
+		'submit' => 'required|submit'
+	];
 
-    public function logUser($data, $fields,$session)
-    // public function logUser($email, $pass,$session)
+    public function logUser($data,$session)
     {
-        $fieldData = $this->mapFormColumn($fields,$data);
-
-        //In this case, i dont wont to pass field argument because i need user data
-        //In other case you can put null in the field position function or put specific fields
-        // $result = $this->select("users",  $fieldData,"active = 1")->fetchObj(false);
-        // $usuario = $this->conexion->find('users');
-        $usuario = $this->select('name','email','id_user')->where('email', '=', trim($fieldData['email']))
-                        ->where('pass','=',$fieldData['pass'])
+  
+        $usuario = $this->select('name','email','id_user')->where('email', '=', trim($data['email']))
+                        ->where('pass','=',md5($data['pass']))
                         ->where('active','=','1')
                         ->first();
         //Compruebo si                 
