@@ -22,13 +22,15 @@ class Boot
 {
     //https://www.php.net/manual/es/language.oop5.properties.php no compatible con 7.3
     // public static Boot $app;
+    public static $app;
+    public $perro = "sanchez";
     // public ?Controller $controller = null;
     // public Router $router;
     public $router;
 
     function __construct()
     {
-        // self::$app = $this;
+        self::$app = $this;
         // $this->router = new Router();
         // $this->loadUrls();
         $this->loadHelpers();

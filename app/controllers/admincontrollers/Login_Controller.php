@@ -1,7 +1,7 @@
 <?php
 namespace app\controllers\admincontrollers;
 
-use app\classes\Validation;
+use app\classes\Boot;
 use app\classes\Controller;
 use app\model\adminmodels\Admin_Model;
 defined('ROOT_PATH') or exit('Direct access forbidden');
@@ -10,13 +10,6 @@ class Login_Controller extends Controller
 {
 	public $havemodel = false;
     protected $defaultView = 'login';
-
-	//Put on key the name of the column in database, specific if necesary encrypt and if is submit to select function in class model
-	public $loginValidations = [
-		'email' => 'required|email|min:2|max:100|column:email',
-		'pass' => 'required|min:2|max:100|encrypt|column:pass',
-		'submit' => 'required|submit'
-	];
 	
 	public function __construct() 
 	{
@@ -27,7 +20,7 @@ class Login_Controller extends Controller
 	}
 
 	public function index()
-	{
+	{    echo Boot::$app->perro;
 		if(!$this->isLogin){
 			$this->createForm("formLogin");
 			$this->loadAdminView('login');
@@ -38,22 +31,27 @@ class Login_Controller extends Controller
 
 	public function login()
 	{
-		$validador = new Validation('users');
-		$validation = $validador->validateFields($this->loginValidations,$_POST);
-		if(!count($validation)){
-			if($this->model->logUser($_POST,$this->loginValidations,$this->session))
-			// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
-			{
-				$this->view->assign('email', $this->model->username);
-				//Cargará el index
-				$this->redirect('admin');
-			}else{
-				$this->createForm("formLogin");
-				$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
-			}
+		if($this->model->logUser($_POST,$this->session)){
+			\Helper::$redirect->route('admin.home');
 		}else{
-			$this->createForm("formLogin");
-			$this->error('login',self::FLASH_ERROR,'flash',$validation);
-		 }
+			$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
+			\Helper::$redirect->route('login');
+		}
+		// $validador = new Validation('users');
+		// $validation = $validador->validateFields($this->loginValidations,$_POST);
+		// if(!count($validation)){
+		// 	if($this->model->logUser($_POST,$this->loginValidations,$this->session))
+		// 	// if($this->model->logUser($_POST['email'],$_POST['pass'],$this->session))
+		// 	{
+		// 		$this->view->assign('email', $this->model->username);
+		// 		//Cargará el index
+		// 		$this->redirect('admin');
+		// 	}else{
+		// 		$this->createForm("formLogin");
+			
+		// 	}
+		// }else{
+		// 	$this->createForm("formLogin");
+		// 	$this->error('login',self::FLASH_ERROR,'flash',$validation);
 	}
 }

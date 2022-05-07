@@ -2,6 +2,8 @@
 namespace app\classes;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use app\classes\Validation;
+
 class Model extends Eloquent
 {
 	protected $db;
@@ -11,13 +13,19 @@ class Model extends Eloquent
 			$limit = 1 ,
 			$totalrow,
 			$total_pages,
-			$conectar;
+			$conectar,
+			$validator;
 
 	public function __construct() 
 	{
 		// parent::__construct();
 		$this->conectar = new Connection;
     }
+
+	public function validation()
+	{
+		$this->validator = new Validation($this->conectar);
+	}
 
 	protected function secure($value)
 	{

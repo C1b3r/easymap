@@ -1,15 +1,26 @@
 <?php
 namespace app\classes;
+
+use Illuminate\Container\Container;
+
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Translation\FileLoader;
+use Illuminate\Translation\Translator;
+use Illuminate\Validation\DatabasePresenceVerifier;
+use Illuminate\Validation\Factory;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Validation 
 {
-	// todo we catch from database or file
-	private $secretKey = 'fjd3vkuw#KURefg';
-	protected $table = '';
-	public function __construct($table = '') 
+	
+
+	public function __construct($capsule) 
 	{
-		$this->table = $table;
+		$loader = new FileLoader(new Filesystem, 'lang');
+		$translator = new Translator($loader, 'en');
+		$presence = new DatabasePresenceVerifier($capsule->getDatabaseManager());
+		$validation = new Factory($translator, new Container);
     }
 
 	public function validateFields($rules,$post)

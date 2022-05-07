@@ -13,6 +13,8 @@
         "illuminate/database": "^8.83",
         "illuminate/pagination": "^8.83",
         "illuminate/routing": "^8.83",
-        "illuminate/events": "^8.83"
+        "illuminate/events": "^8.83",
+        "illuminate/translation": "8.83.11",
+        "illuminate/validation": "8.83.11"
     }
 }
