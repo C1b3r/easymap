@@ -3,9 +3,7 @@ namespace app\classes;
 
 use Illuminate\Container\Container;
 
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Translation\FileLoader;
-use Illuminate\Translation\Translator;
+
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory;
 
@@ -13,15 +11,19 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Validation 
 {
-	
-
-	public function __construct($capsule) 
+	public $validation; 	
+	// $capsule
+	public function __construct() 
 	{
-		$loader = new FileLoader(new Filesystem, 'lang');
-		$translator = new Translator($loader, 'en');
-		$presence = new DatabasePresenceVerifier($capsule->getDatabaseManager());
-		$validation = new Factory($translator, new Container);
+		$this->validation = new Factory(Boot::$app->translator, new Container);
     }
+	
+	//need to validate against values in the database
+	public function validatePresence($capsule)
+	{ //creo que en vez de declarar la variable en el boot lo usaré llamando a esta función pasandole la conexion
+		$presence = new DatabasePresenceVerifier($capsule->getDatabaseManager());
+		Boot::$app->validation->setPresenceVerifier($presence);
+	}
 
 	public function validateFields($rules,$post)
 	{

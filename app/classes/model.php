@@ -20,6 +20,7 @@ class Model extends Eloquent
 	{
 		// parent::__construct();
 		$this->conectar = new Connection;
+		// Boot::$app->capsule = $this->conectar;
     }
 
 	public function validation()
