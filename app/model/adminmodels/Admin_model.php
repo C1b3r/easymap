@@ -1,6 +1,7 @@
 <?php
 namespace app\model\adminmodels;
 use app\classes\Model;
+use app\classes\Boot;
 
 class Admin_Model extends Model
  {
@@ -12,17 +13,24 @@ class Admin_Model extends Model
     protected $rules = [
 		'email' => 'required|email',
 		'pass' => 'required',
-		'submit' => 'required|submit'
+		'submit' => 'required'
 	];
 
     public function logUser($data,$session)
     {
+
+        $validator = Boot::$app->validator->make($data, $this->rules);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return false;
+        }
   
         $usuario = $this->select('name','email','id_user')->where('email', '=', trim($data['email']))
                         ->where('pass','=',md5($data['pass']))
                         ->where('active','=','1')
                         ->first();
-        //Compruebo si                 
+        //Compruebo si recibo un resultado
         if(!empty($usuario)){
                 $this->username = $usuario->email;
                 $session->addSession('username',$this->username);

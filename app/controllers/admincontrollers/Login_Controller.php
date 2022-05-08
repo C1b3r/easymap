@@ -20,22 +20,28 @@ class Login_Controller extends Controller
 	}
 
 	public function index()
-	{    echo Boot::$app->perro;
+	{   
 		if(!$this->isLogin){
 			$this->createForm("formLogin");
 			$this->loadAdminView('login');
 		}else{
-			$this->redirect('admin');
+			// $this->redirect('admin');
+			\Helper::$redirect->route('Adminhome');
 		}
 	}
 
 	public function login()
 	{
-		if($this->model->logUser($_POST,$this->session)){
-			\Helper::$redirect->route('admin.home');
+		$data = ['email' => $_POST['email'],
+				'pass' => $_POST['pass'],
+				'submit' => $_POST['submit'],
+				];
+		if($this->model->logUser($data,$this->session)){
+			return \Helper::$redirect->route('Adminhome');
 		}else{
 			$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
-			\Helper::$redirect->route('login');
+			$this->createForm("formLogin");
+			return \Helper::$redirect->route('login');
 		}
 		// $validador = new Validation('users');
 		// $validation = $validador->validateFields($this->loginValidations,$_POST);

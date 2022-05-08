@@ -4,9 +4,9 @@ use app\controllers\admincontrollers\Admin_Controller;
 use app\controllers\admincontrollers\Login_Controller;
 use app\controllers\admincontrollers\Logout_Controller;
 
-// $router->get('/', function () {
+// $router->name('home2')->get('/', function () {
 //     return 'hello world!';
-// })->name('home');
+// });
 
 // $router->middleware(['middleware' => 'sesion'])->group(['prefix'=>'admin'],function () use($router){
    // Route::auth();
@@ -19,7 +19,7 @@ use app\controllers\admincontrollers\Logout_Controller;
 // });
 $router->prefix(ADMIN_FOLDER)->group(function () use($router){
   $router->name('login')->get('/login',[Login_Controller::class, 'index']);
-  $router->name('login')->post('/login',[Login_Controller::class, 'login']);
+  $router->name('loginpost')->post('/login',[Login_Controller::class, 'login']);
 });
 //Necesito definirlo al principio porque si no en el action de easymap\vendor\illuminate\routing\RouteCollection.php addLookups no aparece
 
@@ -29,5 +29,5 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     // Route::get('/home', 'HomeController@index');
     //ruta a template
     $router->name('logout')->get('/logout',[Logout_Controller::class,'index']);
-    $router->name('admin.home')->get('/',[Admin_Controller::class, 'index']);
+    $router->name('Adminhome')->get('/',[Admin_Controller::class, 'index']);
 });

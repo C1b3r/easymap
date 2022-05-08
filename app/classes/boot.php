@@ -7,9 +7,10 @@ use app\classes\Controller;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Illuminate\Routing\Router;
-use Illuminate\Routing\UrlGenerator;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Translation\FileLoader;
+use Illuminate\Translation\Translator;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -23,22 +24,33 @@ class Boot
     //https://www.php.net/manual/es/language.oop5.properties.php no compatible con 7.3
     // public static Boot $app;
     public static $app;
-    public $perro = "sanchez";
+    public $perro;
+    public $validation, //my class validation
+           $validator, //validator laravel
+           $router,
+           $loader,
+		   $translator,
+           $capsule,
+           $session; //pasar todo a esta variable o dejarlo tal y como esta en el new
     // public ?Controller $controller = null;
     // public Router $router;
-    public $router;
 
     function __construct()
     {
         self::$app = $this;
         // $this->router = new Router();
         // $this->loadUrls();
+        $this->init();
         $this->loadHelpers();
         $this->load();
     }
-     //Function init Deprecated 
-    public static function init()
+    public function init()
     { 
+        new Session();
+        $this->loader = new FileLoader(new Filesystem, '/lang');
+		$this->translator = new Translator($this->loader, 'es');
+        $this->validation = new Validation();
+        $this->validator = $this->validation->validation;
         /*The same as Boot::loader
         if loader not static use new Self, when create object, loader will be load(class,controller and  model*/
          // spl_autoload_register(array('Boot','loader')); //before namespaces
@@ -129,7 +141,7 @@ class Boot
     public function load()
     {
         // $url = isset($_GET['location']) ? $_GET['location'] : null;
-        new Session();
+
         // $url = $this->parseUrl();
 		
 		// $controller = new InitController($url);
