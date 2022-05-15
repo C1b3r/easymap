@@ -31,7 +31,10 @@ class Boot
            $loader,
 		   $translator,
            $capsule,
-           $session; //pasar todo a esta variable o dejarlo tal y como esta en el new
+           $session,
+           $container,
+           $events,
+           $request; //pasar todo a esta variable o dejarlo tal y como esta en el new
     // public ?Controller $controller = null;
     // public Router $router;
 
@@ -149,16 +152,16 @@ class Boot
 		try{
         // Create a request from server variables, and bind it to the container; optional
         // Create a service container
-        $container = new Container;
-        $request = Request::capture();
-        $container->instance('Illuminate\Http\Request', $request);
+        $this->container = new Container;
+        $this->request = Request::capture();
+        $this->container->instance('Illuminate\Http\Request', $this->request);
 
         // Using Illuminate/Events/Dispatcher here (not required); any implementation of
         // Illuminate/Contracts/Event/Dispatcher is acceptable
-        $events = new Dispatcher($container);
+        $this->events = new Dispatcher($this->container);
 
         // Create the router instance
-        $this->router = new Router($events, $container);
+        $this->router = new Router($this->events, $this->container);
 
         // Global middlewares
         // $globalMiddleware = [
@@ -178,7 +181,7 @@ class Boot
         $this->loadUrls();
 
         // Create the redirect instance
-        \Helper::redirect($this->router->getRoutes(), $request);
+        \Helper::redirect($this->router->getRoutes(), $this->request);
         // $redirect = new Redirector(new UrlGenerator());
 
         // use redirect
@@ -187,7 +190,7 @@ class Boot
         // return $redirect->to('/');
 
         // Dispatch the request through the router
-        $response = $this->router->dispatch($request);
+        $response = $this->router->dispatch($this->request);
 
         // Send the response back to the browser
         $response->send();
