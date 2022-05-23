@@ -2,6 +2,7 @@
 namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 use app\classes\Session;
+use app\model\adminmodels\Mapas_Model;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -22,6 +23,7 @@ class Mapas_Controller extends Controller
 					->assign('title', $this->currentTitle)
 					->assign('current_page',$this->currentPage);
 		$this->isLogin = Session::checkIfLogin();
+		$this->model = new Mapas_Model();
 		
 	}
 

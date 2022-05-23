@@ -2,6 +2,7 @@
 namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 use app\classes\Session;
+use app\model\adminmodels\Users_Model;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -19,6 +20,7 @@ class Users_Controller extends Controller
 					->assign('title', $this->currentTitle)
 					->assign('current_page',$this->currentPage);
 		$this->isLogin = Session::checkIfLogin();
+		$this->model = new Users_Model();
 		
 	}
 

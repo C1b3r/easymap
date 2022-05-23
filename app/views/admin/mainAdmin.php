@@ -80,7 +80,7 @@
                         </tbody>
                       </table>
                 </div>
-                <a href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>mapas" class="btn btn-block btn-light float-end">Ver todos</a>
+                <a href="<?php echo Helper::$urlGeneration->route('list_maps');?>" class="btn btn-block btn-light float-end">Ver todos</a>
             </div>
         </div>
     </div>

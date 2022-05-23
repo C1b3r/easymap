@@ -3,6 +3,8 @@
 use app\controllers\admincontrollers\Admin_Controller;
 use app\controllers\admincontrollers\Login_Controller;
 use app\controllers\admincontrollers\Logout_Controller;
+use app\controllers\admincontrollers\Mapas_Controller;
+use app\controllers\admincontrollers\Users_Controller;
 
 // $router->name('home2')->get('/', function () {
 //     return 'hello world!';
@@ -30,4 +32,6 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     //ruta a template
     $router->name('logout')->get('/logout',[Logout_Controller::class,'index']);
     $router->name('Adminhome')->get('/',[Admin_Controller::class, 'index']);
+    $router->name('list_users')->get('/users',[Users_Controller::class, 'index']);
+    $router->name('list_maps')->get('/mapas/{page?}',[Mapas_Controller::class, 'index']);
 });
