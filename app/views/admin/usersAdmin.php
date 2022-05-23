@@ -9,7 +9,7 @@
             </h5> 
            
             <div class="card-body">
-              <?php  if(!empty($this->results)): ?>
+            <?php  if($this->results->isNotEmpty()): ?>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -18,13 +18,13 @@
                             <th scope="col">Fecha de alta</th> 
                             <th scope="col"></th>
                           </tr>
-                        </thead>
+                        </thead> 
                         <tbody>
-                        <?php foreach ($this->results->data as $value):?>
+                        <?php foreach ($this->results as $value):?>
                              <tr>
-                              <th scope="row"><?php echo $value['email'];?></th>
-                              <th scope="row"><?php echo $value['date_add'];?></th>
-                              <td><a class="btn btn-secondary" href="<?php echo COMPLETE_WEB_PATH_ADMIN.strtolower($this->current_page).'/edit/'.$value['id_user'];?>">Editar</a></td>
+                              <th scope="row"><?php echo $value->email;?></th>
+                              <th scope="row"><?php echo $value->date_add;?></th>
+                              <td><a class="btn btn-secondary" href="<?php echo COMPLETE_WEB_PATH_ADMIN.strtolower($this->current_page).'/edit/'.$value->id_user;?>">Editar</a></td>
                              </tr>
                               
                         <?php endforeach; ?>
