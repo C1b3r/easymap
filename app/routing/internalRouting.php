@@ -33,5 +33,6 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     $router->name('logout')->get('/logout',[Logout_Controller::class,'index']);
     $router->name('Adminhome')->get('/',[Admin_Controller::class, 'index']);
     $router->name('list_users')->get('/users',[Users_Controller::class, 'index']);
-    $router->name('list_maps')->get('/mapas/{page?}',[Mapas_Controller::class, 'index']);
+    $router->name('list_maps')->get('/mapas',[Mapas_Controller::class, 'index']);
+    $router->name('list_maps')->get('/mapas/page/{page}',[Mapas_Controller::class, 'index']);
 });
