@@ -17,6 +17,7 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if (! isset($_SESSION['id_user'])) {
+            $_SESSION['desireURI'] = $request->url();
             return \Helper::$redirect->route('login');
         }
 

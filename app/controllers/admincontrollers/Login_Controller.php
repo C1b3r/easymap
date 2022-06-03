@@ -38,6 +38,11 @@ class Login_Controller extends Controller
 				'submit' => $_POST['submit'],
 				];
 		if($this->model->logUser($data,$this->session)){
+			if(isset( $_SESSION['desireURI'])){
+				$desireUrl = $_SESSION['desireURI'];
+				unset($_SESSION['desireURI']);
+				return \Helper::$redirect->to($desireUrl);
+			}
 			return \Helper::$redirect->route('Adminhome');
 		}else{
 			$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
