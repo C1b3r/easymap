@@ -24,15 +24,11 @@ class Admin_Controller extends Controller
 				   ->assign('description','')
 				   ->assign('other_title','')
 				   ->assign('current_page','Visión general');
-		if($this->isLogin)
-		{
-			$maps = $this->model->getMap(2);
 
-			if($maps){
-				$this->view->assign('maps', $maps);
-			}
+		$maps = $this->model->getMap(2);
 
-		}
+		$this->view->assign('maps', $maps);
+		
 		$this->loadAdminView($this->defaultView);   
 	}
 }

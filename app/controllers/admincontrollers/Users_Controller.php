@@ -19,7 +19,6 @@ class Users_Controller extends Controller
 		$this->view->assign('robots','noindex, nofollow')
 					->assign('title', $this->currentTitle)
 					->assign('current_page',$this->currentPage);
-		$this->isLogin = Session::checkIfLogin();
 		$this->model = new Users_Model();
 		
 	}
@@ -30,14 +29,11 @@ class Users_Controller extends Controller
 		$this->view->assign('keywords','')
 				   ->assign('description','')
 				   ->assign('other_title','');
-		if($this->isLogin)
-		{
-			$users = $this->model->getUsuarios();//page 1
 
-			if($users){
-				$this->view->assign('results', $users);
-			}
+		$users = $this->model->getUsuarios();//page 1
 
+		if($users){
+			$this->view->assign('results', $users);
 		}
 		$this->loadAdminView('usersAdmin');  
 	}

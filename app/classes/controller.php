@@ -12,7 +12,7 @@ defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Controller
 {
-	protected $isLogin = false; //check if user login
+
 	//If your controller dont have database operation, override in the child with false value
 	public $havemodel = true;
 	public $secciones = null;
@@ -29,10 +29,7 @@ class Controller
 	{
 		$this->view = new View();
 		$this->session = new Session;
-		//If only wants show admin view i need to check session
-		if($admin){
-		  $this->isLogin = Session::checkIfLogin();
-		}
+
 	}
 	
 	public function loadModel($name) 
