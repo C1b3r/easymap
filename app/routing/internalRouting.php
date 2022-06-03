@@ -35,7 +35,7 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
 
     //Users
     $router->name('list_users')->get('/users',[Users_Controller::class, 'index']);
-    $router->name('edit_user')->get('/users/edit/{id}',[Users_Controller::class, 'index']);
+    $router->name('edit_user')->get('/users/edit/{id}',[Users_Controller::class, 'edit']);
 
     //Maps
     $router->name('list_maps')->get('/mapas',[Mapas_Controller::class, 'index']);
