@@ -18,7 +18,7 @@ class Users_Model extends Model
        if(!is_numeric($page)){
            $page = 0;
        }
-        $result = $this->paginate($this->limit,['email','name','date_add'],'page',$page); 
+        $result = $this->paginate($this->limit,['id_user','email','name','date_add'],'page',$page); 
         return $result;
 
     }
