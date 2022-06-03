@@ -96,24 +96,24 @@ class Controller
 		// print_r($result);
 	}
 
-	public function edit($request = '')
-	{
-		//To get the form dynamically,get the parent controller
-		$realClassName = get_class($this);
-		//Separate in array
-		$className = explode("_",$realClassName);
-		$nameForm = "edit".$className[0];
-		$this->view->assign('nameForm', $nameForm);
-		//For breadcrum  in header
-		$this->view->assign('precedent_page',"Editar ".$className[0]);
-		$this->view->assign('previous_page_link',$className[0]);
-		/* Declaro la vista, esto irá a editAdmin y como lo otro va a una clase hija que es un formulario, si necesito pasarle contenido al formulario tengo que declararselo en el form */
-		$this->form()->assign('secciones',$this->secciones);
-		// print_r(strtolower($className[0]));
-		$this->createForm($nameForm);
-		return $this->loadAdminView("editAdmin");
+	// public function edit($request = '')
+	// {
+	// 	//To get the form dynamically,get the parent controller
+	// 	$realClassName = get_class($this);
+	// 	//Separate in array
+	// 	$className = explode("_",$realClassName);
+	// 	$nameForm = "edit".$className[0];
+	// 	$this->view->assign('nameForm', $nameForm);
+	// 	//For breadcrum  in header
+	// 	$this->view->assign('precedent_page',"Editar ".$className[0]);
+	// 	$this->view->assign('previous_page_link',$className[0]);
+	// 	/* Declaro la vista, esto irá a editAdmin y como lo otro va a una clase hija que es un formulario, si necesito pasarle contenido al formulario tengo que declararselo en el form */
+	// 	$this->form()->assign('secciones',$this->secciones);
+	// 	// print_r(strtolower($className[0]));
+	// 	$this->createForm($nameForm);
+	// 	return $this->loadAdminView("editAdmin");
 
-	}
+	// }
 
 	public function redirect($url ,$bckslash = true) 
 	{

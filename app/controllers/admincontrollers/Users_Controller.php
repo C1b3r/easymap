@@ -55,7 +55,11 @@ class Users_Controller extends Controller
 	// 	$this->loadAdminView('usersAdmin'); 
 
 	// }
+	
+	public function edit($id)
+	{
 
+	}
 
 	public function crearmapa()
 	{
