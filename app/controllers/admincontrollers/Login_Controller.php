@@ -3,6 +3,7 @@ namespace app\controllers\admincontrollers;
 
 use app\classes\Boot;
 use app\classes\Controller;
+use app\classes\Session;
 use app\model\adminmodels\Admin_Model;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -21,12 +22,12 @@ class Login_Controller extends Controller
 
 	public function index()
 	{   
-		if(!$this->isLogin){
+		if(!Session::checkIfLogin()){
 			$this->createForm("formLogin");
 			$this->loadAdminView('login');
 		}else{
 			// $this->redirect('admin');
-			\Helper::$redirect->route('Adminhome');
+		return \Helper::$redirect->route('Adminhome');
 		}
 	}
 

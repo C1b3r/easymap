@@ -22,7 +22,6 @@ class Mapas_Controller extends Controller
 		$this->view->assign('robots','noindex, nofollow')
 					->assign('title', $this->currentTitle)
 					->assign('current_page',$this->currentPage);
-		$this->isLogin = Session::checkIfLogin();
 		$this->model = new Mapas_Model();
 		
 	}
@@ -33,15 +32,13 @@ class Mapas_Controller extends Controller
 		$this->view->assign('keywords','')
 				   ->assign('description','')
 				   ->assign('other_title','');
-		if($this->isLogin)
-		{
-			$maps = $this->model->getMap(); //page 1
+	
+		$maps = $this->model->getMap(); //page 1
 
-			if($maps){
-				$this->view->assign('results', $maps);
-			}
-
+		if($maps){
+			$this->view->assign('results', $maps);
 		}
+
 		$this->view->assign('current_page',$this->currentPage);
 		$this->loadAdminView('mapsAdmin');  
 	}
