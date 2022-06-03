@@ -62,7 +62,7 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                          <a class="nav-link active text__link" aria-current="page" href="#">
+                          <a class="nav-link active text__link" aria-current="page" href="<?php echo Helper::$urlGeneration->route('Adminhome');  ?>">
                             <i class="bi bi-house-door"></i>
                             <span class="ms-2">Inicio</span>
                           </a>

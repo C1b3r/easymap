@@ -10,7 +10,7 @@ class Model extends Eloquent
 	public $form = [];
 	public $result,
 			$count,
-			$limit = 1 ,
+			$limit = 25 ,
 			$totalrow,
 			$total_pages,
 			$conectar,
