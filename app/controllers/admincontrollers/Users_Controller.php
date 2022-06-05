@@ -54,7 +54,34 @@ class Users_Controller extends Controller
 	
 	public function edit($id)
 	{
-
+		$this->view->assign('keywords','')
+		->assign('description','')
+		->assign('other_title','');
+		$dataUser = $this->model->getDataUsuario($id);//page 1
+		if($dataUser){
+			$this->createCSRF();
+			$this->view->assign('results', $dataUser);
+			$this->loadAdminView('editAdmin'); 
+		}else{
+			return \Helper::$redirect->route('list_users');
+		}	
+	}
+	public function editSubmit($id)
+	{
+		$token = $_POST['token'];
+		if($this->checkCSRF($token)){
+			//success
+			if($dataUser = $this->model->changeDataUser($id,$_POST)){
+				unset($_SESSION['tokencsrf']);
+				$this->createCSRF();
+				$this->view->assign('results', $dataUser);
+				$this->loadAdminView('editAdmin'); 
+			}else{
+				$this->error('login',self::FLASH_ERROR,'message','Hubo un error al procesar los datos');
+				return \Helper::$redirect->route('edit_user_post',['id' =>$id]);
+			}
+			//error
+		}
 	}
 
 	public function crearmapa()

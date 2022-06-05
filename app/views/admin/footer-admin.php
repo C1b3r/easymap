@@ -1,16 +1,18 @@
 <?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <?php if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])):?>
-    <?php if(isset($this->pagination,$this->results) && $this->results->isNotEmpty() || $this->pagination):?>
+    <?php if(isset($this->pagination) && $this->pagination):?>
+     <?php if($this->results->isNotEmpty()): //por si acaso un resultado no es una colección y es solo un array,solo compruebo primero que realmente haya paginacion activa?>
         <div class="mt-3 d-flex justify-content-center">
-      <?php //echo $this->createPaginationLink($this->results,$this->current_page); 
-      echo $this->createPaginationLinkORM([
-                   'limit' => $this->results->perPage(),
-                  'total' => $this->results->total(),
-                  'page' => $this->results->currentPage()
-                  ],$this->current_page); 
-      ?>      
+        <?php //echo $this->createPaginationLink($this->results,$this->current_page); 
+         echo $this->createPaginationLinkORM([
+                    'limit' => $this->results->perPage(),
+                    'total' => $this->results->total(),
+                    'page' => $this->results->currentPage()
+                    ],$this->current_page); 
+        ?>      
         </div>
     
+     <?php endif;?>
     <?php endif;?>
 
             <footer class="pt-5 d-flex justify-content-between">

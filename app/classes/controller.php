@@ -93,6 +93,23 @@ class Controller
 		// print_r($result);
 	}
 
+	public function createCSRF()
+	{
+		if(!isset($_SESSION['tokencsrf'] ) || empty($_SESSION['tokencsrf'] )){
+			$_SESSION['tokencsrf'] = md5(uniqid(mt_rand(), true));
+		}
+	}
+	public function checkCSRF($token)
+	{
+		if (!$token || $token !== $_SESSION['tokencsrf']) {
+			// return 405 http status code
+			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+			exit;
+		}else{
+			return true;
+		}
+	}
+
 	// public function edit($request = '')
 	// {
 	// 	//To get the form dynamically,get the parent controller
