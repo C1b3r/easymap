@@ -72,7 +72,7 @@ class Controller
 			$this->view->assign('message',array('type'=> $format, 'mensaje'=>$mensaje));
 		}
 		
-		return $this->loadAdminView($view);
+		// return $this->loadAdminView($view);
 	}
 
 	public function page($page = 1)

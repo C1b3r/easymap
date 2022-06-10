@@ -7,18 +7,27 @@ class Mail
 
 	private $headers,$message,$subject,$address;
 	
-	public function __construct()
+	public function __construct($email)
 	{
-		$this->address = 'mail admin';
+		$this->address = $email;
+		$this->setHeaders();
 	}
-	public function setHeaders($from = 'mapfletadmin@'.WEB_PATH)
+	public function setHeaders()
 	{
 		$email_headers  = 'MIME-Version: 1.0' . "\r\n";
 		$email_headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-		$email_headers .= 'From: '. $from . "\r\n";
-		$email_headers .= 'Reply-To:'. $from ." \r\n";
 		// $email_headers .= 'X-Mailer: PHP/'.phpversion();	
 		$this->headers = $email_headers;
+		// return $this;
+	}
+	public function setFrom($from = 'easymapadmin@'.CURRENT_DOMAIN)
+	{
+		$this->headers .='From: '. $from . "\r\n";
+		return $this;
+	}
+	public function setReply($from = 'easymapadmin@'.CURRENT_DOMAIN)
+	{
+		$this->headers .= 'Reply-To:'. $from ." \r\n";
 		return $this;
 	}
 	public function setMessage($message)

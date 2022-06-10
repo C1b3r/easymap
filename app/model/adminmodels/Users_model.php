@@ -41,9 +41,9 @@ class Users_Model extends Model
         $user = $this::find($id);
         //Si no existe
         if(!isset($user)){
-           
             return false;
         }
+        $shouldSendMail = false;
         //Check if password is not empty
         if(!empty($data['old_pass']) && !empty($data['new_pass']) && !empty($data['confirm_pass'])){
             if($data['new_pass'] !== $data['confirm_pass']){
@@ -53,23 +53,31 @@ class Users_Model extends Model
             //     ->where('id_user','=',$id)
             //     ->where('pass','=',md5($data['old_pass']))
             //     ->first();
-
-           if($data['old_pass'] !== $user->pass){
+            $data['new_pass'] = md5($data['new_pass']);
+           if(md5($data['old_pass']) === $user->pass){
             $user->pass = $data['new_pass'];
+            $shouldSendMail = true;
            }else{
                return false;
            }
         }
+        //Validation require name, email, del email si cambia, verificar que es unique, puede darse el caso creo que actualices
+        //y si le metes el unique no te permita, tienes que comprobar que es distinto al email de base de datos y solo ahí comprobar que verdaderamente es único
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->active = isset($data['active'])? 1: 0 ;
         //https://stackoverflow.com/questions/42623841/laravel-password-password-confirmation-validation
         //6512bd43d9caa6e02c990b0a82652dca
+        //https://stackoverflow.com/questions/17799148/how-to-check-if-a-user-email-already-exist https://stackoverflow.com/questions/28198897/laravel-check-for-unique-rule-without-itself-in-update
         $saved = $user->save();
 
         if(!$saved){
             return false;
         }else{
+            if($shouldSendMail){
+                $mail = new \Mail($user->email);
+                $mail->setFrom()->setSubject("Cambio de contraseña")->setMessage("Su contraseña ha sido cambiada")->send();
+            }
              return array('id_user'=>$id ,'name' =>  $user->name, 'email' => $user->email, 'active'=> $user->active);
         }
 
