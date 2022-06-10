@@ -77,8 +77,8 @@ class Users_Controller extends Controller
 				$this->view->assign('results', $dataUser);
 				$this->loadAdminView('editAdmin'); 
 			}else{
-				$this->error('login',self::FLASH_ERROR,'message','Hubo un error al procesar los datos');
-				return \Helper::$redirect->route('edit_user_post',['id' =>$id]);
+				$this->error('Cambio contraseña','Mensaje','message','Hubo un error al procesar los datos');
+				return \Helper::$redirect->route('edit_user',['id' =>$id]);
 			}
 			//error
 		}
