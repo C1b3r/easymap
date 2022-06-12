@@ -3,7 +3,7 @@ namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 use app\classes\Session;
 use app\model\adminmodels\Users_Model;
-
+use Illuminate\Support\Facades\Request;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Users_Controller extends Controller 
