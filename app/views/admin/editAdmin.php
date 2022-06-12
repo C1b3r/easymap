@@ -7,6 +7,7 @@
       </div>
       <form name="usersform" method="POST" action="<?php echo Helper::$urlGeneration->route('edit_user_post', ['id' =>$this->results['id_user']]); ?>" enctype="application/x-www-form-urlencoded">  
        <input type="hidden" name="token" value="<?php echo $_SESSION['tokencsrf'] ?? '' ?>">
+       <input type="hidden" name="id" value="<?php echo $this->results['id_user'] ?>">
 
         <div class="row mt-2">
             <div class="col-md-6"><label class="labels body__text">Nombre</label><input type="text" name="name" class="form-control" required placeholder="Name" value="<?php echo $this->results['name']; ?>"></div>
