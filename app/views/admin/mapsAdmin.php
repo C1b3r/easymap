@@ -1,5 +1,5 @@
 <?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
-<h1 class="h2 body__text">Todos los mapas</h1>
+<h1 class="h2 mb-4">Todos los mapas</h1>
 
 <div class="row">
     <div class="col-12 col-xl-12 mb-4 mb-lg-0">
