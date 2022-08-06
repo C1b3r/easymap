@@ -42,6 +42,21 @@ class Mapas_Controller extends Controller
 		$this->view->assign('current_page',$this->currentPage);
 		$this->loadAdminView('mapsAdmin');  
 	}
+
+	public function edit($id)
+	{
+		$this->view->assign('keywords','')
+		->assign('description','')
+		->assign('other_title','');
+		$dataUser = $this->model->getDataMap($id);//page 1
+		if($dataUser){
+			$this->createCSRF();
+			$this->view->assign('results', $dataUser);
+			$this->loadAdminView('editMapas'); 
+		}else{
+			return \Helper::$redirect->route('list_maps');
+		}	
+	}
 	// public function page($page = 0)
 	// {
 	// 	if(!is_numeric($page)){

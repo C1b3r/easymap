@@ -24,4 +24,16 @@ class Mapas_Model extends model
         return $result;
 
     }
+    public function getDataMap($id)
+    {
+        $results = $this->select('title','configuration','description')
+                        ->where('id_map','=',$id)
+                        ->first();
+        if(!empty($results)){
+            return array('id_user'=>$results->id_user ,'name' => $results->name, 'email' => $results->email, 'active'=> $results->active);
+        }else{
+            return false;
+        }
+    }
+
  }
