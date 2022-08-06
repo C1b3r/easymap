@@ -72,6 +72,11 @@ class Boot
             throw new MyException('Not routes files found',__FUNCTION__,0);
         }
         require_once ROOT_PATH.'/app/routing/internalRouting.php';
+        
+        $router->any('{path?}', function() {
+            throw new MyException(); //404
+            } )->where('path', '(.*)');
+
     }
     //Function loader Deprecated 
     public static function loader($className)

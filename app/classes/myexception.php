@@ -10,7 +10,7 @@ class MyException extends \Exception
 	const THROW_MEDIUM = 1;
 	const THROW_HARD = 2;
 	
-    public function __construct($msg = '',$namefile = '', $code = 0)
+    public function __construct($msg = '',$namefile = '', $code = 0, $included = 0)
     {
 		parent::__construct($msg, (int) $code);
 		$controller = new Error_Controller();
@@ -18,7 +18,7 @@ class MyException extends \Exception
 		switch($code)
 		{
 			case self::THROW_SIMPLE:
-				$controller->index($msg); //como es simple, solamente tomo nota
+				$controller->index($msg,'404', $included); //como es simple, solamente tomo nota
 				return false;
 
 			break;
