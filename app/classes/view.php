@@ -14,7 +14,7 @@ class View {
 		{
 			require_once(VIEW_PATH . $name . '.php');
 		}
-		else throw new MyException('View file not found: '.$name,1);
+		else throw new MyException('View file not found: '.$name,0,0,1);
 		return $this;
 	}
 	private function clean($text)

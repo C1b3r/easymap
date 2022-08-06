@@ -133,7 +133,7 @@ class Form extends View
 		{
 			include_once(VIEW_FORM_PATH . $name . '.php');
 		}
-		else{ throw new MyException('View file not found: '.$name,1); }
+		else{ throw new MyException('View file not found: '.$name,0,0,1); }
 
 		$form = ob_get_contents();
 		ob_end_clean();

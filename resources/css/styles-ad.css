@@ -40,7 +40,7 @@ body {
     display: var(--btn__light);
 }
 
-.body__text {
+.body__text,.error-details {
     color: var(--color-text-body);
 }
 

@@ -12,7 +12,7 @@ class Error_Controller extends Controller
 	{
 		parent::__construct();
 	}
-	function index($message = '' ,$code = '404') 
+	function index($message = '' ,$code = '404', $includeStyles = 0) 
 	{
 		if (!DEBUG_ENVIRONMENT)
 		{
@@ -37,7 +37,7 @@ class Error_Controller extends Controller
 		$this->view->assign('robots','noindex, nofollow')
 				   ->assign('keywords','error page, page, error, '.$code)
 				   ->assign('description','This is error page, not need description')
-				   ->display('error');
+				   ->display('error',$includeStyles);
 				   die();
 	}
 }
