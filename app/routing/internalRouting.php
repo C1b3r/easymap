@@ -41,5 +41,5 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     //Maps
     $router->name('list_maps')->get('/mapas',[Mapas_Controller::class, 'index']);
     $router->name('list_maps_page')->get('/mapas/page/{page}',[Mapas_Controller::class, 'index']);
-    $router->name('edit_map')->get('/mapas/edit/{id}',[Mapas_Controller::class, 'index']);
+    $router->name('edit_map')->get('/mapas/edit/{id}',[Mapas_Controller::class, 'edit']);
 });
