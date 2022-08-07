@@ -1,3 +1,3 @@
-import('../bootstrap/popper.min.js');
-import('../../vendor/twbs/bootstrap/dist/js/bootstrap.min.js');
+import ('./popper.min.js');
+import ('../bootstrap/bootstrap.min.js');
 //require no funciona
