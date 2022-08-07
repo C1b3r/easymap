@@ -3,3 +3,4 @@ config/conf.php
 .htaccess
 /logs
 /vendor
+/resources/bootstrap

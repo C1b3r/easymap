@@ -16,7 +16,7 @@ RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
 #if subfolder, ^/subfolderdomain/subfolder/logs localhost/map/easymap/logs/
 RedirectMatch 403 ^/logs/.*$
-RedirectMatch 403 ^/vendor/?$
+RedirectMatch 403 ^/vendor/.*$
 <FilesMatch  "(composer.json)|(composer.lock)">
     Order Allow,Deny
     Deny from all
