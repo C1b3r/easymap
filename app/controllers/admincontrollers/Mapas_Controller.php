@@ -52,7 +52,7 @@ class Mapas_Controller extends Controller
 		if($dataUser){
 			$this->createCSRF();
 			$this->view->assign('results', $dataUser);
-			$this->loadAdminView('editMapas'); 
+			$this->loadAdminForm('editMapas'); 
 		}else{
 			return \Helper::$redirect->route('list_maps');
 		}	

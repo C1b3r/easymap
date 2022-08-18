@@ -60,6 +60,10 @@ class Controller
 	{
 		return $this->view->display($currentView,null,true);
 	}
+	protected function loadAdminForm($currentView = 'error')
+	{
+		return $this->view->display("forms/".$currentView,null,true);
+	}
 
 	
 	/* Format is for div message class
