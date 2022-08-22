@@ -26,21 +26,24 @@ class Admin_Model extends Model
             return false;
         }
   
-        $usuario = $this->select('name','email','id_user')->where('email', '=', trim($data['email']))
-                        ->where('pass','=',md5($data['pass']))
+        $usuario = $this->select('name','email','id_user','pass')->where('email', '=', trim($data['email']))
                         ->where('active','=','1')
                         ->first();
         //Compruebo si recibo un resultado
         if(!empty($usuario)){
+            if (password_verify($data['pass'],$usuario->pass ))
+            {
                 $this->username = $usuario->email;
                 $session->addSession('username',$this->username);
                 $session->addSession('id_user',$usuario->id_user);// Storing user session value
                 return true;
-            }
-            else
-            {
+            } else{
                 return false;
             }
+        }else
+        {
+            return false;
+        }
     }
 
 

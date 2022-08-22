@@ -77,7 +77,7 @@ class Users_Controller extends Controller
 				$this->view->assign('results', $dataUser);
 				$this->loadAdminForm('editAdmin'); 
 			}else{
-				$this->error('Cambio contraseña','Mensaje','message','Hubo un error al procesar los datos');
+				$this->error('Cambio contraseña','flash','message','Hubo un error al procesar los datos'); //tengo que hacer que perdure
 				return \Helper::$redirect->route('edit_user',['id' =>$id]);
 			}
 			//error
