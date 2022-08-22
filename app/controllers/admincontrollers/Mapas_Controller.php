@@ -1,4 +1,9 @@
 <?php
+namespace app\controllers\admincontrollers;
+use app\classes\Controller;
+use app\classes\Session;
+use app\model\adminmodels\Mapas_Model;
+
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Mapas_Controller extends Controller 
@@ -17,7 +22,7 @@ class Mapas_Controller extends Controller
 		$this->view->assign('robots','noindex, nofollow')
 					->assign('title', $this->currentTitle)
 					->assign('current_page',$this->currentPage);
-		$this->isLogin = Session::checkIfLogin();
+		$this->model = new Mapas_Model();
 		
 	}
 
@@ -27,17 +32,28 @@ class Mapas_Controller extends Controller
 		$this->view->assign('keywords','')
 				   ->assign('description','')
 				   ->assign('other_title','');
-		if($this->isLogin)
-		{
-			$maps = $this->model->getMap(); //page 1
+	
+		$maps = $this->model->getMap(); //page 1
 
-			if($maps){
-				$this->view->assign('results', $maps);
-			}
-
+		if($maps){
+			$this->view->assign('results', $maps);
 		}
+
 		$this->view->assign('current_page',$this->currentPage);
 		$this->loadAdminView('mapsAdmin');  
+	}
+
+	public function edit($id)
+	{
+		$this->view->assign('secciones',$this->secciones);
+		$dataUser = $this->model->getDataMap($id);//page 1
+		if($dataUser){
+			$this->createCSRF();
+			$this->view->assign('results', $dataUser);
+			$this->loadAdminForm('editMapas'); 
+		}else{
+			return \Helper::$redirect->route('list_maps');
+		}	
 	}
 	// public function page($page = 0)
 	// {

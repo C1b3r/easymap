@@ -1,4 +1,9 @@
 <?php
+namespace app\controllers\admincontrollers;
+use app\classes\Controller;
+use app\classes\Session;
+use app\model\adminmodels\Users_Model;
+use Illuminate\Support\Facades\Request;
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Users_Controller extends Controller 
@@ -14,7 +19,7 @@ class Users_Controller extends Controller
 		$this->view->assign('robots','noindex, nofollow')
 					->assign('title', $this->currentTitle)
 					->assign('current_page',$this->currentPage);
-		$this->isLogin = Session::checkIfLogin();
+		$this->model = new Users_Model();
 		
 	}
 
@@ -24,14 +29,11 @@ class Users_Controller extends Controller
 		$this->view->assign('keywords','')
 				   ->assign('description','')
 				   ->assign('other_title','');
-		if($this->isLogin)
-		{
-			$users = $this->model->getUsuarios();//page 1
 
-			if($users){
-				$this->view->assign('results', $users);
-			}
+		$users = $this->model->getUsuarios();//page 1
 
+		if($users){
+			$this->view->assign('results', $users);
 		}
 		$this->loadAdminView('usersAdmin');  
 	}
@@ -49,7 +51,38 @@ class Users_Controller extends Controller
 	// 	$this->loadAdminView('usersAdmin'); 
 
 	// }
-
+	
+	public function edit($id)
+	{
+		$this->view->assign('keywords','')
+		->assign('description','')
+		->assign('other_title','');
+		$dataUser = $this->model->getDataUsuario($id);//page 1
+		if($dataUser){
+			$this->createCSRF();
+			$this->view->assign('results', $dataUser);
+			$this->loadAdminForm('editAdmin'); 
+		}else{
+			return \Helper::$redirect->route('list_users');
+		}	
+	}
+	public function editSubmit($id)
+	{
+		$token = $_POST['token'];
+		if($this->checkCSRF($token)){
+			//success
+			if($dataUser = $this->model->changeDataUser($id,$_POST)){
+				unset($_SESSION['tokencsrf']);
+				$this->createCSRF();
+				$this->view->assign('results', $dataUser);
+				$this->loadAdminForm('editAdmin'); 
+			}else{
+				$this->error('Cambio contraseña','Mensaje','message','Hubo un error al procesar los datos');
+				return \Helper::$redirect->route('edit_user',['id' =>$id]);
+			}
+			//error
+		}
+	}
 
 	public function crearmapa()
 	{

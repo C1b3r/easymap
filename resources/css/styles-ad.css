@@ -40,14 +40,25 @@ body {
     display: var(--btn__light);
 }
 
-.body__text {
+.body__text,.error-details {
     color: var(--color-text-body);
 }
 
 .text__link {
     color: var(--color-text-link);
 }
-
+.card{
+    background-color: var(--container-div);
+}
+.card-header,.table,.h2,h1,label{
+    color: var(--color-text-body);
+}
+.text-success{
+    color: var(--color-bg-success)!important;
+}
+a{
+    color: var(--color-enlace);
+}
 
 /*Login form*/
 

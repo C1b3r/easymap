@@ -13,5 +13,5 @@
 
 <p class="small mb-5 pb-lg-2"><a class="text-white" href="#!">He olvidado mi contraseña</a></p>
 
-<button class="btn btn-outline-light btn-lg px-5" name="submit" type="submit" value="submit">Login</button>
+<button class="btn btn-outline-light btn-lg px-5" noprefetch name="submit" type="submit" value="submit">Login</button>
 </form>
