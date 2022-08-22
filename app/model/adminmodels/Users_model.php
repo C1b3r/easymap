@@ -53,8 +53,8 @@ class Users_Model extends Model
             //     ->where('id_user','=',$id)
             //     ->where('pass','=',md5($data['old_pass']))
             //     ->first();
-            $data['new_pass'] = md5($data['new_pass']);
-           if(md5($data['old_pass']) === $user->pass){
+            $data['new_pass'] = password_hash($data['new_pass'], PASSWORD_BCRYPT);
+           if(password_verify($data['old_pass'],$user->pass)){
             $user->pass = $data['new_pass'];
             $shouldSendMail = true;
            }else{
