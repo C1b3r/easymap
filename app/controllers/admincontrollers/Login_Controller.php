@@ -45,7 +45,7 @@ class Login_Controller extends Controller
 			}
 			return \Helper::$redirect->route('Adminhome');
 		}else{
-			$this->error('login',self::FLASH_ERROR,'message','Usuario o contraseña incorrectos');
+			$this->error('login',self::FLASH_ERROR,'flash','Usuario o contraseña incorrectos');
 			$this->createForm("formLogin");
 			return \Helper::$redirect->route('login');
 		}
