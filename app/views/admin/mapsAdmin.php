@@ -26,7 +26,7 @@
                               <th scope="row"><?php echo $value->title;?></th>
                               <th scope="row"><?php echo $value->description;?></th>
                               <td><p class="card-text text-success"><?php echo $value->date_add;?></p></td>
-                              <td><a class="btn btn-secondary" href="<?php  echo Helper::$urlGeneration->route('edit_map', ['id' => $value->id_map]) ;?>">Editar</a></td>
+                              <td><a class="btn btn-secondary" noprefetch href="<?php  echo Helper::$urlGeneration->route('edit_map', ['id' => $value->id_map]) ;?>">Editar</a></td>
                              </tr>
                               
                         <?php endforeach; ?>

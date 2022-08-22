@@ -45,9 +45,7 @@ class Mapas_Controller extends Controller
 
 	public function edit($id)
 	{
-		$this->view->assign('keywords','')
-		->assign('description','')
-		->assign('other_title','');
+		$this->view->assign('secciones',$this->secciones);
 		$dataUser = $this->model->getDataMap($id);//page 1
 		if($dataUser){
 			$this->createCSRF();
