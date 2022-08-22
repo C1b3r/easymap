@@ -1,5 +1,6 @@
 <?php 
 defined('ROOT_PATH') or exit('Direct access forbidden');
+//I recommend moving the conf.php file out of the domain accessible folder for security reasons
 //database
 define("DB_HOST", "");
 define("DB_USER", "");
