@@ -3,6 +3,7 @@ namespace app\classes;
 class View {
 	public $data = array();
 	public $pagination = false;
+	protected $property = [];
 
 	public function __construct() 
 	{
@@ -21,6 +22,18 @@ class View {
 	{
 		return trim(strtolower(str_replace(' ' ,'-',$text)));
 	}
+
+	
+	public function __set($name,$value)
+	{
+		$this->property[$name] = $value;
+	}
+	
+	public function __get($name)
+	{
+		return $this->property[$name];
+	}
+	
 	public function assign($field,$value)
 	{
 		//Creating property object dinamically
