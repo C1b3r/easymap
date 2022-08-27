@@ -66,7 +66,7 @@
                         </thead>
                         <tbody>
                         <?php  
-                          if(!empty($this->maps)){
+                          if(!$this->maps->isEmpty()){
                             foreach ($this->maps as $value) {
                               echo '<tr>
                               <th scope="row">'.$value->title.'</th>

@@ -28,7 +28,7 @@ class Controller
     public function __construct($admin = false) 
 	{
 		$this->view = new View();
-		$this->session = new Session;
+		$this->session = Boot::$app->session;
 
 	}
 	
