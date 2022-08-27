@@ -49,7 +49,7 @@ class Boot
     }
     public function init()
     { 
-        new Session();
+        $this->session = new Session();
         $this->loader = new FileLoader(new Filesystem, '/lang');
 		$this->translator = new Translator($this->loader, 'es');
         $this->validation = new Validation();

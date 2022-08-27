@@ -14,7 +14,7 @@
     <div class="col-md-6 d-flex justify-content-center">
         <!-- Checkbox -->
         <div class="form-check mb-3 mb-md-0">
-        <input class="form-check-input" name="loginCheck" type="checkbox" value="" id="loginCheck">
+        <input class="form-check-input" name="loginCheck" type="checkbox" value="checked" id="loginCheck">
         <label class="form-check-label" for="loginCheck"> Recordar contraseña </label>
         </div>
     </div>

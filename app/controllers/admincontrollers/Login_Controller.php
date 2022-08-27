@@ -22,7 +22,7 @@ class Login_Controller extends Controller
 
 	public function index()
 	{   
-		if(!Session::checkIfLogin()){
+		if(!Boot::$app->session->checkIfLogin()){
 			$this->createForm("formLogin");
 			$this->loadAdminView('login');
 		}else{
@@ -33,11 +33,14 @@ class Login_Controller extends Controller
 
 	public function login()
 	{
+		$remember = isset($_POST['loginCheck']) ? true : false;
+
 		$data = ['email' => $_POST['email'],
 				'pass' => $_POST['pass'],
 				'submit' => $_POST['submit'],
 				];
-		if($this->model->logUser($data,$this->session)){
+		
+		if($this->model->logUser($data,$this->session,$remember)){
 			if(isset( $_SESSION['desireURI'])){
 				$desireUrl = $_SESSION['desireURI'];
 				unset($_SESSION['desireURI']);

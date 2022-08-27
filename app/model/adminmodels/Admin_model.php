@@ -16,7 +16,7 @@ class Admin_Model extends Model
 		'submit' => 'required'
 	];
 
-    public function logUser($data,$session)
+    public function logUser($data,$session,$remember = false)
     {
 
         $validator = Boot::$app->validator->make($data, $this->rules);
@@ -36,6 +36,10 @@ class Admin_Model extends Model
                 $this->username = $usuario->email;
                 $session->addSession('username',$this->username);
                 $session->addSession('id_user',$usuario->id_user);// Storing user session value
+                if($remember){
+                    $session->remember_me($usuario->id_user,365);
+                }
+
                 return true;
             } else{
                 return false;
