@@ -3,6 +3,7 @@ namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 use app\classes\Session;
 use app\model\adminmodels\Mapas_Model;
+use Illuminate\Http\Request;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -45,11 +46,13 @@ class Mapas_Controller extends Controller
 
 	public function edit($id)
 	{
-		$this->view->assign('secciones',$this->secciones);
-		$dataUser = $this->model->getDataMap($id);//page 1
+		$this->view->assign('secciones',['informacionMapa' => 'Informacion',
+						 'puntosMapa' => 'Puntos del mapa',
+						]);
+		$dataUser = true; // $this->model->getDataMap($id);//page 1
 		if($dataUser){
 			$this->createCSRF();
-			$this->view->assign('results', $dataUser);
+			// $this->view->assign('results', $dataUser);
 			$this->loadAdminForm('editMapas'); 
 		}else{
 			return \Helper::$redirect->route('list_maps');
@@ -63,6 +66,10 @@ class Mapas_Controller extends Controller
 	// 	$this->index();
 	// }
 
+	public function informacionMapa(Request $request)
+	{
+echo "hola";
+	}
 	public function crearmapa()
 	{
 		$this->view->assign('current_page',$this->currentPage)

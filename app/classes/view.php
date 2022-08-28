@@ -26,12 +26,14 @@ class View {
 	
 	public function __set($name,$value)
 	{
-		$this->property[$name] = $value;
+		// $this->property[$name] = $value;
+		$this->$name = $value;
 	}
 	
-	public function __get($name)
+	public function &__get($name)
 	{
-		return $this->property[$name];
+		return $this->$name;
+		// return $this->property[$name];
 	}
 	
 	public function assign($field,$value)

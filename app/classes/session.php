@@ -13,7 +13,7 @@ class Session
     }
 
     public function checkIfLogin()
-    {//test cookie in future
+    {
         if(isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])){
 			return true;
 		}
