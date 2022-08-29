@@ -26,14 +26,20 @@ class View {
 	
 	public function __set($name,$value)
 	{
-		// $this->property[$name] = $value;
-		$this->$name = $value;
+		$this->property[$name] = $value;
+		// $this->$name = $value;
 	}
 	
 	public function &__get($name)
 	{
-		return $this->$name;
-		// return $this->property[$name];
+		// return $this->$name;
+		return $this->property[$name];
+	}
+
+	//Necesario si se va a checkear si una propiedad existe o no
+	public function __isset($name)
+	{
+		return isset($this->property[$name]);
 	}
 	
 	public function assign($field,$value)
