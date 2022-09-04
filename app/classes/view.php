@@ -207,4 +207,13 @@ class View {
 		
 	}
 
+	public function renderSections($sections)
+	{
+		if(!isset($sections) && count($sections) < 1){
+			return false;
+		}
+		$vistaSecciones = $this->render('admin/secciones/mainSections',true);
+		return $vistaSecciones;
+	}
+
 }

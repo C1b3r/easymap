@@ -106,6 +106,12 @@ a{
     height: 30px!important;
 }
 
+/* Tabs */
+
+.nav-link{
+   color: var(--color-enlace);
+}
+
 
 /*Medias*/
 
