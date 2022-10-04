@@ -23,7 +23,6 @@ class Login_Controller extends Controller
 	public function index()
 	{   
 		if(!Boot::$app->session->checkIfLogin()){
-			$this->createForm("formLogin");
 			$this->loadAdminView('login');
 		}else{
 			// $this->redirect('admin');
@@ -49,7 +48,6 @@ class Login_Controller extends Controller
 			return \Helper::$redirect->route('Adminhome');
 		}else{
 			$this->error('login',self::FLASH_ERROR,'flash','Usuario o contraseña incorrectos');
-			$this->createForm("formLogin");
 			return \Helper::$redirect->route('login');
 		}
 		// $validador = new Validation('users');
