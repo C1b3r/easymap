@@ -61,6 +61,7 @@ class Users_Controller extends Controller
 		if($dataUser){
 			$this->createCSRF();
 			$this->view->assign('results', $dataUser);
+			$this->loadAdminForm('editAdmin');
 		}else{
 			return \Helper::$redirect->route('list_users');
 		}	
@@ -74,6 +75,7 @@ class Users_Controller extends Controller
 				unset($_SESSION['tokencsrf']);
 				$this->createCSRF();
 				$this->view->assign('results', $dataUser);
+				$this->loadAdminForm('editAdmin');
 			}else{
 				$this->error('Cambio contraseña','flash','flash','Hubo un error al procesar los datos'); //tengo que hacer que perdure
 				return \Helper::$redirect->route('edit_user',['id' =>$id]);

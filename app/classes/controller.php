@@ -60,7 +60,7 @@ class Controller
 	{
 		return $this->view->display($currentView,null,true);
 	}
-	//Deprecated
+
 	protected function loadAdminForm($currentView = 'error')
 	{
 		return $this->view->display("forms/".$currentView,null,true);
