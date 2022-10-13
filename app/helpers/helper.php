@@ -82,4 +82,52 @@ class Helper
 		self::$redirect = new Redirector(self::$urlGeneration);
 	  }
 
+	  public static function breadcrumb($separator = ' &raquo; ', $home = 'Home')
+	  {
+		$subfolders = explode('/',CURRENT_DIRECTORY);
+		// This gets the REQUEST_URI (/path/to/file.php), splits the string (using '/') into an array, and then filters out any empty values
+		$path = array_filter(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)), function($var) use($subfolders){
+			if(!in_array($var, $subfolders)){
+				return $var;
+			}
+		});
+
+		// This will build our "base URL"
+		$base = (in_array(ADMIN_FOLDER,$path)) ? COMPLETE_WEB_PATH_ADMIN :COMPLETE_WEB_PATH;
+
+		// Initialize a temporary array with our breadcrumbs.
+		$breadcrumbs = Array('<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+		<li class="breadcrumb-item "><a class="text__link" href="'.$base.'">'.$home.'</a></li>');
+
+		// Find out the index for the last value in our path array
+		$keys = array_keys($path);
+		$last = end($keys);
+		// Build the rest of the breadcrumbs
+		foreach ($path as $current => $crumb) {
+			// Our "title" is the text that will be displayed (strip out .php and turn '_' into a space)
+			$title = ucwords(str_replace(Array('.php', '_','-'), Array('', ' ',' '), $crumb));
+			//Quit admin string from url and edit and next number id page
+			if($crumb === ADMIN_FOLDER || strtolower($crumb) === 'edit' || is_numeric($crumb)){
+				continue;
+			}
+			// If we are not on the last index, then display an <a> tag
+			if ($current != $last){
+
+				$breadcrumbs[] = '<li class="breadcrumb-item ">
+				<a class="text__link" href="'.$base.$crumb.'">'.$title.'</a>
+				</li>'; 
+			} 
+			// Just display the current page
+			else{
+				$breadcrumbs[] =  '<li class="breadcrumb-item active body__text" aria-current="page">'.$title.'</li>';
+			}
+ 		}		
+		$breadcrumbs[] = '</ol>
+		</nav>';
+
+		// Build our temporary array (pieces of bread) into one big string :)
+		return implode($separator, $breadcrumbs);
+	  }
+
 }
