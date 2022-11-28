@@ -29,7 +29,7 @@ class Controller
 	{
 		$this->view = new View();
 		$this->session = Boot::$app->session;
-
+		$this->createCSRF();
 	}
 	
 	public function loadModel($name) 
@@ -98,7 +98,7 @@ class Controller
 		// print_r($result);
 	}
 
-	public function createCSRF()
+	public function createCSRF() : void
 	{
 		if(!isset($_SESSION['tokencsrf'] ) || empty($_SESSION['tokencsrf'] )){
 			$_SESSION['tokencsrf'] = bin2hex(random_bytes(32));
