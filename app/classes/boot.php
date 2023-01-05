@@ -217,9 +217,13 @@ class Boot
 
     public function loadHelpers()
     {
-        foreach (glob(ROOT_PATH.'app/helpers/*.php') as $filename) {
-            require_once($filename);
-        }
+        // foreach (glob(ROOT_PATH.'app/helpers/*.php') as $filename) {
+        //     require_once($filename);
+        // }
+   
+        require_once(ROOT_PATH.'app/helpers/helper.php');
+        require_once(ROOT_PATH.'app/helpers/mail.php');
+
 
     }
 

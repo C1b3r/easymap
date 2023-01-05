@@ -23,7 +23,9 @@ class Controller
 	const FLASH_WARNING = 'warning';
 	const FLASH_INFO = 'info';
 	const FLASH_SUCCESS = 'success';
-	public $pagination = 1;
+	public int $pagination = 1;
+	public View $view;
+	public $model,$form;
 
     public function __construct($admin = false) 
 	{
