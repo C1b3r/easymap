@@ -216,4 +216,10 @@ class View {
 		return $vistaSecciones;
 	}
 
+	//echoAndSanitize
+	function eas($string) 
+	{
+		echo htmlspecialchars($string);
+	}
+
 }
