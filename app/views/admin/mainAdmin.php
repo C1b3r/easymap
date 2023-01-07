@@ -69,8 +69,8 @@
                           if(!$this->maps->isEmpty()){
                             foreach ($this->maps as $value) {
                               echo '<tr>
-                              <th scope="row">'.$value->title.'</th>
-                              <th scope="row">'.$value->description.'</th>
+                              <th scope="row">'.htmlspecialchars($value->title).'</th>
+                              <th scope="row">'.htmlspecialchars($value->description).'</th>
                               <td><p class="card-text text-success">'.$value->date_add.'</p></td>
                               </tr>
                               ';
