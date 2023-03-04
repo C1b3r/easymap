@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="<?php echo $this->robots; ?>">
+    <meta name="url" content="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">
     <title><?php echo $this->title; ?></title>
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-ref.css';?>" rel="stylesheet">
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-root.css';?>" rel="stylesheet">

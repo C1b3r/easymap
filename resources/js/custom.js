@@ -23,3 +23,4 @@ if (document.getElementsByClassName('flash-message-container').length > 0) {
 function countChildElement(nameElement) {
     return document.querySelector(nameElement).childElementCount
 }
+//document.querySelector('meta[name="csrf-token"]').content;
