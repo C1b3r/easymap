@@ -10,6 +10,7 @@ define("DB_CHARSET", "utf8mb4");
 define("DB_COLLATION", "utf8mb4_unicode_ci");
 define("DB_PREFIX", "mymap_");
 define("ADMIN_FOLDER", "admin"); //For security reasons, it stronglly recomended change admin folder and the value of this variable
+define("APP_ENV", "develop");
 
 //path's
 define('WEB_PROTOCOL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ?  'https' : 'http');
