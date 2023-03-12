@@ -37,17 +37,20 @@
 <script src="<?php echo PUBLIC_WEB_PATH.'js/nightmode.js';?>"></script>
 <script defer src="<?php echo PUBLIC_WEB_PATH.'js/custom.js';?>"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.2.0/quicklink.umd.js"></script> -->
-<script src="<?php echo PUBLIC_WEB_PATH.'js/quicklink.umd.js?v=2.2.0';?>"></script>
 <script src="<?php echo PUBLIC_WEB_PATH.'js/jquery.min.js?v=3.6.0';?>"></script>
-<script>
-window.addEventListener('load', () => {
-  quicklink.listen(
-    {
-      origins:false,
-      ignores:[(uri, elem) => elem.hasAttribute('noprefetch')] 
-    }
-  );
-});
-</script>
+<?php 
+if(APP_ENV === 'production'):?>
+<script src="<?php echo PUBLIC_WEB_PATH.'js/quicklink.umd.js?v=2.2.0';?>"></script>
+  <script>
+  window.addEventListener('load', () => {
+    quicklink.listen(
+      {
+        origins:false,
+        ignores:[(uri, elem) => elem.hasAttribute('noprefetch')] 
+      }
+    );
+  });
+  </script>
+<?php endif;?>
 </body>
 </html>
