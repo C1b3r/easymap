@@ -4,3 +4,4 @@ config/conf.php
 /logs
 /vendor
 /resources/bootstrap
+/node_modules
