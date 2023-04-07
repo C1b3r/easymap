@@ -1,0 +1,22 @@
+{
+  "name": "mapflet",
+  "version": "1.0.0",
+  "description": "Crea tu mapa con ayuda de la libería leafletjs.\r Con un panel de administración personalizable.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C1b3r/easymap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/C1b3r/easymap/issues"
+  },
+  "homepage": "https://github.com/C1b3r/easymap#readme",
+  "devDependencies": {
+    "purify-css": "^1.2.5"
+  }
+}
