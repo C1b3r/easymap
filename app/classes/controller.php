@@ -7,6 +7,7 @@ use app\classes\MyException;
 use app\classes\Session;
 use app\classes\View;
 use app\model\adminmodels\Admin_Model;
+use Illuminate\Http\Response;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -142,5 +143,11 @@ class Controller
 
 		header("Location: ".COMPLETE_WEB_PATH.$url);
 		die();
+	}
+
+	public function responseJson($mensaje,$status_code = 200)
+	{
+		$response = new Response($mensaje, $status_code); //->header('Content-Type', 'text/plain');
+		return $response;
 	}
 }

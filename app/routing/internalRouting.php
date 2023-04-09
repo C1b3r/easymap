@@ -6,6 +6,22 @@ use app\controllers\admincontrollers\Logout_Controller;
 use app\controllers\admincontrollers\Mapas_Controller;
 use app\controllers\admincontrollers\Users_Controller;
 
+/*use Illuminate\Http\Response;
+$router->get('/home', function () use($router){
+  // return (new Response('Hello World', 200))
+  //               ->header('Content-Type', 'text/plain'); 
+
+  // return $router->response("hola")->header('Content-Type', 'text/plain'); //esto no funciona porque no viene del router, viene del response
+  // return "hola";
+});
+*/
+//esto es un ejemplo, se usa el response para generar una nueva respuesta y puedes agregarle el tipo https://laravel.com/docs/5.1/responses#json-response
+/*$router->get('/home', function (){
+  // return ['name' => 'Abigail', 'state' => 'CA']; //esto devuelve un json directamente https://stackoverflow.com/questions/34178670/call-to-undefined-method-illuminate-http-responsejson-in-laravel5 https://stackoverflow.com/questions/40537415/how-to-return-json-response-in-laravel
+  //no puedo usar el helper response() porque solo esta para laravel, tengo que importar el response y retornar ese new response
+ 
+});
+*/
 // $router->name('home2')->get('/', function () {
 //     return 'hello world!';
 // });

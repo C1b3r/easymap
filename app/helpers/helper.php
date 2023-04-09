@@ -21,8 +21,8 @@ class Helper
 	  
 	  public static function getMail()
 	  {
-		  $mail = new Mail();
-		  return $mail; 
+		//   $mail = new Mail();
+		//   return $mail; 
 	  }
 
 	  public static function setFlash($type,$name,$flash_message)

@@ -24,7 +24,6 @@ class Boot
     //https://www.php.net/manual/es/language.oop5.properties.php no compatible con 7.3
     // public static Boot $app;
     public static $app;
-    public $perro;
     public $validation, //my class validation
            $validator, //validator laravel
            $router,
