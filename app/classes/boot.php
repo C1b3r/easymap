@@ -14,8 +14,10 @@ use Illuminate\Translation\Translator;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
-require_once ROOT_PATH.'/config/conf.php';
-//require_once ROOT_PATH.'../conf.php';
+// require_once ROOT_PATH.'/config/conf.php';
+require_once ROOT_PATH.'../conf.php'; //recommended path
+require_once ROOT_PATH.'/config/path-conf.php';
+
 require_once ROOT_PATH.'/config/database.php';
 // require_once ROOT_PATH.'/app/routes/web.php';
 
