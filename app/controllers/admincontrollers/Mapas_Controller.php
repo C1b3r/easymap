@@ -68,12 +68,25 @@ class Mapas_Controller extends Controller
 
 	public function informacionMapa(Request $request)
 	{
-echo "hola";
+		header('Content-Type: application/json');
+		if($request->ajax()){
+			echo json_encode("AJAX");
+		  }else{
+			echo json_encode("HTTP");
+		  }
+		 
+
 	}
 	public function crearmapa()
 	{
 		$this->view->assign('current_page',$this->currentPage)
 					->assign('antecesor_page',array('mapas'=>'mapas')); //para el breadcrum, declaramos un array de url=>nombre
 		$this->loadAdminView('mapsAdmin');
+	}
+
+	public function tab(){
+		$data = array();
+		header('Content-Type: application/json');
+		echo json_encode($data);
 	}
 }
