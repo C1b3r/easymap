@@ -16,34 +16,44 @@ function cargarTab(tab = '') {
 }
 
 function cargarContenido(urltab) {
-    // Seleccionar la etiqueta meta por su nombre
-    const metaUrl = document.querySelector('meta[name="url"]');
 
-    // Obtener el valor de la meta etiqueta
-    const url = metaUrl.getAttribute('content');
     // Realizamos la llamada a la API utilizando la función fetch
-    fetch(url + urltab)
-    .then(response => response.json()) // Convertimos la respuesta a JSON
+    fetchData(urltab)
     .then(data => {
-    // Obtenemos los datos del JSON
-    const titulo = data.titulo;
-    const descripcion = data.descripcion;
 
-    // Creamos un nuevo elemento de título
-    const tituloElemento = document.createElement('h2');
-    tituloElemento.textContent = titulo;
+        const titulo = data.titulo;
+        const descripcion = data.descripcion;
+    
+        // Crear los elementos y añadirlos al contenedor
+        const tituloElemento = document.createElement('h2');
+        tituloElemento.textContent = titulo;
+        const descripcionElemento = document.createElement('p');
+        descripcionElemento.textContent = descripcion;
+    
+        const contenedor = document.querySelector('.seccion');
+        contenedor.appendChild(tituloElemento);
+        contenedor.appendChild(descripcionElemento);
+    });
 
-    // Creamos un nuevo elemento de descripción
-    const descripcionElemento = document.createElement('p');
-    descripcionElemento.textContent = descripcion;
-
-    // Añadimos los elementos al contenedor de la sección
-    const contenedor = document.querySelector('.seccion');
-    contenedor.appendChild(tituloElemento);
-    contenedor.appendChild(descripcionElemento);
-    })
-    .catch(error => console.error(error));
 }
+/*
+Custom url si es true entonces coge la url tal cual
+*/
+function fetchData(url,customurl = false, options = { headers: {'X-Requested-With': 'XMLHttpRequest'} }) {
+
+    if(!customurl){
+         // Seleccionar la etiqueta meta por su nombre
+         const metaUrl = document.querySelector('meta[name="url"]');
+
+         // Obtener el valor de la meta etiqueta
+         const uri = metaUrl.getAttribute('content');
+         url = uri + url;
+    }
+    return fetch(url, options)
+      .then(response => response.json())
+      .catch(error => console.error(error));
+  }
+  
 
 function enviarContenido(urltab){
     const metaUrl = document.querySelector('meta[name="url"]').getAttribute('content');
