@@ -8,12 +8,11 @@ if (parametroUrl == '') {
 function cargarTab(tab = '') { 
     //Si esta vacio, que cargue el primero obligatoriamente
     if (tab === '') {
-        let tab = document.querySelector('a[primerTab]');
-        cargarContenido(tab.hash.substring(1))
+        let tab = document.querySelector('ul#myTab > li > a');
+        cargarContenido(tab.getAttribute("href").substring(1))
     } else {
         cargarContenido(tab)
     }
-
 }
 
 function cargarContenido(urltab) {

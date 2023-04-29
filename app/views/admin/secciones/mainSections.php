@@ -1,10 +1,10 @@
 <?php defined('ROOT_PATH') or exit('Direct access forbidden'); ?>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
    <!-- active  -->
-  <?php $first = reset($this->secciones);
+  <?php
   foreach($this->secciones as $section => $nombreSeccion):?>
     <li class="nav-item" role="presentation">
-      <a class="nav-link" onclick="cargarContenido('<?php echo $section; ?>')" <?php echo ($nombreSeccion == $first)? "primerTab ": '' ;?>id="<?php echo $section; ?>-tab" href="#<?php echo $section; ?>" type="button" role="tab" aria-controls="<?php echo $section; ?>" aria-selected="true"><?php echo $nombreSeccion; ?></a>
+      <a class="nav-link" onclick="cargarContenido('<?php echo $section; ?>')" id="<?php echo $section; ?>-tab" href="#<?php echo $section; ?>" type="button" role="tab" aria-controls="<?php echo $section; ?>" aria-selected="true"><?php echo $nombreSeccion; ?></a>
     </li>
    
   <?php endforeach;?>
