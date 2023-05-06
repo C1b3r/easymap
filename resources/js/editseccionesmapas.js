@@ -31,8 +31,11 @@ function cargarTab(tab = '') {
         cargarContenido(tab.getAttribute("href").substring(1));
         activateTab(tab);
     } else {
-        cargarContenido(tab);
-        activateTab(document.querySelector('#'+tab+'-tab'));
+        if(elemento = document.getElementById(tab+'-tab')){
+            cargarContenido(tab);
+            activateTab(elemento);
+        }
+       
     }
 }
 
@@ -107,12 +110,17 @@ function enviarContenido(urltab){
 }
 
 function activateTab(tab) {
-    const tabs = document.querySelectorAll('.nav-tabs .nav-link');
+    try {
+        const tabs = document.querySelectorAll('.nav-tabs .nav-link');
   
-    tabs.forEach(tab => {
-      tab.classList.remove('active');
-    });
-  
-    tab.classList.add('active');
+        tabs.forEach(tab => {
+          tab.classList.remove('active');
+        });
+      
+        tab.classList.add('active');
+    } catch (error) {
+        
+    }
+
 }
   
