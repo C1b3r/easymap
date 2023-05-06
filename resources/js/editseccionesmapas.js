@@ -32,6 +32,7 @@ function cargarTab(tab = '') {
         activateTab(tab);
     } else {
         cargarContenido(tab);
+        activateTab(document.querySelector('#'+tab+'-tab'));
     }
 }
 
