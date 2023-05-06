@@ -1,4 +1,23 @@
 var parametroUrl = window.location.hash.substring(1);
+// Seleccionar todos los elementos con la clase "nav-link-tab"
+const tabs = document.querySelectorAll('.nav-link-tab');
+
+// Agregar un controlador de eventos "click" a cada elemento
+tabs.forEach(tab => {
+  tab.addEventListener('click', event => {
+    // Obtener el elemento de pestaña correspondiente
+    const tabElement = tab.getAttribute("href").substring(1);
+
+    // Activar la pestaña correspondiente
+    activateTab(tab);
+
+    // Cargar el contenido correspondiente en cada clic
+    cargarContenido(tabElement);
+  });
+});
+
+
+
 if (parametroUrl == '') {
     cargarTab();
 } else {
@@ -9,18 +28,26 @@ function cargarTab(tab = '') {
     //Si esta vacio, que cargue el primero obligatoriamente
     if (tab === '') {
         let tab = document.querySelector('ul#myTab > li > a');
-        cargarContenido(tab.getAttribute("href").substring(1))
+        cargarContenido(tab.getAttribute("href").substring(1));
+        activateTab(tab);
     } else {
-        cargarContenido(tab)
+        cargarContenido(tab);
     }
 }
 
 function cargarContenido(urltab) {
-
+    const divTarget = document.getElementById('resultTab');
     // Realizamos la llamada a la API utilizando la función fetch
     fetchData(urltab)
     .then(data => {
-
+        
+        if(data.Message === MESSAGE_TYPES.ERROR){
+            divTarget.innerHTML = '<p class="text-center mt-3">'+MESSAGE_TYPES.MESSAGE_ERROR+'</p>';
+            divTarget.classList.add('show', 'active');
+            return;
+        }
+        // console.log(data);
+        // return
         const titulo = data.titulo;
         const descripcion = data.descripcion;
     
@@ -30,7 +57,7 @@ function cargarContenido(urltab) {
         const descripcionElemento = document.createElement('p');
         descripcionElemento.textContent = descripcion;
     
-        const contenedor = document.querySelector('.seccion');
+        const contenedor = document.querySelector('#resultTab');
         contenedor.appendChild(tituloElemento);
         contenedor.appendChild(descripcionElemento);
     });
@@ -77,3 +104,14 @@ function enviarContenido(urltab){
         console.error('Ha ocurrido un error:', error);
     });
 }
+
+function activateTab(tab) {
+    const tabs = document.querySelectorAll('.nav-tabs .nav-link');
+  
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+    });
+  
+    tab.classList.add('active');
+}
+  

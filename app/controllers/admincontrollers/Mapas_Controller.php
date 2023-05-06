@@ -69,12 +69,17 @@ class Mapas_Controller extends Controller
 	public function informacionMapa(Request $request)
 	{
 		header('Content-Type: application/json');
-		if($request->ajax()){
-			echo json_encode("AJAX");
-		  }else{
-			echo json_encode("HTTP");
-		  }
-		 
+		if(!$request->ajax()){
+			return json_encode(array('Message' => "error"));
+		}
+		$info = array(
+			'Message' => "correcto",
+			"titulo" => "<input type='text' name='titulo' value='Título de la información'>",
+			"descripcion" => "<p>Descripción de la información</p>",
+			"enlace" => "<iframe src='https://www.ejemplo.com'></iframe>"
+		);
+		return json_encode($info);
+
 
 	}
 	public function crearmapa()
