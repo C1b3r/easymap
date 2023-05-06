@@ -34,6 +34,7 @@
 </div>
 <?php endif;?>
 <script defer src="<?php echo PUBLIC_WEB_PATH.'js/scripts-ref.js';?>"></script>
+<script defer src="<?php echo PUBLIC_WEB_PATH.'js/diccionario.js';?>"></script>
 <script src="<?php echo PUBLIC_WEB_PATH.'js/nightmode.js';?>"></script>
 <script defer src="<?php echo PUBLIC_WEB_PATH.'js/custom.js';?>"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.2.0/quicklink.umd.js"></script> -->
