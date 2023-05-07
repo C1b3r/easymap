@@ -41,29 +41,20 @@ function cargarTab(tab = '') {
 
 function cargarContenido(urltab) {
     const divTarget = document.getElementById('resultTab');
+    divTarget.classList.add('show', 'active'); //activamos la sección de resultados si esta no existe
+    addSpinner(divTarget);
     // Realizamos la llamada a la API utilizando la función fetch
     fetchData(urltab)
     .then(data => {
         
         if(data.Message === MESSAGE_TYPES.ERROR){
             divTarget.innerHTML = '<p class="text-center mt-3">'+MESSAGE_TYPES.MESSAGE_ERROR+'</p>';
-            divTarget.classList.add('show', 'active');
             return;
         }
         // console.log(data);
         // return
-        const titulo = data.titulo;
-        const descripcion = data.descripcion;
-    
-        // Crear los elementos y añadirlos al contenedor
-        const tituloElemento = document.createElement('h2');
-        tituloElemento.textContent = titulo;
-        const descripcionElemento = document.createElement('p');
-        descripcionElemento.textContent = descripcion;
-    
-        const contenedor = document.querySelector('#resultTab');
-        contenedor.appendChild(tituloElemento);
-        contenedor.appendChild(descripcionElemento);
+        renderFetch(divTarget,data);
+
     });
 
 }
@@ -121,6 +112,53 @@ function activateTab(tab) {
     } catch (error) {
         
     }
+}
 
+function renderFetch(target,data){
+    const firstContainer = document.createElement(data.type);
+
+    //Comprobamos que efectivamente es un array    
+    if (data.childValues && Array.isArray(data.childValues)) {
+        data.childValues.forEach(function(child) {
+            const childElement = document.createElement(child.type);
+          
+            // Recorrer los atributos del hijo
+            Object.entries(child.attributes).forEach(([attribute, value]) => {
+              childElement.setAttribute(attribute, value);
+            });
+          
+            // Asignar el valor del hijo
+            childElement.innerHTML = child.value;
+          
+            // Agregar el hijo al contenedor padre
+            firstContainer.appendChild(childElement);
+          });
+    }
+    target.innerHTML = ''; //limpiamos antes de pintar
+    target.appendChild(firstContainer);
 }
   
+
+function addSpinner(element){
+
+    const divContainer = document.createElement('div');
+    divContainer.classList.add('d-flex');
+    divContainer.classList.add('justify-content-center');
+    divContainer.classList.add('mt-4');
+
+    const spinnerDiv = document.createElement('div');
+    spinnerDiv.classList.add('spinner-border');
+    spinnerDiv.setAttribute('role', 'status');
+
+    const spinnerText = document.createElement('span');
+    spinnerText.classList.add('visually-hidden');
+    spinnerText.textContent = 'Loading...';
+
+    // Agregar el elemento span al elemento div
+    spinnerDiv.appendChild(spinnerText);
+    divContainer.appendChild(spinnerDiv);
+
+    // Agregar el elemento div al contenedor
+    element.appendChild(divContainer);
+
+}
