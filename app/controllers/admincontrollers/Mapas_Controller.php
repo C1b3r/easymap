@@ -71,10 +71,15 @@ class Mapas_Controller extends Controller
 		header('Content-Type: application/json');
 		if(!$request->ajax()){
 			return json_encode(array('Message' => "error"));
-		}
-		
+		} 
 		$info = array(
 			"type" => "form",
+			"attributes" => array(
+				"name" => "mapasform",
+				"method" => "POST",
+				"action" => COMPLETE_WEB_PATH_ADMIN."login",
+				"enctype" => "application/x-www-form-urlencoded",
+			),
 			"childValues" => array(
 			  array(
 				"type" => "input",
@@ -93,7 +98,7 @@ class Mapas_Controller extends Controller
 			  )
 			)
 		  );
-		  
+
 		return json_encode($info);
 	}
 	public function crearmapa()

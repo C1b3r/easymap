@@ -41,6 +41,7 @@ function cargarTab(tab = '') {
 
 function cargarContenido(urltab) {
     const divTarget = document.getElementById('resultTab');
+    divTarget.innerHTML = ''; //limpiamos antes de pintar
     divTarget.classList.add('show', 'active'); //activamos la sección de resultados si esta no existe
     addSpinner(divTarget);
     // Realizamos la llamada a la API utilizando la función fetch
@@ -116,8 +117,19 @@ function activateTab(tab) {
 
 function renderFetch(target,data){
     const firstContainer = document.createElement(data.type);
+    //Comprobamos si hay más información que poner al contenedor padre
+    if (data.attributes && typeof data.attributes === 'object') {
+        
+        for (const attribute in data.attributes) {
+            if (data.attributes.hasOwnProperty(attribute)) {
+              const value = data.attributes[attribute];
+              firstContainer.setAttribute(attribute, value);
+            }
+          }
+    }
+    
 
-    //Comprobamos que efectivamente es un array    
+    //Comprobamos que hay información de los nodos hijo y es un array   
     if (data.childValues && Array.isArray(data.childValues)) {
         data.childValues.forEach(function(child) {
             const childElement = document.createElement(child.type);
