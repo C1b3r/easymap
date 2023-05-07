@@ -72,15 +72,29 @@ class Mapas_Controller extends Controller
 		if(!$request->ajax()){
 			return json_encode(array('Message' => "error"));
 		}
+		
 		$info = array(
-			'Message' => "correcto",
-			"titulo" => "<input type='text' name='titulo' value='Título de la información'>",
-			"descripcion" => "<p>Descripción de la información</p>",
-			"enlace" => "<iframe src='https://www.ejemplo.com'></iframe>"
-		);
+			"type" => "form",
+			"childValues" => array(
+			  array(
+				"type" => "input",
+				"attributes" => array(
+				  "name" => "username",
+				  "placeholder" => "Enter username"
+				)
+			  ),
+			  array(
+				"type" => "input",
+				"attributes" => array(
+				  "name" => "password",
+				  "type" => "password",
+				  "placeholder" => "Enter password"
+				)
+			  )
+			)
+		  );
+		  
 		return json_encode($info);
-
-
 	}
 	public function crearmapa()
 	{

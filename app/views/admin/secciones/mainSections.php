@@ -11,7 +11,7 @@
 </ul>
 <section class="col-md-12">
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade" id="resultTab" role="tabpanel" aria-labelledby="b">..90090909.</div>
+      <div class="tab-pane fade p-3" id="resultTab" role="tabpanel" aria-labelledby="b"></div>
     </div>
 </section>
 <script>//alert(window.location.hash.substring(1)); //substring para quitar el #</script>
