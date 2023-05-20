@@ -130,4 +130,14 @@ class Helper
 		return implode($separator, $breadcrumbs);
 	  }
 
+	  public static function loadJSONView(string $path,string $name)
+	  {
+		if (file_exists(VIEW_PATH.$path.$name.'.php'))
+        {
+            return require_once VIEW_PATH.$path.$name.'.php';
+        }else{
+           return null;
+        }
+	  }
+
 }
