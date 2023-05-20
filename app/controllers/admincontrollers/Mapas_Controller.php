@@ -3,6 +3,7 @@ namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 use app\classes\Session;
 use app\model\adminmodels\Mapas_Model;
+use Helper;
 use Illuminate\Http\Request;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
@@ -72,34 +73,10 @@ class Mapas_Controller extends Controller
 		if(!$request->ajax()){
 			return json_encode(array('Message' => "error"));
 		} 
-		$info = array(
-			"type" => "form",
-			"attributes" => array(
-				"name" => "mapasform",
-				"method" => "POST",
-				"action" => COMPLETE_WEB_PATH_ADMIN."login",
-				"enctype" => "application/x-www-form-urlencoded",
-			),
-			"childValues" => array(
-			  array(
-				"type" => "input",
-				"attributes" => array(
-				  "name" => "username",
-				  "placeholder" => "Enter username"
-				)
-			  ),
-			  array(
-				"type" => "input",
-				"attributes" => array(
-				  "name" => "password",
-				  "type" => "password",
-				  "placeholder" => "Enter password"
-				)
-			  )
-			)
-		  );
-
+	
+		$info = Helper::loadJSONView('/admin/secciones/','informacionMapaa') ?? array('Message' => "error");
 		return json_encode($info);
+		
 	}
 	public function crearmapa()
 	{

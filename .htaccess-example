@@ -26,5 +26,8 @@ RedirectMatch 403 ^/vendor/.*$
 #https
 #RewriteCond %{HTTPS} off
 #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#quitar el acceso al .git
+RewriteRule \.(git|svn)(/.*)?$ - [F,NC] 
+
 </IfModule>
 
