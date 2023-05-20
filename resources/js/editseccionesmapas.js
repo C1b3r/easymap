@@ -115,40 +115,54 @@ function activateTab(tab) {
     }
 }
 
-function renderFetch(target,data){
-    const firstContainer = document.createElement(data.type);
-    //Comprobamos si hay más información que poner al contenedor padre
-    if (data.attributes && typeof data.attributes === 'object') {
-        
-        for (const attribute in data.attributes) {
-            if (data.attributes.hasOwnProperty(attribute)) {
-              const value = data.attributes[attribute];
-              firstContainer.setAttribute(attribute, value);
-            }
-          }
-    }
-    
-
-    //Comprobamos que hay información de los nodos hijo y es un array   
-    if (data.childValues && Array.isArray(data.childValues)) {
-        data.childValues.forEach(function(child) {
-            const childElement = document.createElement(child.type);
-          
-            // Recorrer los atributos del hijo
-            Object.entries(child.attributes).forEach(([attribute, value]) => {
-              childElement.setAttribute(attribute, value);
-            });
-          
-            // Asignar el valor del hijo
-            childElement.innerHTML = child.value;
-          
-            // Agregar el hijo al contenedor padre
-            firstContainer.appendChild(childElement);
-          });
-    }
-    target.innerHTML = ''; //limpiamos antes de pintar
+function renderFetch(target, data) {
+    const firstContainer = createContainer(data.type);
+    addAttributes(firstContainer, data.attributes);
+    createChildElements(firstContainer, data.childValues);
+  
+    target.innerHTML = ''; // Limpiamos antes de pintar
     target.appendChild(firstContainer);
-}
+  }
+  
+  function createContainer(type) {
+    return document.createElement(type);
+  }
+  
+  function addAttributes(element, attributes) {
+    if (attributes && typeof attributes === 'object') {
+      for (const attribute in attributes) {
+        if (attributes.hasOwnProperty(attribute)) {
+          const value = attributes[attribute];
+          element.setAttribute(attribute, value);
+        }
+      }
+    }
+  }
+  
+  function createChildElements(parent, childValues) {
+    if (childValues && Array.isArray(childValues)) {
+      childValues.forEach(function (child) {
+        const childElement = createChildElement(child.type);
+        addAttributes(childElement, child.attributes);
+  
+        if (child.childValues && Array.isArray(child.childValues)) {
+          createChildElements(childElement, child.childValues);
+        }
+  
+        if (child.value) {
+          childElement.innerHTML = child.value;
+        }
+  
+        parent.appendChild(childElement);
+      });
+    }
+  }
+  
+  
+  function createChildElement(type) {
+    return document.createElement(type);
+  }
+  
   
 
 function addSpinner(element){
