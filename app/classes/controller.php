@@ -150,4 +150,13 @@ class Controller
 		$response = new Response($mensaje, $status_code); //->header('Content-Type', 'text/plain');
 		return $response;
 	}
+
+	/**  Función para realizar el reemplazo en el JSON
+	 */
+	public function reemplazarMarcadores(array $json, array $data) {
+		foreach ($data as $key => $value) {
+		$json = str_replace("{{$key}}", $value, $json);
+		}
+		return $json;
+ 	 }
 }
