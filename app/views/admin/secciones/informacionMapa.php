@@ -19,7 +19,7 @@ return array(
 							"attributes" => array(
 								"type" => "hidden",
 								"name" => "temp_random",
-								"value" => "{{random}}"
+								"value" => $_SESSION['tokencsrf']
 							)
 						),
 						array(
@@ -93,7 +93,7 @@ return array(
 										array(
 											"type" => "label",
 											"attributes" => array(
-												"class" => "labels"
+												"class" => "labels col-sm-1 col-form-label",
 											),
 											"value" => "Latitud"
 										),
@@ -116,7 +116,7 @@ return array(
 										array(
 											"type" => "label",
 											"attributes" => array(
-												"class" => "labels"
+												"class" => "labels col-sm-1 col-form-label"
 											),
 											"value" => "Longitud"
 										),
@@ -133,21 +133,46 @@ return array(
 							)
 						),
 						array(
-							"type" => "iframe",
+							"type" => "div",
 							"attributes" => array(
-								"style" => "width:100%; height:300px;",
-								"src" => "https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/utils/geocoder/embed"
+								"class" => "text-center mt-4",
+								"id" => "iframe-container"
+							),
+							"childValues" => array(
+								array(
+									"type" => "p",
+									"attributes" => array(
+										"class" => "iframe-content",
+										"data-src" => "https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/utils/geocoder/embed",
+										"innerText" => "Haz click aquí para desplegar mapa para escoger unas coordenadas"
+									)
+								)
+								/*array(
+									"type" => "iframe",
+									"attributes" => array(
+										"style" => "width:100%; height:300px;",
+										"src" => "https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/utils/geocoder/embed"
+									)
+								)*/
 							)
 						),
 						array(
-							"type" => "button",
+							"type" => "div",
 							"attributes" => array(
-								"class" => "btn btn-outline-primary btn-lg px-5",
-								"name" => "submit",
-								"type" => "submit",
-								"value" => "submit"
+								"class" => "text-center mt-4"
 							),
-							"value" => "Editar"
+							"childValues" => array(
+								array(
+									"type" => "button",
+									"attributes" => array(
+										"class" => "btn btn-outline-primary btn-lg px-5",
+										"name" => "submit",
+										"type" => "submit",
+										"value" => "submit"
+									),
+									"value" => "Editar"
+								)
+							)
 						)
 					)
 				)

@@ -55,7 +55,7 @@ function cargarContenido(urltab) {
         // console.log(data);
         // return
         renderFetch(divTarget,data);
-
+        cargarListener();
     });
 
 }
@@ -131,6 +131,10 @@ function renderFetch(target, data) {
   function addAttributes(element, attributes) {
     if (attributes && typeof attributes === 'object') {
       for (const attribute in attributes) {
+        if(attribute ==='innerText'){
+          element.innerHTML = attributes.innerText;
+          continue;
+        }
         if (attributes.hasOwnProperty(attribute)) {
           const value = attributes[attribute];
           element.setAttribute(attribute, value);
@@ -187,4 +191,27 @@ function addSpinner(element){
     // Agregar el elemento div al contenedor
     element.appendChild(divContainer);
 
+}
+
+//Lo meto aquí ya que al cargarlo por fetch, no existen y va a fallar
+function cargarListener (){
+  var iframecontents = document.getElementsByClassName('iframe-content');
+  iframecontents[0].addEventListener('click', function(event) {
+    let iframeContainer = document.getElementById("iframe-container");
+    // Obtener el atributo "data-src" del elemento actual (this)
+    let element = event.target
+    let iframeSrc = element.getAttribute("data-src");
+
+    // Crear el iframe y establecer el src
+    var iframe = document.createElement('iframe');
+    iframe.src = iframeSrc;
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allowfullscreen', 'true');
+    iframe.style.width = '100%';
+    iframe.style.height = '300px';
+
+    // Reemplazar el div por el iframe
+    iframeContainer.innerHTML = '';
+    iframeContainer.appendChild(iframe);
+  });
 }
