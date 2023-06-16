@@ -197,6 +197,15 @@ function addSpinner(element){
 function cargarListener (){
   var iframecontents = document.getElementsByClassName('iframe-content');
   iframecontents[0].addEventListener('click', function(event) {
+    //Lo cargo mejor en una ventana emergente que en un iframe para poder tener la info de coordenadas en cada pestaña
+    let element = event.target
+    const windowFeatures = "left=100,top=100,width=1109.520,height=316.190";
+    const handle = window.open(
+      element.getAttribute("data-src"),
+      "_blank",
+      windowFeatures
+    );
+    /*
     let iframeContainer = document.getElementById("iframe-container");
     // Obtener el atributo "data-src" del elemento actual (this)
     let element = event.target
@@ -212,6 +221,6 @@ function cargarListener (){
 
     // Reemplazar el div por el iframe
     iframeContainer.innerHTML = '';
-    iframeContainer.appendChild(iframe);
+    iframeContainer.appendChild(iframe);*/
   });
 }

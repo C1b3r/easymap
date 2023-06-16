@@ -140,10 +140,10 @@ return array(
 							),
 							"childValues" => array(
 								array(
-									"type" => "p",
+									"type" => "button",
 									"attributes" => array(
-										"class" => "iframe-content",
-										"data-src" => "https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/utils/geocoder/embed",
+										"class" => "iframe-content btn btn-secondary",
+										"data-src" => "https://developers.google.com/maps/documentation/utils/geocoder?hl=es-419",
 										"innerText" => "Haz click aquí para desplegar mapa para escoger unas coordenadas"
 									)
 								)
@@ -159,7 +159,7 @@ return array(
 						array(
 							"type" => "div",
 							"attributes" => array(
-								"class" => "text-center mt-4"
+								"class" => "text-end mt-4"
 							),
 							"childValues" => array(
 								array(
