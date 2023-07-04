@@ -50,17 +50,17 @@ class Mapas_Controller extends Controller
 
 	public function edit($id)
 	{
+		if(!is_numeric($id)){
+			return \Helper::$redirect->route('list_maps');
+		}
 		$this->view->assign('secciones',["informacionMapa/{$id}" => 'Informacion',
 						 "puntosMapa/{$id}" => 'Puntos del mapa',
 						]);
-		$dataUser = true; // $this->model->getDataMap($id);//page 1
-		if($dataUser){
-			$this->createCSRF();
-			// $this->view->assign('results', $dataUser);
-			$this->loadAdminForm('editMapas'); 
-		}else{
-			return \Helper::$redirect->route('list_maps');
-		}	
+	
+		$this->createCSRF();
+		// $this->view->assign('results', $dataUser);
+		$this->loadAdminForm('editMapas'); 
+		
 	}
 	// public function page($page = 0)
 	// {

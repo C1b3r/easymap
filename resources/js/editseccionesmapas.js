@@ -40,9 +40,13 @@ function cargarTab(tab = '') {
 }
 
 function cargarContenido(urltab) {
-    const divTarget = document.getElementById('resultTab');
-    divTarget.innerHTML = ''; //limpiamos antes de pintar
-    divTarget.classList.add('show', 'active'); //activamos la sección de resultados si esta no existe
+    const divTarget = document.getElementById(urltab);
+    if(checkIfLoaded(divTarget)){
+      return;
+    }
+    // divTarget.innerHTML = ''; //limpiamos antes de pintar
+    limpiaShowActivos(); //limpiamos los div que ya tengan los elementos de clase
+    divTarget.classList.add('show', 'active','loaded'); //activamos la sección de resultados si esta no existe
     addSpinner(divTarget);
     // Realizamos la llamada a la API utilizando la función fetch
     fetchData(urltab)
@@ -58,6 +62,32 @@ function cargarContenido(urltab) {
         cargarListener();
     });
 
+}
+
+function checkIfLoaded(element)
+{
+  return element.classList.contains('loaded');
+}
+
+function limpiaShowActivos()
+{
+  const elements = document.getElementsByClassName('show active'); // Reemplaza 'tu-selector-de-elementos' con el selector adecuado para tus elementos
+  
+ // Convierte la lista de elementos en un array para poder usar forEach
+ const elementsArray = Array.from(elements);
+  
+ elementsArray.forEach(function(element) {
+   element.classList.remove('show', 'active');
+ });
+}
+
+//no-use, use limpiaShowActivos
+function removeShowActiveClasses() {
+  const elements = document.querySelectorAll('.selector-de-elementos'); // Reemplaza 'tu-selector-de-elementos' con el selector adecuado para tus elementos
+  
+  elements.forEach(function(element) {
+    element.classList.remove('show', 'active');
+  });
 }
 /*
 Custom url si es true entonces coge la url tal cual
