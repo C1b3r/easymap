@@ -151,12 +151,5 @@ class Controller
 		return $response;
 	}
 
-	/**  Función para realizar el reemplazo en el JSON
-	 */
-	public function reemplazarMarcadores(array $json, array $data) {
-		foreach ($data as $key => $value) {
-		$json = str_replace("{{$key}}", $value, $json);
-		}
-		return $json;
- 	 }
+
 }

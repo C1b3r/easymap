@@ -25,7 +25,7 @@ class Admin_Controller extends Controller
 				   ->assign('other_title','')
 				   ->assign('current_page','Visión general');
 
-		$maps = $this->model->getMap(2);
+		$maps = $this->model->getLatestMaps(3);
 
 		$this->view->assign('maps', $maps);
 		

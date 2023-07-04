@@ -2,9 +2,11 @@
 namespace app\model\adminmodels;
 use app\classes\Model;
 use app\classes\Boot;
+use app\traits\Maps_Trait;
 
 class Admin_Model extends Model
  {
+    use Maps_Trait;
     public $username;
     protected $table = 'users',
               $primaryKey = 'id_user',
@@ -51,12 +53,6 @@ class Admin_Model extends Model
     }
 
 
-    public function getMap($limit)
-    {
-        $this->limit = 3;
-        // $result = $this->select("map", null)->fetchAllArray();   //En este caso, al ser un limit, hacemos un fetchall
-        $result = $this->conectar->conexion->table('map')->take($this->limit)->get();
-        return $result;
-    }
+
 
  }

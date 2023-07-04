@@ -71,7 +71,7 @@
                               echo '<tr>
                               <th scope="row">'.htmlspecialchars($value->title).'</th>
                               <th scope="row">'.htmlspecialchars($value->description).'</th>
-                              <td><p class="card-text text-success">'.$value->date_add.'</p></td>
+                              <td><p class="card-text text-success">'.$value->created_at.'</p></td>
                               </tr>
                               ';
                             } 
