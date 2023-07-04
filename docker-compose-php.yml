@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+    web:
+      build: 
+        context: . #en esta carpeta, monte el siguiente dockerfile
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      links:
+        - mariadb
+      volumes:
+        # - ~/docker/wordpress/wp-content:/var/www/html/wp-content #esto lo crea en la carpeta de usuario
+        # - ./Volumenes/logs:/var/www/html/logs
+        # - ./Volumenes/logs:/var/www/html/logs
+          - .:/usr/local/apache2/htdocs/  #monte lo que tengo como volumen persistente en desarrollo
+    php:
+      image: php:8.2.6-fpm-bullseye
+      command: bash -c "sudo apt install php8.2-{cli,zip,mysql,bz2,curl,mbstring,intl,common}"
+      links:
+        - web
+
+    mariadb:
+      image: mariadb:10.6.13
+      command: --default-authentication-plugin=mysql_native_password
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_DATABASE: test
+        MYSQL_ROOT_PASSWORD: root
+      volumes:
+        # - ~/docker/mysql-data:/var/lib/mysql # esto genera una carpeta Docker en la carpeta de usuario
+        - ./Volumenes/mysql-data:/var/lib/mysql 
+#esto con el punto crea una carpeta volumenes, no puedes crear en D:/ una carpeta de volumenes
+#ejecuta con podman-compose -f docker-compose.yml up -d
