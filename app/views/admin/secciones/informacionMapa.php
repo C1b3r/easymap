@@ -47,7 +47,7 @@ return array(
 												"type" => "text",
 												"class" => "form-control",
 												"placeholder" => "Titulo",
-												"value" => ""
+												"value" => "{var_title}"
 											)
 										)
 									)
@@ -71,7 +71,8 @@ return array(
 											"attributes" => array(
 												"class" => "form-control",
 												"rows" => "3",
-												"placeholder" => "Descripción"
+												"placeholder" => "Descripción",
+												"innerText" => "{var_descripcion}"
 											)
 										)
 									)
@@ -102,7 +103,8 @@ return array(
 											"attributes" => array(
 												"type" => "text",
 												"name" => "latitud",
-												"placeholder" => "Latitud"
+												"placeholder" => "Latitud",
+												"value" => "{var_latitud}"
 											)
 										)
 									)
@@ -125,7 +127,8 @@ return array(
 											"attributes" => array(
 												"type" => "text",
 												"name" => "longitud",
-												"placeholder" => "Longitud"
+												"placeholder" => "Longitud",
+												"value" => "{var_longitud}"
 											)
 										)
 									)

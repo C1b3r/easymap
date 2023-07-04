@@ -5,11 +5,14 @@ use app\classes\Session;
 use app\model\adminmodels\Mapas_Model;
 use Helper;
 use Illuminate\Http\Request;
+use app\traits\Json_Trait;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
 class Mapas_Controller extends Controller 
 {
+	use Json_Trait;
+
 	protected $defaultView = 'mapsAdmin';
 	protected $currentTitle = 'Listado de mapas';
 	protected $currentPage = 'mapas'; //for pagination and breadcrumb links
@@ -47,8 +50,8 @@ class Mapas_Controller extends Controller
 
 	public function edit($id)
 	{
-		$this->view->assign('secciones',['informacionMapa' => 'Informacion',
-						 'puntosMapa' => 'Puntos del mapa',
+		$this->view->assign('secciones',["informacionMapa/{$id}" => 'Informacion',
+						 "puntosMapa/{$id}" => 'Puntos del mapa',
 						]);
 		$dataUser = true; // $this->model->getDataMap($id);//page 1
 		if($dataUser){
@@ -73,9 +76,20 @@ class Mapas_Controller extends Controller
 		if(!$request->ajax()){
 			return json_encode(array('Message' => "error"));
 		} 
-	
-		$info = Helper::loadJSONView('/admin/secciones/','informacionMapa') ?? array('Message' => "error");
-		return json_encode($info);
+		// Crear un array con los datos de reemplazo
+		/*$data = array(
+			'var_title' => 'eee',
+			'var_descripcion' => 'asdfasdf',
+			'var_latitud' => 'sdsd',
+			'var_longitud' => 'dd'
+		);*/
+
+		$data = $this->model->getDataMap($request->id);
+
+		$info = $this->loadJSONView('/admin/secciones/','informacionMapa') ?? array('Message' => "error");
+		$json = json_encode($info);
+		$json_replaced = $this->reemplazarMarcadores($json,$data);
+		return $json_replaced;
 		
 	}
 	public function crearmapa()

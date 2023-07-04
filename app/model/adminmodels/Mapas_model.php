@@ -31,10 +31,27 @@ class Mapas_Model extends model
                         ->where('id_map','=',$id)
                         ->first();
         if(!empty($results)){
-            return array('id_user'=>$results->id_user ,'name' => $results->name, 'email' => $results->email, 'active'=> $results->active);
+            [$latitud,$longitud] = $this->getConfiguration($results->configuration);
+            return array('var_title'=>$results->title ,'var_descripcion' => $results->description, 'var_latitud' => $latitud, 'var_longitud'=> $longitud);
         }else{
             return false;
         }
     }
 
+    public function getConfiguration($json)
+    {
+        $data = json_decode($json,true)['coord'] ?? null;
+        return [$data['lat'] ?? '', $data['lon'] ?? ''];
+        /*ejemplo
+        {
+            "coord":{
+                "lon":-8.396,
+                "lat":43.3713
+            } 
+        }
+        */
+    }
+
  }
+
+ 
