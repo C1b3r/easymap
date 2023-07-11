@@ -72,6 +72,8 @@
                               <th scope="row">'.htmlspecialchars($value->title).'</th>
                               <th scope="row">'.htmlspecialchars($value->description).'</th>
                               <td><p class="card-text text-success">'.$value->created_at.'</p></td>
+                              <td><a class="btn btn-secondary" noprefetch href="'
+                              .Helper::$urlGeneration->route('edit_map', ['id' => $value->id_map]).'">Editar</a></td>
                               </tr>
                               ';
                             } 

@@ -22,9 +22,11 @@ $router->get('/home', function () use($router){
  
 });
 */
-// $router->name('home2')->get('/', function () {
-//     return 'hello world!';
-// });
+/* //desde la versión 10 no se permiten funciones anónimas
+ $router->name('home2')->get('/', function () {
+     return 'hello world!';
+ }); 
+*/
 
 // $router->middleware(['middleware' => 'sesion'])->group(['prefix'=>'admin'],function () use($router){
    // Route::auth();
@@ -35,7 +37,10 @@ $router->get('/home', function () use($router){
 //     $router->get ( '/redirect/{provider}', 'SocialAuthController@redirect' );
 //     $router->get ( '/callback/{provider}', 'SocialAuthController@callback' );
 // });
-$router->name('hometest')->get('/test',[Mapas_Controller::class, 'informacionMapa']);
+// $router->name('hometest')->get('/test',[Mapas_Controller::class, 'informacionMapa']);
+
+// $router->get('/pruebaMigration/{nombre}', ['app\migrations\Migration', 'ejecuta']);
+
 
 $router->prefix(ADMIN_FOLDER)->group(function () use($router){
   $router->name('login')->get('/login',[Login_Controller::class, 'index']);

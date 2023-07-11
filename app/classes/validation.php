@@ -105,10 +105,11 @@ class Validation
   
 	  public function isRecordUnique($input, $fieldName, $fieldDatabase) 
 	  {	
-		  //For unique fields, we need defined as unique:nameoffieldindatabase in the string
-		  // Connect to database
-		  $stmt = new Model();
-		 $cantidad = $stmt->checkOneRow($this->table,$fieldDatabase,$input[$fieldName]);	
+		//For unique fields, we need defined as unique:nameoffieldindatabase in the string
+		// Connect to database
+		$stmt = new Model();
+		$table = '';
+		 $cantidad = $stmt->checkOneRow($table,$fieldDatabase,$input[$fieldName]);	
 
 		 if(!$cantidad || $cantidad == 0){
 			 //if not cuantity, false or if $cantidad =0 not exist
