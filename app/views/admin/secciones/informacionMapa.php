@@ -10,7 +10,7 @@ return array(
 					"attributes" => array(
 						"name" => "mapasform",
 						"method" => "POST",
-						"action" => COMPLETE_WEB_PATH_ADMIN."login",
+						"action" => COMPLETE_WEB_PATH_ADMIN."informacionMapa",
 						"enctype" => "application/x-www-form-urlencoded"
 					),
 					"childValues" => array(
@@ -67,6 +67,13 @@ return array(
 									),
 									"childValues" => array(
 										array(
+											"type" => "label",
+											"attributes" => array(
+												"class" => "labels"
+											),
+											"value" => "Descripción"
+										),
+										array(
 											"type" => "textarea",
 											"attributes" => array(
 												"class" => "form-control",
@@ -85,6 +92,13 @@ return array(
 								"class" => "row mt-3 mb-4"
 							),
 							"childValues" => array(
+								array(
+									"type" => "label",
+									"attributes" => array(
+										"class" => "labels"
+									),
+									"value" => "Coordenadas de inicio"
+								),
 								array(
 									"type" => "div",
 									"attributes" => array(
@@ -129,6 +143,70 @@ return array(
 												"name" => "longitud",
 												"placeholder" => "Longitud",
 												"value" => "{var_longitud}"
+											)
+										)
+									)
+								)
+							)
+						),
+						array(
+							"type" => "div",
+							"attributes" => array(
+								"class" => "row mt-3 mb-4"
+							),
+							"childValues" => array(
+								array(
+									"type" => "label",
+									"attributes" => array(
+										"class" => "labels"
+									),
+									"value" => "Zoom y provedor url"
+								),
+								array(
+									"type" => "div",
+									"attributes" => array(
+										"class" => "col-md-12"
+									),
+									"childValues" => array(
+										array(
+											"type" => "label",
+											"attributes" => array(
+												"class" => "labels col-sm-1 col-form-label",
+											),
+											"value" => "Zoom"
+										),
+										array(
+											"type" => "input",
+											"attributes" => array(
+												"type" => "number",
+												"name" => "Zoom",
+												"placeholder" => "Zoom",
+												"value" => "{var_zoom}"
+											)
+										)
+									)
+								),
+								array(
+									"type" => "div",
+									"attributes" => array(
+										"class" => "col-md-12"
+									),
+									"childValues" => array(
+										array(
+											"type" => "label",
+											"attributes" => array(
+												"class" => "labels col-sm-1 col-form-label"
+											),
+											"value" => "Proveedor"
+										),
+										array(
+											"type" => "input",
+											"attributes" => array(
+												"class" => "col-sm-10",
+												"type" => "text",
+												"name" => "Proveedor",
+												"placeholder" => "Proveedor",
+												"value" => "{var_proveedor}"
 											)
 										)
 									)

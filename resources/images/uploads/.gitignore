@@ -1,0 +1,5 @@
+# Fichero que va dentro de la carpeta que quieras meter sin subcarpetas
+# Ignora todos los ficheros
+*
+# Excepto este archivo y este directorio
+!.gitignore

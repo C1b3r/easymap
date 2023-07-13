@@ -1,4 +1,5 @@
 var parametroUrl = window.location.hash.substring(1);
+var currentId = document.getElementById('cuId').value;
 // Seleccionar todos los elementos con la clase "nav-link-tab"
 const tabs = document.querySelectorAll('.nav-link-tab');
 
@@ -42,14 +43,27 @@ function cargarTab(tab = '') {
 function cargarContenido(urltab) {
     const divTarget = document.getElementById(urltab);
     if(checkIfLoaded(divTarget)){
+      limpiaShowActivos();
+      divTarget.classList.add('show', 'active','loaded');
       return;
     }
     // divTarget.innerHTML = ''; //limpiamos antes de pintar
     limpiaShowActivos(); //limpiamos los div que ya tengan los elementos de clase
     divTarget.classList.add('show', 'active','loaded'); //activamos la sección de resultados si esta no existe
     addSpinner(divTarget);
+    if (urltab === 'datatable') {
+      // setTimeout(cargarReferenciasDataTables, 500); //retrasamos la carga ya que tiene que pintarlo después de jquery
+      setTimeout(() => {
+        cargarReferenciasDataTables().then(() => {
+          divTarget.innerHTML = '';
+          configurarDataTable(divTarget);
+        });
+      }, 500); // Establecer un retraso de 500 milisegundos (medio segundo)
+      return;
+    }
+      
     // Realizamos la llamada a la API utilizando la función fetch
-    fetchData(urltab)
+    fetchData(urltab+'/'+currentId)
     .then(data => {
         
         if(data.Message === MESSAGE_TYPES.ERROR){
@@ -62,6 +76,105 @@ function cargarContenido(urltab) {
         cargarListener();
     });
 
+}
+
+ // Realizar la configuración y la carga de la tabla DataTables
+ function configurarDataTable(divTarget) {
+  // Crear la tabla y asignarle un id
+  const table = document.createElement('table');
+  table.id = 'miTabla'; // Asigna un id a la tabla
+
+  // Agregar la tabla como hijo del divTarget
+  divTarget.appendChild(table);
+
+  // Configurar las opciones y configuraciones de DataTables
+  const dataTableOptions = {
+    columns: [
+      {
+        data: 'latitude',
+        title: 'Latitud'
+      },
+      {
+        data: 'longitude',
+        title: 'Longitud'
+      },
+      {
+        data: 'id_image',
+        title: 'ID Imagen'
+      },
+      {
+        data: 'id_spot',
+        title: 'ID Spot'
+      }
+    ],
+    "pageLength": 25,
+    serverSide: true,
+    ajax: {
+      url: getUrl()+'cargarPuntos/'+currentId,
+      type: 'POST',
+      dataSrc: 'data',
+      data: function (params) {
+          // Aquí se establecen los parámetros de paginación
+          params.page = params.start / params.length + 1; // Calcular el número de página
+          params.limit = params.length; // Establecer el límite de registros por página
+          return params;
+      },
+      error: function (xhr, textStatus, error) {
+          console.error(error);
+      }
+  }
+  };
+   // Inicializar la tabla DataTables utilizando el elemento HTML de la tabla
+   const miTabla = new DataTable(table, dataTableOptions);
+
+  
+}
+
+
+async function cargarReferenciasDataTables() {
+  // Verificar si el CSS ya está cargado
+  var linkExists = document.querySelector('link[href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css"]');
+  if (!linkExists) {
+    await cargarScriptAsync('https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css', 'css');
+
+    // Cargar el CSS de DataTables
+   /* var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css';
+    document.head.appendChild(link);*/
+  }
+
+  // Verificar si el JS ya está cargado
+  var scriptExists = document.querySelector('script[src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"]');
+  if (!scriptExists) {
+    await cargarScriptAsync('https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js', 'script');
+    // Cargar el JS de DataTables
+    /*var script = document.createElement('script');
+    script.src = 'https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js';
+    document.body.appendChild(script);*/
+  }
+  return true;
+}
+
+function cargarScriptAsync(src, type) {
+  return new Promise((resolve, reject) => {
+    const element = document.createElement(type === 'css' ? 'link' : 'script');
+    element.onload = () => {
+      resolve();
+    };
+    element.onerror = () => {
+      reject(new Error(`Error al cargar el script: ${src}`));
+    };
+
+    if (type === 'css') {
+      element.rel = 'stylesheet';
+      element.href = src;
+    } else if (type === 'script') {
+      element.src = src;
+    }
+
+    document.head.appendChild(element);
+  });
 }
 
 function checkIfLoaded(element)
@@ -95,18 +208,21 @@ Custom url si es true entonces coge la url tal cual
 function fetchData(url,customurl = false, options = { headers: {'X-Requested-With': 'XMLHttpRequest'} }) {
 
     if(!customurl){
-         // Seleccionar la etiqueta meta por su nombre
-         const metaUrl = document.querySelector('meta[name="url"]');
-
-         // Obtener el valor de la meta etiqueta
-         const uri = metaUrl.getAttribute('content');
-         url = uri + url;
+         url = getUrl() + url;
     }
     return fetch(url, options)
       .then(response => response.json())
       .catch(error => console.error(error));
   }
-  
+
+function getUrl()
+{
+  // Seleccionar la etiqueta meta por su nombre
+  const metaUrl = document.querySelector('meta[name="url"]');
+  // Obtener el valor de la meta etiqueta
+  const uri = metaUrl.getAttribute('content');
+  return uri;
+}
 
 function enviarContenido(urltab){
     const metaUrl = document.querySelector('meta[name="url"]').getAttribute('content');

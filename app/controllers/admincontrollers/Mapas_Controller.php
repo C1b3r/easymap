@@ -3,6 +3,7 @@ namespace app\controllers\admincontrollers;
 use app\classes\Controller;
 use app\classes\Session;
 use app\model\adminmodels\Mapas_Model;
+use app\model\adminmodels\Hotspot_Model;
 use Helper;
 use Illuminate\Http\Request;
 use app\traits\Json_Trait;
@@ -16,9 +17,7 @@ class Mapas_Controller extends Controller
 	protected $defaultView = 'mapsAdmin';
 	protected $currentTitle = 'Listado de mapas';
 	protected $currentPage = 'mapas'; //for pagination and breadcrumb links
-	public $secciones = ['informacionMapa' => 'Informacion',
-						 'puntosMapa' => 'Puntos del mapa',
-						];
+
 
 	public function __construct() 
 	{
@@ -53,9 +52,12 @@ class Mapas_Controller extends Controller
 		if(!is_numeric($id)){
 			return \Helper::$redirect->route('list_maps');
 		}
-		$this->view->assign('secciones',["informacionMapa/{$id}" => 'Informacion',
-						 "puntosMapa/{$id}" => 'Puntos del mapa',
-						]);
+		$this->view->assign('secciones',["informacionMapa" => 'Informacion',
+						 	"puntosMapa" => 'Puntos del mapa',
+						 	"datatable" => 'Listado de puntos de mapas',
+							]
+						)
+						->assign('currentId' , $id);
 	
 		$this->createCSRF();
 		// $this->view->assign('results', $dataUser);
@@ -77,19 +79,31 @@ class Mapas_Controller extends Controller
 			return json_encode(array('Message' => "error"));
 		} 
 		// Crear un array con los datos de reemplazo
-		/*$data = array(
-			'var_title' => 'eee',
-			'var_descripcion' => 'asdfasdf',
-			'var_latitud' => 'sdsd',
-			'var_longitud' => 'dd'
-		);*/
-
 		$data = $this->model->getDataMap($request->id);
 
 		$info = $this->loadJSONView('/admin/secciones/','informacionMapa') ?? array('Message' => "error");
 		$json = json_encode($info);
 		$json_replaced = $this->reemplazarMarcadores($json,$data);
 		return $json_replaced;
+		
+	}
+
+	public function puntosMapa(Request $request)
+	{
+		header('Content-Type: application/json');
+		if(!$request->ajax()){
+			return json_encode(array('Message' => "error"));
+		} 
+		// Crear un array con los datos de reemplazo
+		/*$hotspotModel = new Hotspot_Model();
+		$data = $hotspotModel->getByMapId($request->id)->toArray();
+	
+
+		$info = $this->loadJSONView('/admin/secciones/','puntosMapa') ?? array('Message' => "error");
+		$json = json_encode($info);
+		$json_replaced = $this->reemplazarMarcadores($json,$data);*/
+		$info = $this->loadJSONView('/admin/secciones/','puntosMapa') ?? array('Message' => "error");
+		return $info;
 		
 	}
 	public function crearmapa()
@@ -103,5 +117,53 @@ class Mapas_Controller extends Controller
 		$data = array();
 		header('Content-Type: application/json');
 		echo json_encode($data);
+	}
+
+	//Cargar los puntos para volcarlos en un datatable
+	public function cargarPuntos(Request $request)
+	{
+		header('Content-Type: application/json');
+		if(!$request->ajax()){
+			return json_encode(array('Message' => "error"));
+		} 
+		$id = $request->id;
+		$draw = $request->input('draw');
+		$start = $request->input('start');
+		$length = $request->input('length');
+		$searchValue = $request->input('search.value');
+		// Consulta principal utilizando Eloquent
+		$query = Hotspot_Model::query()->select('latitude','longitude','id_image','id_spot');
+
+		// Aplicar la búsqueda si se proporciona un valor de búsqueda
+		if ($searchValue) {
+			$query->where(function ($q) use ($searchValue,$id) {
+				// Aquí debes definir las columnas en las que quieres realizar la búsqueda
+				$q->where('informacion', 'like', "%{$searchValue}%")
+					->where('id_map', '=', $id);
+					//->orWhere('columna2', 'like', "%{$searchValue}%");
+				// ... continuar con las demás columnas si es necesario
+			});
+		}
+	
+		// Obtener el número total de registros antes de aplicar la paginación
+		$totalRecords = $query->count();
+	
+		// Aplicar la paginación
+		$query->skip($start)->take($length);
+	
+		// Obtener los datos para la página actual
+		$data = $query->get();
+	
+		// Construir la respuesta en formato JSON
+		$jsonData = [
+			"draw" => intval($draw),
+			"recordsTotal" => $totalRecords,
+			"recordsFiltered" => $totalRecords, // En este ejemplo, no se realiza ningún filtrado adicional
+			"data" => $data,
+		];
+	
+		// Enviar la respuesta en formato JSON
+		return  json_encode($jsonData);
+
 	}
 }

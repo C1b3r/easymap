@@ -150,4 +150,12 @@ class Validation
   
 		  return isset($arr[1])?$arr[1]:null;
 	  }
+	  
+	  public function imageRules()
+	  {
+		//1MB máximo
+		return [
+            'image' => 'required|image|size:1024|mimes:jpeg,png,jpg|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'
+        ];
+	  }
 }

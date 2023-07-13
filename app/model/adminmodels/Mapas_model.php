@@ -31,8 +31,14 @@ class Mapas_Model extends model
                         ->where('id_map','=',$id)
                         ->first();
         if(!empty($results)){
-            [$latitud,$longitud] = $this->getConfiguration($results->configuration);
-            return array('var_title'=>$results->title ,'var_descripcion' => $results->description, 'var_latitud' => $latitud, 'var_longitud'=> $longitud);
+            [$latitud,$longitud,$zoom,$proveedor] = $this->getConfiguration($results->configuration);
+            return array('var_title'=>$results->title ,
+                        'var_descripcion' => $results->description, 
+                        'var_latitud' => $latitud, 
+                        'var_longitud'=> $longitud,
+                        'var_zoom' => $zoom, 
+                        'var_proveedor'=> $proveedor
+                    );
         }else{
             return false;
         }
@@ -40,14 +46,24 @@ class Mapas_Model extends model
 
     public function getConfiguration($json)
     {
-        $data = json_decode($json,true)['coord'] ?? null;
-        return [$data['lat'] ?? '', $data['lon'] ?? ''];
+        $data = json_decode($json,true);
+        $latitud = '';
+        $longitud = '';
+        if(isset($data['coord'])){
+            $latitud = $data['coord']['lat'];
+            $longitud = $data['coord']['lon'] ;
+        }
+        $zoom = $data['zoom'] ?? '';
+        $proveedor = $data['provider'] ?? '';
+        return [$latitud, $longitud,$zoom,$proveedor];
         /*ejemplo
-        {
+           {
+            "zoom": 6,
+            "provider" : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             "coord":{
-                "lon":-8.396,
-                "lat":43.3713
-            } 
+                    "lon":-8.396,
+                    "lat":43.3713
+                } 
         }
         */
     }
