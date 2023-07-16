@@ -5,6 +5,7 @@ use app\controllers\admincontrollers\Login_Controller;
 use app\controllers\admincontrollers\Logout_Controller;
 use app\controllers\admincontrollers\Mapas_Controller;
 use app\controllers\admincontrollers\Users_Controller;
+use app\controllers\Images_Controller;
 
 /*use Illuminate\Http\Response;
 $router->get('/home', function () use($router){
@@ -67,5 +68,10 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     $router->name('edit_map')->get('/mapas/edit/{id}',[Mapas_Controller::class, 'edit']);
     $router->name('informacionMapa')->get('/informacionMapa/{id}',[Mapas_Controller::class, 'informacionMapa']);
     $router->name('puntosmapa')->get('/puntosMapa/{id}',[Mapas_Controller::class, 'puntosMapa']);
+    $router->name('puntosmapaPOST')->post('/puntosMapa',[Mapas_Controller::class, 'guardarPuntosMapa']);
     $router->name('cargarPuntos')->post('/cargarPuntos/{id}',[Mapas_Controller::class, 'cargarPuntos']);
+
+    //Images
+    $router->name('subirImagen')->post('/subirImagen',[Images_Controller::class, 'subirImagen']);
+    
 });

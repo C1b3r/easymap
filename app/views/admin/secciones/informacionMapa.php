@@ -10,7 +10,7 @@ return array(
 					"attributes" => array(
 						"name" => "mapasform",
 						"method" => "POST",
-						"action" => COMPLETE_WEB_PATH_ADMIN."informacionMapa",
+						"action" => Helper::$urlGeneration->route('informacionMapa'),
 						"enctype" => "application/x-www-form-urlencoded"
 					),
 					"childValues" => array(
@@ -20,6 +20,14 @@ return array(
 								"type" => "hidden",
 								"name" => "temp_random",
 								"value" => $_SESSION['tokencsrf']
+							)
+						),
+						array(
+							"type" => "input",
+							"attributes" => array(
+								"type" => "hidden",
+								"name" => "current_map",
+								"value" => "{var_id}"
 							)
 						),
 						array(
@@ -47,7 +55,8 @@ return array(
 												"type" => "text",
 												"class" => "form-control",
 												"placeholder" => "Titulo",
-												"value" => "{var_title}"
+												"value" => "{var_title}",
+												"required" => "required"
 											)
 										)
 									)
@@ -79,7 +88,8 @@ return array(
 												"class" => "form-control",
 												"rows" => "3",
 												"placeholder" => "Descripción",
-												"innerText" => "{var_descripcion}"
+												"innerText" => "{var_descripcion}",
+												"required" => "required"
 											)
 										)
 									)
@@ -118,7 +128,8 @@ return array(
 												"type" => "text",
 												"name" => "latitud",
 												"placeholder" => "Latitud",
-												"value" => "{var_latitud}"
+												"value" => "{var_latitud}",
+												"required" => "required"
 											)
 										)
 									)
@@ -142,7 +153,8 @@ return array(
 												"type" => "text",
 												"name" => "longitud",
 												"placeholder" => "Longitud",
-												"value" => "{var_longitud}"
+												"value" => "{var_longitud}",
+												"required" => "required"
 											)
 										)
 									)
@@ -181,7 +193,8 @@ return array(
 												"type" => "number",
 												"name" => "Zoom",
 												"placeholder" => "Zoom",
-												"value" => "{var_zoom}"
+												"value" => "{var_zoom}",
+												"required" => "required"
 											)
 										)
 									)
@@ -206,7 +219,8 @@ return array(
 												"type" => "text",
 												"name" => "Proveedor",
 												"placeholder" => "Proveedor",
-												"value" => "{var_proveedor}"
+												"value" => "{var_proveedor}",
+												"required" => "required"
 											)
 										)
 									)
@@ -225,7 +239,8 @@ return array(
 									"attributes" => array(
 										"class" => "iframe-content btn btn-secondary",
 										"data-src" => "https://developers.google.com/maps/documentation/utils/geocoder?hl=es-419",
-										"innerText" => "Haz click aquí para desplegar mapa para escoger unas coordenadas"
+										"innerText" => "Haz click aquí para desplegar mapa para escoger unas coordenadas",
+										"type" => "button"
 									)
 								)
 								/*array(

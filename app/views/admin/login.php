@@ -8,7 +8,7 @@
             <div class="mb-md-5 mt-md-4 pb-5">
               <h2 class="fw-bold mb-2 text-uppercase text-white">Login</h2>
               <p class="text-white mb-5">Please enter your login and password!</p>
-              <form  orm name="loginform" method="POST" action="<?php echo COMPLETE_WEB_PATH_ADMIN."login"?>" enctype="application/x-www-form-urlencoded">  
+              <form  orm name="loginform" method="POST" action="<?php echo Helper::$urlGeneration->route('login')?>" enctype="application/x-www-form-urlencoded">  
                 <input type="hidden" name="temp_random" value="{{random}}">
                 <div class="form-outline mb-4">
                     <input type="text" id="typeEmail" name="email" autofocus class="form-control form-control-lg"  />

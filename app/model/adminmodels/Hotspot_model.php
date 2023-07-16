@@ -13,7 +13,8 @@ class Hotspot_Model extends model
     'latitude',
     'longitude',
     'id_image',
-    'id_spot'
+    'id_spot',
+    'information'
     ];
    
     public function getByMapId($idMap)

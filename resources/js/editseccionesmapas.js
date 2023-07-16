@@ -65,7 +65,7 @@ function cargarContenido(urltab) {
     // Realizamos la llamada a la API utilizando la función fetch
     fetchData(urltab+'/'+currentId)
     .then(data => {
-        
+
         if(data.Message === MESSAGE_TYPES.ERROR){
             divTarget.innerHTML = '<p class="text-center mt-3">'+MESSAGE_TYPES.MESSAGE_ERROR+'</p>';
             return;
@@ -74,6 +74,10 @@ function cargarContenido(urltab) {
         // return
         renderFetch(divTarget,data);
         cargarListener();
+    }).catch(error => {
+      // Manejar el error aquí, es un error no controlado y puede ser cualquier cosa
+      console.error(error);
+    
     });
 
 }
@@ -224,7 +228,7 @@ function getUrl()
   return uri;
 }
 
-function enviarContenido(urltab){
+function enviarContenidoJSON(urltab){
     const metaUrl = document.querySelector('meta[name="url"]').getAttribute('content');
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
     
@@ -245,6 +249,46 @@ function enviarContenido(urltab){
         .catch(error => {
         console.error('Ha ocurrido un error:', error);
     });
+}
+function enviarContenidoAdjunto(urltab,formData,elements){
+  const metaUrl = document.querySelector('meta[name="url"]').getAttribute('content');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    
+  // Configurar las opciones de la petición Fetch
+  const options = {
+    method: 'POST',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-Token': csrfToken
+    },
+    body: formData,
+  };
+
+  fetch(metaUrl+urltab, options)
+  .then(response => response.json())
+  .then(data => {
+    if (data.Message) {
+      // Se produjo un error, manejarlo adecuadamente
+      console.error(data.Message);
+      alert(data.Message);
+      return null; // Retorna null si hay un error
+    } else {
+      return data.id; // Retorna el ID
+    }
+  })
+  .then(id => {
+    if (id !== null && id !== undefined) {
+      elements.imagenId.value = id;
+      elements.btn.innerHTML = '¡Subido!';
+      elements.btn.disabled = true;
+      elements.imagenInterna.required = false;
+      elements.imagenExterna.required = false
+    }
+  })
+  .catch(error => {
+    console.error(error);
+  });
+   
 }
 
 function activateTab(tab) {
@@ -342,6 +386,9 @@ function addSpinner(element){
 //Lo meto aquí ya que al cargarlo por fetch, no existen y va a fallar
 function cargarListener (){
   var iframecontents = document.getElementsByClassName('iframe-content');
+  if (iframecontents.length === 0) {
+    return;
+  }
   iframecontents[0].addEventListener('click', function(event) {
     //Lo cargo mejor en una ventana emergente que en un iframe para poder tener la info de coordenadas en cada pestaña
     let element = event.target
@@ -369,4 +416,47 @@ function cargarListener (){
     iframeContainer.innerHTML = '';
     iframeContainer.appendChild(iframe);*/
   });
+}
+
+function subirImagen(btn)
+{
+  let imagenInterna = document.getElementById("imgint");
+  let imagenExterna = document.getElementById("imgext");
+  let imagenId = document.getElementById('img_id');
+  let id = document.getElementById('cuId').value;
+  let imagenSubir = '';
+   //si no están rellenos, mostramos alerta
+  if((imagenInterna.value == null || imagenInterna.value == "") && (imagenExterna.value == null || imagenExterna.value == "") ){
+    alert("No hay ninguna imagen subida");
+    return;
+  }
+ //Si hay subida en ambas lanzamos el confirm para que acepte una u otra
+  if((imagenInterna.value !== null && imagenInterna.value !== "") && (imagenExterna.value !== null && imagenExterna.value !== "") ){
+    if (window.confirm("Tienes ambos campos de imagen relleno ¿Quieres quedarte con la interna?")) {
+      imagenSubir = imagenInterna;
+    }else{
+      imagenSubir = imagenExterna;
+    }
+  }
+  //Ahora comprobamos uno por uno en caso de que se haya subido uno u otro
+  if(imagenSubir.length==0){
+    //imagen interna
+    if((imagenInterna.value !== null || imagenInterna.value !== "") && (imagenExterna.value == null || imagenExterna.value == "") ){
+      imagenSubir = imagenInterna.files[0];
+      
+    }else{
+      imagenSubir = imagenExterna.value;
+    }
+  }
+
+  // Crear un objeto FormData y agregar los datos
+  const formData = new FormData();
+  formData.append('id', id);
+  formData.append('imagen', imagenSubir); // Agregar el archivo al formulario
+  
+  enviarContenidoAdjunto('subirImagen',formData,{btn,imagenId,imagenInterna,imagenExterna});
+
+
+ 
+ 
 }
