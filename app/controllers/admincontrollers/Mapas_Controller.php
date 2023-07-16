@@ -97,13 +97,14 @@ class Mapas_Controller extends Controller
 		// Crear un array con los datos de reemplazo
 		/*$hotspotModel = new Hotspot_Model();
 		$data = $hotspotModel->getByMapId($request->id)->toArray();
-	
 
 		$info = $this->loadJSONView('/admin/secciones/','puntosMapa') ?? array('Message' => "error");
 		$json = json_encode($info);
 		$json_replaced = $this->reemplazarMarcadores($json,$data);*/
 		$info = $this->loadJSONView('/admin/secciones/','puntosMapa') ?? array('Message' => "error");
-		return $info;
+		$json = json_encode($info);
+		$json_replaced = $this->reemplazarMarcadores($json,['var_id' => $request->id]);
+		return $json_replaced;
 		
 	}
 	public function crearmapa()
@@ -164,6 +165,19 @@ class Mapas_Controller extends Controller
 	
 		// Enviar la respuesta en formato JSON
 		return  json_encode($jsonData);
+
+	}
+
+	public function guardarPuntosMapa(Request $request)
+	{
+		
+		$hotspot = new Hotspot_Model;
+		$hotspot->id_map =$request->input('current_map');
+		$hotspot->latitude = $request->input('latitud');
+		$hotspot->longitude = $request->input('longitud');
+		$hotspot->id_image = $request->input('img_id');
+		$hotspot->id_spot = 1 ;
+		$hotspot->information = $request->input('informacion');
 
 	}
 }

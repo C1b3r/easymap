@@ -37,7 +37,8 @@ class Mapas_Model extends model
                         'var_latitud' => $latitud, 
                         'var_longitud'=> $longitud,
                         'var_zoom' => $zoom, 
-                        'var_proveedor'=> $proveedor
+                        'var_proveedor'=> $proveedor,
+                        'var_id'=> $id
                     );
         }else{
             return false;
