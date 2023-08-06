@@ -54,6 +54,7 @@ return array(
 											"attributes" => array(
 												"type" => "text",
 												"class" => "form-control",
+												"name" => "titulo",
 												"placeholder" => "Titulo",
 												"value" => "{var_title}",
 												"required" => "required"
@@ -87,6 +88,7 @@ return array(
 											"attributes" => array(
 												"class" => "form-control",
 												"rows" => "3",
+												"name" => "description",
 												"placeholder" => "Descripción",
 												"innerText" => "{var_descripcion}",
 												"required" => "required"

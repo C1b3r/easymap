@@ -7,6 +7,7 @@ use app\model\adminmodels\Hotspot_Model;
 use Helper;
 use Illuminate\Http\Request;
 use app\traits\Json_Trait;
+use app\classes\Boot;
 
 defined('ROOT_PATH') or exit('Direct access forbidden');
 
@@ -136,7 +137,8 @@ class Mapas_Controller extends Controller
 		$length = $request->input('length');
 		$searchValue = $request->input('search.value');
 		// Consulta principal utilizando Eloquent
-		$query = Hotspot_Model::query()->select('latitude','longitude','id_image','id_spot');
+		$query = Hotspot_Model::query()->select('latitude','longitude','id_image','id_spot')
+								->with('image');
 
 		// Aplicar la búsqueda si se proporciona un valor de búsqueda
 		if ($searchValue) {
@@ -157,13 +159,20 @@ class Mapas_Controller extends Controller
 	
 		// Obtener los datos para la página actual
 		$data = $query->get();
+
+		$transformedResults = $data->map(function ($data) {
+			$image_path = ($data->image->ext) ? '' : PUBLIC_WEB_PATH.'images/uploads/' ;
+			$data->image_name = '<img  width="80px" src="' . $image_path . $data->image->name . '" alt="' . $data->image->name . '">';
+		
+			return $data;
+		});
 	
 		// Construir la respuesta en formato JSON
 		$jsonData = [
 			"draw" => intval($draw),
 			"recordsTotal" => $totalRecords,
 			"recordsFiltered" => $totalRecords, // En este ejemplo, no se realiza ningún filtrado adicional
-			"data" => $data,
+			"data" => $transformedResults,
 		];
 	
 		// Enviar la respuesta en formato JSON
@@ -173,7 +182,24 @@ class Mapas_Controller extends Controller
 
 	public function guardarPuntosMapa(Request $request)
 	{
+		// Validación de datos
+		$validator = Boot::$app->validator->make($request->all(), [
+			'current_map' => 'required',
+			'latitud' => 'required|numeric',
+			'longitud' => 'required|numeric',
+			'img_id' => 'required',
+			'informacion' => 'required',
+		]);
+		  
+
 		
+		 // Si la validación falla, redirige con mensajes de error
+		if ($validator->fails()) {
+			$this->error('mapa',self::FLASH_ERROR,'flash','No se pudo guardar, compruebe los campos');
+			return \Helper::$redirect->back()->withFragment('#puntosMapa');
+
+		}
+
 		$hotspot = new Hotspot_Model;
 		$hotspot->id_map =$request->input('current_map');
 		$hotspot->latitude = $request->input('latitud');
@@ -181,19 +207,50 @@ class Mapas_Controller extends Controller
 		$hotspot->id_image = $request->input('img_id');
 		$hotspot->id_spot = 1 ;
 		$hotspot->information = $request->input('informacion');
+		$hotspot->save();
+
+		$this->error('mapa',self::FLASH_SUCCESS,'flash','Se ha guardado con éxito');
+
+		return \Helper::$redirect
+        ->back()->withFragment('#puntosMapa');
+        // ->with('success', 'Hotspot guardado correctamente.');
 
 	}
 
 	public function guardarInfoMapa(Request $request)
 	{
+		// Validación de datos
+		$validator = Boot::$app->validator->make($request->all(), [
+			'current_map' => 'required',
+			'latitud' => 'required|numeric',
+			'longitud' => 'required|numeric',
+			'titulo' => 'required',
+			'description' => 'required',
+			'Zoom' => 'required',
+			'Proveedor' => 'required',
+		]);
+		// Si la validación falla, redirige con mensajes de error
+		if ($validator->fails()) {
+		$this->error('mapa',self::FLASH_ERROR,'flash','No se pudo guardar, compruebe los campos');
+		return \Helper::$redirect->back()->withFragment('#informacionMapa');
+		}
+	
+		$model =  $this->model->firstOrNew(['id_map' =>$request->input('current_map')]);
+		$model->title = $request->input('titulo');
+		$model->configuration = [
+			"zoom" => $request->input('Zoom'),
+			"provider" => $request->input('Proveedor'),
+			"coord" => [
+				"lon" => $request->input('latitud'),
+				"lat" => $request->input('longitud'),
+			],
+		];
+		$model->description = $request->input('description');
+		$model->save();
 		
-		$hotspot = new Hotspot_Model;
-		$hotspot->id_map =$request->input('current_map');
-		$hotspot->latitude = $request->input('latitud');
-		$hotspot->longitude = $request->input('longitud');
-		$hotspot->id_image = $request->input('img_id');
-		$hotspot->id_spot = 1 ;
-		$hotspot->information = $request->input('informacion');
 
+		$this->error('mapa',self::FLASH_SUCCESS,'flash','Se ha guardado con éxito');
+		return \Helper::$redirect
+        ->back()->withFragment('#informacionMapa');
 	}
 }
