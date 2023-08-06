@@ -83,6 +83,9 @@ class Mapas_Controller extends Controller
 
 		$info = $this->loadJSONView('/admin/secciones/','informacionMapa') ?? array('Message' => "error");
 		$json = json_encode($info);
+		/* Necesito agregarlo después ya que no puedo auto generar la ruta si no tengo el id
+		$data['url_dest'] = Helper::$urlGeneration->route('informacionMapa',["id" =>$request->id]);
+		*/
 		$json_replaced = $this->reemplazarMarcadores($json,$data);
 		return $json_replaced;
 		
@@ -169,6 +172,19 @@ class Mapas_Controller extends Controller
 	}
 
 	public function guardarPuntosMapa(Request $request)
+	{
+		
+		$hotspot = new Hotspot_Model;
+		$hotspot->id_map =$request->input('current_map');
+		$hotspot->latitude = $request->input('latitud');
+		$hotspot->longitude = $request->input('longitud');
+		$hotspot->id_image = $request->input('img_id');
+		$hotspot->id_spot = 1 ;
+		$hotspot->information = $request->input('informacion');
+
+	}
+
+	public function guardarInfoMapa(Request $request)
 	{
 		
 		$hotspot = new Hotspot_Model;

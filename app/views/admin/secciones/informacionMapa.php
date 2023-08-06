@@ -10,7 +10,7 @@ return array(
 					"attributes" => array(
 						"name" => "mapasform",
 						"method" => "POST",
-						"action" => Helper::$urlGeneration->route('informacionMapa'),
+						"action" => Helper::$urlGeneration->route('informacionPOST'),
 						"enctype" => "application/x-www-form-urlencoded"
 					),
 					"childValues" => array(
