@@ -5,10 +5,13 @@ use Illuminate\Pagination\Paginator;
 class Mapas_Model extends model
  {
    public $defaultFunction = "getMap",
-          $timestamps = false;
+          $timestamps = true;
    protected $table = 'map',
    $primaryKey = 'id_map',
    $fillable = ['title','configuration','description'];
+   protected $casts = [
+    'configuration' => 'array',
+   ];
    
     public function getMap($page = 0,$limit = '')
     {
@@ -47,7 +50,7 @@ class Mapas_Model extends model
 
     public function getConfiguration($json)
     {
-        $data = json_decode($json,true);
+        $data = $json;
         $latitud = '';
         $longitud = '';
         if(isset($data['coord'])){

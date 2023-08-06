@@ -103,8 +103,8 @@ function cargarContenido(urltab) {
         title: 'Longitud'
       },
       {
-        data: 'id_image',
-        title: 'ID Imagen'
+        data: 'image_name',
+        title: 'Imagen'
       },
       {
         data: 'id_spot',

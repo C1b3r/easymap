@@ -245,7 +245,7 @@ return array(
 										"type" => "submit",
 										"value" => "submit"
 									),
-									"value" => "Editar"
+									"value" => "Enviar"
 								)
 							)
 						)
