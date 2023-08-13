@@ -40,19 +40,30 @@ body {
     display: var(--btn__light);
 }
 
-.body__text {
+.body__text,.error-details {
     color: var(--color-text-body);
 }
 
 .text__link {
     color: var(--color-text-link);
 }
-
+.card{
+    background-color: var(--container-div);
+}
+.card-header,.table,.h2,h1,label{
+    color: var(--color-text-body);
+}
+.text-success{
+    color: var(--color-bg-success)!important;
+}
+a{
+    color: var(--color-enlace);
+}
 
 /*Login form*/
 
 .body-secondary {
-    background-color: var(--color-mapflet-secondary);
+    background-color: var(--color-easymap-secondary);
 }
 
 
@@ -78,6 +89,27 @@ body {
     visibility: visible;
     -webkit-transform: translateY(0);
     transform: translateY(0);
+}
+
+
+/* Formularios*/
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: var(--color-outline);
+}
+
+
+/* Correcion botón de busqueda de leaflet geocode*/
+
+.leaflet-control-geosearch form input {
+    height: 30px!important;
+}
+
+/* Tabs */
+
+.nav-link{
+   color: var(--color-enlace);
 }
 
 

@@ -2,3 +2,6 @@ config/conf.php
 /junk
 .htaccess
 /logs
+/vendor
+/resources/bootstrap
+/node_modules

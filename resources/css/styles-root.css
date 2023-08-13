@@ -154,18 +154,25 @@
     --color-error: #eb0400;
     --color-warn: #ffd37a;
     --color-success: #00f593;
+    --color-success-dark: #00b74a;
     --color-info: #1f69ff;
     --color-accent: #9147ff;
-    --color-mapflet-primary: #A4E45A;
-    --color-mapflet-secondary: #7321DB;
-    --color-mapflet-tertiary: #F23D30;
-    --color-mapflet-quaternary: #DBA021;
-    --color-mapflet-quinary: #25C7F9;
+    --color-outline: #BA68C8;
+    --color-easymap-primary: #A4E45A;
+    --color-easymap-secondary: #7321DB;
+    --color-easymap-tertiary: #F23D30;
+    --color-easymap-quaternary: #DBA021;
+    --color-easymap-quinary: #25C7F9;
+    --color-easymap-light-dark: #424242;
+    --color-easymap-dark-body: #303030;
+    --color-easymap-enlace-dark: #3ea6ff;
+    --color-easymap-enlace-light: #065fd4;
+    
 }
 
 .mp-root--theme-dark,
 :root {
-    --color-background-body: var(--color-hinted-grey-3);
+    --color-background-body: var(--color-easymap-dark-body);
     --color-text-body: var(--color-white);
     --btn__dark: none;
     --btn__light: block;
@@ -175,6 +182,9 @@
     --color-text-link-active: var(--color-green-12);
     --color-text-link-focus: var(--color-green-10);
     --color-text-link-visited: var(--color-green-11);
+    --container-div: var(--color-easymap-light-dark);
+    --color-enlace: var( --color-easymap-enlace-dark);
+    --color-bg-success: var(--color-success-dark);
 }
 
 .mp-root--theme-light {
@@ -190,4 +200,7 @@
     --color-text-link-active: var(--color-green-10);
     --color-text-link-focus: var(--color-green-8);
     --color-text-link-visited: var(--color-green-7);
+    --container-div: var(--color-white);
+    --color-enlace: var( --color-easymap-enlace-light);
+    --color-bg-success: var(--color-success);
 }
