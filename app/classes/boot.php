@@ -3,6 +3,7 @@ namespace app\classes;
 
 use app\controllers\Error_Controller;
 use app\classes\Controller;
+use app\classes\Session;
 
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
