@@ -4,6 +4,7 @@ use app\controllers\admincontrollers\Admin_Controller;
 use app\controllers\admincontrollers\Login_Controller;
 use app\controllers\admincontrollers\Logout_Controller;
 use app\controllers\admincontrollers\Mapas_Controller;
+use app\controllers\Puntos_Controller;
 use app\controllers\admincontrollers\Users_Controller;
 use app\controllers\Images_Controller;
 
@@ -69,8 +70,19 @@ $router->middleware(['middleware' => 'admin'])->prefix(ADMIN_FOLDER)->group(func
     $router->name('informacionMapa')->get('/informacionMapa/{id}',[Mapas_Controller::class, 'informacionMapa']);
     $router->name('informacionPOST')->post('/informacionMapa',[Mapas_Controller::class, 'guardarInfoMapa']);
     $router->name('puntosmapa')->get('/puntosMapa/{id}',[Mapas_Controller::class, 'puntosMapa']);
-    $router->name('puntosmapaPOST')->post('/puntosMapa',[Mapas_Controller::class, 'guardarPuntosMapa']);
-    $router->name('cargarPuntos')->post('/cargarPuntos/{id}',[Mapas_Controller::class, 'cargarPuntos']);
+    $router->name('puntomapa')->get('/puntoMapa/{id}',[Mapas_Controller::class, 'puntoMapa']); //traer el punto mapa concreto
+    $router->name('puntomapaUpdate')->post('/puntomapaUpdate',[Mapas_Controller::class, 'puntoMapaUpdate']); //guardarPunto mapa concreto
+    $router->name('puntosmapaPOST')->post('/cargarPuntosMapa',[Mapas_Controller::class, 'guardarPuntosMapa']);
+    $router->name('cargarPuntosMapa')->post('/cargarPuntosMapa/{id}',[Mapas_Controller::class, 'cargarPuntosMapa']);
+    $router->name('eliminarPuntosMapa')->delete('/eliminarPuntosMapa/{id}',[Mapas_Controller::class, 'eliminarPuntosMapa']);
+
+    //puntos
+    $router->name('puntos')->get('/getPuntos',[Puntos_Controller::class, 'getSpots']);
+   /* $router->name('puntosmapaPOST')->post('/cargarPuntosMapa',[Mapas_Controller::class, 'guardarPuntosMapa']);
+    $router->name('cargarPuntosMapa')->post('/cargarPuntosMapa/{id}',[Mapas_Controller::class, 'cargarPuntos']);
+    $router->name('eliminarPuntosMapa')->delete('/eliminarPuntosMapa/{id}',[Mapas_Controller::class, 'eliminarPuntosMapa']);*/
+    //filtros
+    $router->name('cargarFiltros')->delete('/cargarFiltros/{id}',[Mapas_Controller::class, 'eliminarPuntos']);
 
     //Images
     $router->name('subirImagen')->post('/subirImagen',[Images_Controller::class, 'subirImagen']);

@@ -1,5 +1,5 @@
 <?php
-namespace app\model\adminmodels;
+namespace app\model;
 use app\classes\Model;
 use Illuminate\Pagination\Paginator;
 class Spot_Model extends model
@@ -17,6 +17,11 @@ class Spot_Model extends model
     public function getByName($searchValue)
     {
         return $this->where('nombre','like', "%{$searchValue}%")->get();
+    }
+
+    public function getSpots()
+    {
+      return $this->all()->toArray();
     }
     
 

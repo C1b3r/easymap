@@ -142,6 +142,39 @@ return array(
 						array(
 							"type" => "div",
 							"attributes" => array(
+							"class" => "input-group mb-3"
+							),
+							"childValues" => array(
+								array(
+									"type" => "label",
+									"attributes" => array(
+										"class" => "input-group-text"
+									),
+									"value" => "Puntos"
+								),
+								array(
+									"type" => "select",
+									"attributes" => array(
+										"class" => "form-select",
+										"id" => "selectOption",
+										"name" => "selectOption",
+									),
+									"childValues" => array(
+										array(
+											"type" => "option",
+											"attributes" => array(
+												"selected" => "true",
+												"disabled" => "disabled",
+												"innerText" => "--Elige opción--"
+											),
+										)
+									),
+								),
+							)
+						),
+						array(
+							"type" => "div",
+							"attributes" => array(
 								"class" => "row mt-3 mb-4"
 							),
 							"childValues" => array(

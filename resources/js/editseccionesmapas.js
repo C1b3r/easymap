@@ -107,14 +107,28 @@ function cargarContenido(urltab) {
         title: 'Imagen'
       },
       {
-        data: 'id_spot',
-        title: 'ID Spot'
+        data: 'nombre',
+        title: 'Nombre Spot'
+      },
+      {
+        // Columna para el botón de "Editar"
+        title: 'Editar',
+        render: function (data, type, row) {
+          return '<button class="btn btn-edit btn-outline-info" data-id="' + row.id_hotspot + '">Editar</button>';
+        }
+      },
+      {
+        // Columna para el botón de "Eliminar"
+        title: 'Eliminar',
+        render: function (data, type, row) {
+          return '<button class="btn btn-delete btn-outline-danger" data-id="' + row.id_hotspot + '">Eliminar</button>';
+        }
       }
     ],
     "pageLength": 25,
     serverSide: true,
     ajax: {
-      url: getUrl()+'cargarPuntos/'+currentId,
+      url: getUrl()+'cargarPuntosMapa/'+currentId,
       type: 'POST',
       dataSrc: 'data',
       data: function (params) {
@@ -130,10 +144,151 @@ function cargarContenido(urltab) {
   };
    // Inicializar la tabla DataTables utilizando el elemento HTML de la tabla
    const miTabla = new DataTable(table, dataTableOptions);
+  
+  // Agregar eventos para los botones de editar y eliminar usando la API de eventos de DataTables
+  miTabla.on('click', '.btn-edit', function () {
+    const id = this.getAttribute('data-id');
+    // Aquí puedes abrir el modal de edición con el ID
+    abrirModalEditar(id);
+  });
 
+  miTabla.on('click', '.btn-delete', function () {
+    const id = this.getAttribute('data-id');
+    // Aquí puedes ejecutar la función para eliminar con el ID
+    eliminarRegistro(id);
+  });
   
 }
 
+function eliminarRegistro(id) {
+  const confirmacion = confirm('¿Estás seguro de que deseas eliminar este registro?');
+  
+  if (confirmacion) {
+    // Realizar la eliminación, por ejemplo, a través de una solicitud AJAX
+    // Aquí debes implementar la lógica para eliminar el registro con el ID proporcionado
+
+    // Ejemplo de solicitud AJAX utilizando fetch
+    fetch(getUrl() + 'eliminarPuntosMapa/' + id, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Actualizar la tabla después de eliminar el registro
+        actualizarTabla();
+      } else {
+        console.error('Error al eliminar el registro.');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+}
+
+function actualizarTabla()
+{
+  const tabla = $('#miTabla').DataTable();
+  if (tabla) {
+    tabla.ajax.reload();
+  } else {
+    console.error('Tabla no encontrada.');
+  }
+}
+
+function abrirModalEditar(id) {
+  $.ajax({
+    url: getUrl()+'puntoMapa/'+ id,
+    method: 'GET',
+    success: function(data) {
+      // Create a new form
+      var form = document.createElement('form');
+      form.action = getUrl()+'puntomapaUpdate';
+      form.method = 'POST';
+      form.id = 'formEdit';
+      // console.log(JSON.parse(data))
+      // Add the input fields to the form
+     
+      for (var key in data ) { 
+        if (key === 'id_hotspot') {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = data[key];
+          form.appendChild(input);
+          continue;
+        }
+        if (key === 'id_spot') { //No lo agregamos ya que por separado vamos a hacer el select
+          continue;
+        }
+
+        var label = document.createElement('label');
+        label.classList.add('form-label');
+        label.textContent = key;
+
+        var input = document.createElement('input');
+        input.classList.add('form-control');
+        input.type = 'text';
+        input.name = key;
+        input.value = data[key];
+        
+
+        form.appendChild(label);
+        form.appendChild(input);
+      }
+
+      var label = document.createElement('label');
+      label.classList.add('form-label');
+      label.textContent = 'Puntos';
+      form.appendChild(label);
+
+      agregarPuntos(form,data);
+
+      
+    /*  var id_hotspot = document.createElement('input');
+      id_hotspot.type = 'hidden';
+      id_hotspot.name = key;
+      id_hotspot.value = data.id_hotspot;
+    */
+
+
+      $('#modalDetails .modal-body').empty(); //clean
+      // Append the form to the body of the modal
+      $('#modalDetails .modal-body').append(form);
+
+      // Show the modal
+      $('#modalDetails').modal('show');
+    }
+  });
+ 
+}
+
+function agregarPuntos(form,data)
+{
+  var selectList = document.createElement("select");
+  selectList.id = "mySelect";
+  selectList.name = "mySelect";
+  selectList.classList.add('form-select');
+  
+  form.appendChild(selectList);
+
+  $.ajax({
+    url: getUrl()+'getPuntos',
+    method: 'GET',
+    success: function(puntos) {
+      // console.log(puntos)
+      puntos.forEach(option => {
+        const optionEl = document.createElement('option');
+        optionEl.value = option.id_spot;
+        optionEl.text = option.nombre;
+        if (option.id_spot === data.id_spot) {
+          optionEl.selected = true;
+        }
+        selectList.appendChild(optionEl);
+      });
+    }
+  });
+}
 
 async function cargarReferenciasDataTables() {
   // Verificar si el CSS ya está cargado
@@ -385,6 +540,13 @@ function addSpinner(element){
 
 //Lo meto aquí ya que al cargarlo por fetch, no existen y va a fallar
 function cargarListener (){
+  cargaIframe();
+  cargaSelect();
+ 
+}
+
+function cargaIframe()
+{
   var iframecontents = document.getElementsByClassName('iframe-content');
   if (iframecontents.length === 0) {
     return;
@@ -415,6 +577,26 @@ function cargarListener (){
     // Reemplazar el div por el iframe
     iframeContainer.innerHTML = '';
     iframeContainer.appendChild(iframe);*/
+  });
+}
+function cargaSelect()
+{
+  var select = document.getElementById('selectOption');
+  if (select.length === 0) {
+    return;
+  }
+  $.ajax({
+    url: getUrl()+'getPuntos',
+    method: 'GET',
+    success: function(puntos) {
+      // console.log(puntos)
+      puntos.forEach(option => {
+        const optionEl = document.createElement('option');
+        optionEl.value = option.id_spot;
+        optionEl.text = option.nombre;
+        select.appendChild(optionEl);
+      });
+    }
   });
 }
 

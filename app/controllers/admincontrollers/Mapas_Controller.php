@@ -111,6 +111,22 @@ class Mapas_Controller extends Controller
 		return $json_replaced;
 		
 	}
+
+	public function eliminarPuntosMapa(Request $request)
+	{
+		header('Content-Type: application/json');
+		if(!$request->ajax() && !$request->isMethod('DELETE')){
+			return json_encode(array('Message' => "error"));
+		} 
+
+		
+		$hotspot = new Hotspot_Model();
+		if( $hotspot->deleteHotspot($request->id) ){
+			return json_encode(['success' => true]);
+		}
+		return json_encode(['success' => false]);
+	}
+
 	public function crearmapa()
 	{
 		$this->view->assign('current_page',$this->currentPage)
@@ -125,7 +141,7 @@ class Mapas_Controller extends Controller
 	}
 
 	//Cargar los puntos para volcarlos en un datatable
-	public function cargarPuntos(Request $request)
+	public function cargarPuntosMapa(Request $request)
 	{
 		header('Content-Type: application/json');
 		if(!$request->ajax()){
@@ -137,15 +153,16 @@ class Mapas_Controller extends Controller
 		$length = $request->input('length');
 		$searchValue = $request->input('search.value');
 		// Consulta principal utilizando Eloquent
-		$query = Hotspot_Model::query()->select('latitude','longitude','id_image','id_spot')
+		$query = Hotspot_Model::query()->select('hotspot.id_hotspot','hotspot.latitude','hotspot.longitude','hotspot.id_image','spot.nombre')
+								->join('spot', 'hotspot.id_spot', '=', 'spot.id_spot')
 								->with('image');
 
 		// Aplicar la búsqueda si se proporciona un valor de búsqueda
 		if ($searchValue) {
 			$query->where(function ($q) use ($searchValue,$id) {
 				// Aquí debes definir las columnas en las que quieres realizar la búsqueda
-				$q->where('informacion', 'like', "%{$searchValue}%")
-					->where('id_map', '=', $id);
+				$q->where('spot.nombre', 'like', "%{$searchValue}%");
+					// ->where('id_map', '=', $id);
 					//->orWhere('columna2', 'like', "%{$searchValue}%");
 				// ... continuar con las demás columnas si es necesario
 			});
@@ -161,6 +178,10 @@ class Mapas_Controller extends Controller
 		$data = $query->get();
 
 		$transformedResults = $data->map(function ($data) {
+			if (!isset($data->image)) {
+				$data->image_name = 'No image';
+				return $data;
+			}
 			$image_path = ($data->image->ext) ? '' : PUBLIC_WEB_PATH.'images/uploads/' ;
 			$data->image_name = '<img  width="80px" src="' . $image_path . $data->image->name . '" alt="' . $data->image->name . '">';
 		
@@ -180,6 +201,47 @@ class Mapas_Controller extends Controller
 
 	}
 
+	public function puntoMapa(Request $request)
+	{ 
+		header('Content-Type: application/json');
+		$id = $request->id;
+		$query = Hotspot_Model::query()->select('hotspot.id_hotspot','hotspot.latitude','hotspot.longitude','hotspot.id_image','spot.id_spot')
+								->join('spot', 'hotspot.id_spot', '=', 'spot.id_spot')
+								->where('hotspot.id_hotspot', '=', $id)->first()->toArray();
+		return $query; //Lo retorno de esta manera porque el json_encode con la cabecera no me está funcionando
+	}
+
+	public function puntomapaUpdate(Request $request)
+	{
+		// Validación de datos
+		$validator = Boot::$app->validator->make($request->all(), [
+			'longitude' => 'required|numeric',
+			'latitude' => 'required|numeric',
+			'id_image' => 'required',
+			'mySelect' => 'required',
+		]);
+
+		// Si la validación falla, redirige con mensajes de error
+		if ($validator->fails()) {
+			$this->error('mapa',self::FLASH_ERROR,'flash','No se pudo guardar, compruebe los campos');
+			return \Helper::$redirect->back()->withFragment('#datatable');
+		}
+		try {
+			Hotspot_Model::where('id_hotspot',$request->input('id_hotspot'))
+					->update(['longitude'=>$request->input('longitude'),
+							  'latitude'=>$request->input('latitude'),
+							  'id_image'=>$request->input('id_image'),
+							  'id_spot'=>$request->input('mySelect'),
+								]);
+			$this->error('mapa',self::FLASH_SUCCESS,'flash','Se ha guardado con éxito');
+		} catch (\Illuminate\Database\QueryException $e) {
+			$this->error('mapa',self::FLASH_ERROR,'flash','No se pudo guardar, compruebe los campos');
+		}
+
+		return \Helper::$redirect
+		->back()->withFragment('#datatable');
+
+	}
 	public function guardarPuntosMapa(Request $request)
 	{
 		// Validación de datos
@@ -189,6 +251,7 @@ class Mapas_Controller extends Controller
 			'longitud' => 'required|numeric',
 			'img_id' => 'required',
 			'informacion' => 'required',
+			'selectOption' => 'required',
 		]);
 		  
 
@@ -205,7 +268,7 @@ class Mapas_Controller extends Controller
 		$hotspot->latitude = $request->input('latitud');
 		$hotspot->longitude = $request->input('longitud');
 		$hotspot->id_image = $request->input('img_id');
-		$hotspot->id_spot = 1 ;
+		$hotspot->id_spot = $request->input('selectOption') ;
 		$hotspot->information = $request->input('informacion');
 		$hotspot->save();
 
