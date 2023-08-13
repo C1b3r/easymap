@@ -66,12 +66,14 @@
                         </thead>
                         <tbody>
                         <?php  
-                          if(!empty($this->maps)){
+                          if(!$this->maps->isEmpty()){
                             foreach ($this->maps as $value) {
                               echo '<tr>
-                              <th scope="row">'.$value['title'].'</th>
-                              <th scope="row">'.$value['description'].'</th>
-                              <td><p class="card-text text-success">'.$value['date_add'].'</p></td>
+                              <th scope="row">'.htmlspecialchars($value->title).'</th>
+                              <th scope="row">'.htmlspecialchars($value->description).'</th>
+                              <td><p class="card-text text-success">'.$value->created_at.'</p></td>
+                              <td><a class="btn btn-secondary" noprefetch href="'
+                              .Helper::$urlGeneration->route('edit_map', ['id' => $value->id_map]).'">Editar</a></td>
                               </tr>
                               ';
                             } 
@@ -80,7 +82,7 @@
                         </tbody>
                       </table>
                 </div>
-                <a href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>mapas" class="btn btn-block btn-light float-end">Ver todos</a>
+                <a href="<?php echo Helper::$urlGeneration->route('list_maps');?>" class="btn btn-block btn-light float-end">Ver todos</a>
             </div>
         </div>
     </div>

@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="<?php echo $this->robots; ?>">
+    <meta name="url" content="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">
     <title><?php echo $this->title; ?></title>
-    <link href="<?php echo PUBLIC_WEB_PATH.'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet">
+    <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-ref.css';?>" rel="stylesheet">
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-root.css';?>" rel="stylesheet">
     <link href="<?php echo PUBLIC_WEB_PATH.'css/styles-ad.css';?>" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> -->
     <link rel="icon" type="image/png" href="<?php echo PUBLIC_WEB_PATH;?>images/icons/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="<?php echo PUBLIC_WEB_PATH;?>images/icons/favicon-32x32.png" sizes="32x32">
+    <meta name="csrf-token" content="<?php echo $_SESSION['tokencsrf']; ?>">
 
 </head>
 <body class="">
@@ -49,9 +51,9 @@
                   Hola, <?php echo $_SESSION['username']; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><a class="dropdown-item" href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>users/edit/<?php echo $_SESSION['id_user'];?>">Settings</a></li>
                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>logout">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item" noprefetch href="<?php echo COMPLETE_WEB_PATH_ADMIN;?>logout">Cerrar sesión</a></li>
                 </ul>
              </div>
         </div>
@@ -62,7 +64,7 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                          <a class="nav-link active text__link" aria-current="page" href="#">
+                          <a class="nav-link active text__link" aria-current="page" href="<?php echo Helper::$urlGeneration->route('Adminhome');  ?>">
                             <i class="bi bi-house-door"></i>
                             <span class="ms-2">Inicio</span>
                           </a>
@@ -87,8 +89,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-sm btn-warning ms-3 mt-2" href="https://github.com/C1b3r/mapflet">
-                            <i class="bi bi-github"></i> Mapflet github
+                            <a class="btn btn-sm btn-warning ms-3 mt-2" href="https://github.com/C1b3r/easymap">
+                            <i class="bi bi-github"></i> Easymap github
                             </a>
                         </li>
                       </ul>
@@ -96,12 +98,8 @@
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
 
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item "><a class="text__link" href="<?php echo COMPLETE_WEB_PATH_ADMIN; ?>">Home</a></li>
-                <li class="breadcrumb-item active  body__text" aria-current="page"><?php echo ucwords($this->title); ?></li>
-            </ol>
-          </nav>
+           <?php echo \Helper::breadcrumb(''); ?>
+           
 <?php endif;
 
 

@@ -1,0 +1,39 @@
+{
+    "name": "ciber/easy-map",
+    "authors": [{
+        "name": "Artulance",
+        "email": "nomail@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "require": {
+        "illuminate/database": "^10.14.1",
+        "illuminate/pagination": "^10.14.1",
+        "illuminate/routing": "^10.14.1",
+        "illuminate/events": "^10.14.1",
+        "illuminate/translation": "^10.14.1",
+        "illuminate/validation": "^10.14.1",
+        "twbs/bootstrap": "5.2.3",
+        "twbs/bootstrap-icons": "^1.8"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@upbs"
+        ],
+        "post-package-install": [
+            "@upbs"
+        ],
+        "upbs": [
+            "php -r \" if(!file_exists('resources/bootstrap')){mkdir('resources/bootstrap/fonts', 0755,true);}\"",
+            "php -r \" copy('vendor/twbs/bootstrap/dist/js/bootstrap.min.js', 'resources/bootstrap/bootstrap.min.js');\"",
+            "php -r \" copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 'resources/bootstrap/bootstrap.min.css');\"",
+            "php -r \" copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css.map', 'resources/bootstrap/bootstrap.min.css.map');\"",
+            "php -r \" copy('vendor/twbs/bootstrap-icons/font/bootstrap-icons.css', 'resources/bootstrap/bootstrap-icons.css');\"",
+            "php -r \" copy('vendor/twbs/bootstrap-icons/font/fonts/bootstrap-icons.woff', 'resources/bootstrap/fonts/bootstrap-icons.woff');\"",
+            "php -r \" copy('vendor/twbs/bootstrap-icons/font/fonts/bootstrap-icons.woff2', 'resources/bootstrap/fonts/bootstrap-icons.woff2');\""
+        ]
+    }
+}
