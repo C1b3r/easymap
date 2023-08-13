@@ -17,5 +17,24 @@
       <?php endforeach;?>  
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDetails" tabindex="-1" aria-labelledby="modalDetails" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalDetails">Edición</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" form='formEdit' class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>//alert(window.location.hash.substring(1)); //substring para quitar el #</script>
 <?php $this->putJSorStyle('js/editseccionesmapas.js','js');?>
